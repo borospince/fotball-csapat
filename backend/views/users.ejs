@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/backend/public/css/users.css">
+    <title>Felhasználók</title>
+</head>
+<body>
+    <% include('nav.ejs') %>
+    <div id="users-kontener">
+        <h1>Felhasználók</h1>
+        <ul>
+            <% usersbackend.forEach(elem => { %>
+                <li>
+                    <div class="user-kontener">
+                        <h1>Név: <%= elem.nev %></h1>
+                        <p>Státusz: <%= elem.statusz %></p>
+                        <a href="/users-backend/<%= elem._id%>">
+                            Adatok módosítása
+                        </a>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>

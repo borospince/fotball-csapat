@@ -1,0 +1,32 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#nav-kontener{
+    float: left;
+    list-style-type: none;
+    padding: 1em;
+    width: 10%;
+}
+
+#nav-kontener li a {
+    color: blue;
+    font-size: 2em;
+    text-decoration: none;
+}
+
+#main-kontener{
+    align-items: center;
+    background-color: #000;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 1em;
+}
