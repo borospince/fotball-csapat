@@ -2,12 +2,33 @@
     background-color: rgb(34, 110, 34);
     color: whitesmoke;
     display: flex;
-    gap: 1em;
-    padding: 1em;
+    gap: 10%;
+    padding: 10px;
+    left: 0;
+    top: 0;
+    margin: 0;
+    width: 100%;
     flex-direction: row;
+    list-style-type: none;
+    position: fixed;
+    justify-content: center;
+    z-index: 1000;
 }
 
 .navbar-kontener a {
     color: whitesmoke;
     text-decoration: none;
+    padding:0;
+    /* border-right: 2px solid white; */
+    font-weight: bold;
+    margin: 0;
+    display: inline-block;
+}
+
+.navbar-kontener a:last-child {
+    border-right:none;
+}
+
+.navbar-kontener a:hover{
+    background-color: darkgreen;
 }
