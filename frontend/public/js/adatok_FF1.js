@@ -4,19 +4,84 @@
 
 let adatok_FF1 = [
     {
-        nev: 'Hangya Heri',
-        Poszt: 'Nem macska 1',
-        kep: sziami01,
+        nev: 'Bence Bakos',
+        Poszt: 'Kapus',
+    },
+    {
+        nev: 'Benjámin Balogh',
+        Poszt: 'Kapus',
+    },
+    {
+        nev: 'Zalán Szűcs',
+        Poszt: 'Védő',
+    },
+    {
+        nev: 'Kornél Kovács',
+        Poszt: 'Védő',
+    },
+    {
+        nev: 'Bálint Tóth',
+        Poszt: 'Védő',
+    },
+    {
+        nev: 'Gergő Nagy',
+        Poszt: 'Védő',
+    },
+    {
+        nev: 'Dorián Varga',
+        Poszt: 'Védő',
+    },
+    {
+        nev: 'Mirkó Molnár',
+        Poszt: 'Közép pálya',
+    },
+    {
+        nev: 'Szabolcs Farkas',
+        Poszt: 'Közép pálya',
+    },
+    {
+        nev: 'Hangya Henrik',
+        Poszt: 'Közép pálya',
+    },
+    {
+        nev: 'Lénárd Kiss',
+        Poszt: 'Közép pálya',
+    },
+    {
+        nev: 'Noel Horváth',
+        Poszt: 'Közép pálya',
+    },
+    {
+        nev: 'Alex Fekete',
+        Poszt: 'Közép pálya',
     },
     {
         nev: 'Szocske Szabolcs',
-        Poszt: 'Aranyos cica 2',
-        kep: sziami02,
+        Poszt: 'Csatár',
     },
     {
         nev: 'Mandíbula',
-        Poszt: 'Már nem mondok semmit 3',
-        kep: sziami03,
+        Poszt: 'Csatár',
+    },
+    {
+        nev: 'Mátyás Lakatos',
+        Poszt: 'Csatár',
+    },
+    {
+        nev: 'Olivér Simon',
+        Poszt: 'Csatár',
+    },
+    {
+        nev: 'Szabó Bálint Róbert',
+        Poszt: 'Edző',
+    },
+    {
+        nev: 'Pincési Márk',
+        Poszt: 'Másod Edző',
+    },
+     {
+        nev: 'Sebők Dominik',
+        Poszt: 'Maszőr',
     },
 ];
 

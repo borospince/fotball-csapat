@@ -14,9 +14,8 @@ let adatok_FF1 = [
         kep: sziami02,
     },
     {
-        nev: 'Mandíbula',
-        Poszt: 'Már nem mondok semmit 3',
-        kep: sziami03,
+        nev: 'Sebők Dominik',
+        Poszt: 'Edsző',
     },
 ];
 
