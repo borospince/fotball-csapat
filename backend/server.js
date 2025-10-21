@@ -30,11 +30,13 @@ app.listen(PORT,() => {
 app.get('/',(req,res) => {
     try{
         res.statusCode = 200;
-        return res.render('index    ');
+        return res.render('index');
     } catch (error) {
         res.statusCode = 404;
         return res.render('404.ejs');
     }
 });
 
-app.use('/users-backend', require('./routes/userRoutesBackend.js'));
+app.use('/players-backend', require('./routes/playersRoutesBackend.js'));
+app.use('/new-player', require('./routes/playersRoutesBackend.js'));
+// app.use('/users-backend', require('./routes/userRoutesBackend.js'));
