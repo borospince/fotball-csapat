@@ -1,9 +1,13 @@
 const express = require('express');
-const { getNewPlayerBackend } = require('../controllers/newPlayerControllersBackend');
+const pictureUploader = require('../middlewares/pictureUpload');
+const {
+    getNewPlayerBackend,
+    postNewPlayerBackend,
+} = require('../controllers/newPlayerControllersBackend');
 
 const router = express.Router();
 
-router.get('/',getNewPlayerBackend);
-// router.post('/',postUserBackend);
+router.get('/', getNewPlayerBackend);
+router.post('/', pictureUploader, postNewPlayerBackend);
 
 module.exports = router;

@@ -1,11 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Új játékos felvétele</h1>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Új játékos felvétele.</title>
+    </head>
+    <body>
+        <%- include('nav.ejs') %>
+        <div id="new-trainers-kontener">
+            <h1>Új játékos felvétele</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td>Játékos neve:</td>
+                        <td>
+                            <input
+                                type="text"
+                                id="nev"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nemzetisége:</td>
+                        <td>
+                            <input
+                                type="text"
+                                id="nemzetiseg"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Születés időpontja:</td>
+                        <td>
+                            <input
+                                type="text"
+                                id="szuletes"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Korosztály:</td>
+                        <td>
+                            <select id="korosztaly">
+                                <option value="felnőtt">felnőtt</option>
+                                <option value="u19">u19</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Poszt:</td>
+                        <td>
+                            <input
+                                type="text"
+                                id="poszt"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ügyesebb lába:</td>
+                        <td>
+                            <select id="ugyesebblaba">
+                                <option value="bal">bal</option>
+                                <option value="jobb">jobb</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gól:</td>
+                        <td>
+                            <input
+                                type="number"
+                                id="gol"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gólpassz:</td>
+                        <td>
+                            <input
+                                type="number"
+                                id="golpassz"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kép:</td>
+                        <td>
+                            <input
+                                type="text"
+                                id="kep"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onclick="letrehoz(event)">Létrehoz</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <script src="/js/letrehoz.js"></script>
+    </body>
 </html>

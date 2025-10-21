@@ -1,11 +1,12 @@
 const express = require('express');
+
 const {
-    getAllPlayersBackend,
-} = require('../controllers/playerControllersBackend');
+    getAllPlayersFrontend,
+} = require('../controllers/playerControllersFrontend');
 
 const router = express.Router();
 
-router.get('/', getAllPlayersBackend);
+router.get('/', getAllPlayersFrontend);
 // router.get('/:id',getOneUserBackend);
 // router.get('/',postUserBackend);
 // router.get('/modosit/:id',updateOneUserBackend);

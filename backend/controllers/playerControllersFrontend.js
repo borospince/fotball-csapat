@@ -1,13 +1,13 @@
 const Footballer = require('../models/Footballer');
 
-exports.getAllPlayersBackend = async (req, res) => {
+exports.getAllPlayersFrontend = async (req, res) => {
     try {
-        const footballers = await Footballer.find({});
+        const players = await Footballer.find({});
         res.statusCode = 200;
-        return res.render('players.ejs', { footballers });
+        return res.json({ players });
     } catch (error) {
-        res.statusCode = 404;
-        return res.render('404.ejs');
+        res.statusCode = 500;
+        return res.json({ msg: error.msg });
     }
 };
 
