@@ -6,6 +6,7 @@ async function letrehoz(event) {
     const korosztaly = document.querySelector('#korosztaly').value;
     const poszt = document.querySelector('#poszt').value;
     const ugyesebblaba = document.querySelector('#ugyesebblaba').value;
+    const ar = document.querySelector('#ar').value;
     const gol = document.querySelector('#gol').value;
     const golpassz = document.querySelector('#golpassz').value;
     const kep = document.querySelector('#kep').value;
@@ -22,6 +23,7 @@ async function letrehoz(event) {
             korosztaly,
             poszt,
             ugyesebblaba,
+            ar,
             gol,
             golpassz,
             kep,

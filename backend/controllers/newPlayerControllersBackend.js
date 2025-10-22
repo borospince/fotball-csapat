@@ -19,22 +19,11 @@ exports.postNewPlayerBackend = async (req, res) => {
             korosztaly,
             poszt,
             ugyesebblaba,
+            ar,
             gol,
             golpassz,
             kep,
         } = req.body;
-
-        console.log({
-            nev,
-            nemzetiseg,
-            szuletes,
-            korosztaly,
-            poszt,
-            ugyesebblaba,
-            gol,
-            golpassz,
-            kep,
-        });
 
         const newPlayerBackend = Footballer({
             nev,
@@ -43,6 +32,7 @@ exports.postNewPlayerBackend = async (req, res) => {
             korosztaly,
             poszt,
             ugyesebblaba,
+            ar,
             gol,
             golpassz,
             kep,

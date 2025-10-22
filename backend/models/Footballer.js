@@ -26,6 +26,10 @@ const footballerSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        ar: {
+            type: Number,
+            required: true,
+        },
         gol: {
             type: Number,
             required: true,
