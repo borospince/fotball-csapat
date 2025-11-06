@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary').v2;
-const Book = require('../models/Book');
+const Footballer = require('../models/Footballer');
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_API_CLOUD_NAME,
@@ -9,7 +9,10 @@ cloudinary.config({
 
 const pictureDeleter = async (req, res, next) => {
     const { id } = req.params;
-    const torolKep = await Book.findById({ _id: id });
+    console.log('====================================');
+    console.log(id);
+    console.log('====================================');
+    const torolKep = await Footballer.findById({ _id: id });
     const kep = torolKep.kep.split('/')[6].split('?')[0];
     console.log(kep);
 

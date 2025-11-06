@@ -50,14 +50,17 @@ exports.getAllPlayersBackend = async (req, res) => {
 //     }
 // };
 
-// exports.deleteOneUserBackend = async (req,res) => {
-//     try {
-//         const { id } = req.params;
-//         await User.findByIdAndDelete({_id: id });
-//         res.statusCode = 200;
-//         return res.json({msg:'sikeres törtlés!'});
-//     } catch (error) {
-//         res.statusCode = 409;
-//         return res.json({msg:'valami hiba történt!'});
-//     }
-// };
+exports.deleteOneUserBackend = async (req,res) => {
+    try {
+        const { id } = req.params;
+        console.log('====================================');
+        console.log(id);
+        console.log('====================================');
+        await Footballer.findByIdAndDelete({_id: id });
+        res.statusCode = 200;
+        return res.json({msg:'sikeres törtlés!'});
+    } catch (error) {
+        res.statusCode = 409;
+        return res.json({msg:'valami hiba történt!'});
+    }
+};

@@ -2,8 +2,8 @@ import './Home.css';
 
 const Home = () => {
   return(
-    <body>
-    <div className="home-kontener">
+    <body className="homebody-kontener">
+      <div className="home-kontener">
       <h1>ízeltlábúak</h1>
     </div>
     </body>

@@ -26,7 +26,8 @@ async function szerkesztes(id){
 }
 
 async function torles(id) {
-    const response = await fetch(`/users-backend/torol/${id}`, {
+    console.log(id);
+    const response = await fetch(`/api/players-backend/${id}`, {
         method:'DELETE',
     });
 
@@ -34,7 +35,8 @@ async function torles(id) {
 
     if (response.ok) {
         window.alert(valasz.msg);
-        window.location = '/users-backend';
-    } else b
+        window.location = '/api/players-backend';
+    } else  {
     window.alert(valasz.msg);
+    }
 }

@@ -8,7 +8,7 @@ const Navbar = () => {
             <Link to="/tickets">Jegyek</Link>
             <Link to="/players/ff1s">Játékosok</Link>
             <Link to="/news">Hírek</Link>
-            <Link to="/clothes">Ruházat</Link>
+            <Link to="/clothes">Web áruház</Link>
             <Link to="/history">Történelem</Link>
             <Link to="/Fans">Szurkolók</Link>
         </div>

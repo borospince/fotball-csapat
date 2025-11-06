@@ -17,15 +17,26 @@
         <div id="users-kontener">
             <p><a href="/api/new-player">Új játékos felvétele</a></p>
             <h1>Labdarugók</h1>
-            <div>
-                <% footballers.forEach(elem => { %>
+            <% footballers.forEach(elem => { %>
+                <div class="player-kontener">
                 <p>Név: <%= elem.nev %></p>
                 <img
                     src="<%= elem.kep %>"
                     alt=""
                 />
-                <% }) %>
+                <p>Nemzetisége: <%= elem.nemzetiseg %></p>
+                <p>Szuletés: <%= elem.szuletes %></p>
+                <p>Korosztály: <%= elem.korosztaly %></p>
+                <p>Poszt: <%= elem.poszt %></p>
+                <p>Ügyesebbláb: <%= elem.ugyesebblaba %></p>
+                <p>Ár: <%= elem.ar %></p>
+                <p>Gól: <%= elem.gol %></p>
+                <p>Gólpasz: <%= elem.golpassz %></p>
+                <button onclick="torles('<%= elem._id%>')">Törlés</button>
+                <button>Modositás</button>
             </div>
+            <% }) %>
         </div>
+        <script src="/js/user-backend.js"></script>
     </body>
 </html>

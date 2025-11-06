@@ -1,0 +1,90 @@
+
+:root {
+  --primary: #0b7a3f; /* klub zöld */
+  --dark: #0b0b0b; /* fekete */
+  --light: #f8f9f8; /* világos háttér */
+  --text: #000000;
+  --radius: 14px;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.players-kontener {
+  display: flex;
+  gap: 20px;
+  padding: 30px;
+  background: var(--light);
+  color: var(--text);
+  min-height: 80vh;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Oldalsáv (bal menü) */
+.sidebar-kontener {
+  flex: 0 0 240px;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px var(--shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-self: flex-start;
+  position: sticky;
+  top: 30px;
+  height: fit-content;
+}
+
+.sidebar-kontener a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.sidebar-kontener a:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
+
+/* Aktív link kinézete (ha NavLink-et használsz majd) */
+.sidebar-kontener a.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* Fő tartalom (Outlet) */
+.players-main-kontener {
+  flex: 1;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px var(--shadow);
+  padding: 25px 30px;
+  overflow: hidden;
+  min-height: 70vh;
+}
+
+/* Kisebb kijelzők (mobil, tablet) */
+@media (max-width: 900px) {
+  .players-kontener {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .sidebar-kontener {
+    flex-direction: row;
+    justify-content: space-around;
+    position: static;
+    width: 100%;
+  }
+
+  .sidebar-kontener a {
+    flex: 1;
+    text-align: center;
+  }
+}

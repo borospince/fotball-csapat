@@ -1,0 +1,120 @@
+body{
+    background-color: lavenderblush;
+}
+
+:root{
+  --primary:#0b7a3f;
+  --accent:#0b0b0b;
+  --muted:#333333;
+  --glass: rgba(255,255,255,0.04);
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+  --radius:14px;
+}
+
+.tori-kontener{
+  max-width:980px;
+  margin:30px auto;
+  padding:28px;
+  background: var(--card-bg);
+  border-radius:var(--radius);
+  border:1px solid rgba(11,122,63,0.12);
+  box-shadow: 0 12px 30px rgba(4,8,6,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color:#000000;
+  backdrop-filter: blur(4px);
+  -webkit-font-smoothing:antialiased;
+}
+
+.tori-kontener h1{
+  margin:6px 0 18px 0;
+  font-size:1.9rem;
+  letter-spacing:0.6px;
+  color:var(--primary);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.tori-kontener h1::before{
+  content:'';
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  background: conic-gradient(from 180deg at 50% 50%, rgba(11,122,63,0.95), rgba(0,0,0,0.9));
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 -6px 14px rgba(255,255,255,0.02);
+  display:inline-block;
+}
+
+.tori-kontener p{
+  font-size:1rem;
+  line-height:1.7;
+  color:#000000;
+  margin-bottom:1rem;
+  white-space:pre-line;
+}
+
+.tori-kontener p strong,
+.tori-kontener .era{
+  display:block;
+  font-weight:700;
+  color:#000000;
+  margin-top:12px;
+  margin-bottom:6px;
+}
+
+.match-card{
+  background: linear-gradient(180deg, rgba(11,122,63,0.12), rgba(11,122,63,0.04));
+  border-radius:10px;
+  padding:14px 18px;
+  margin:12px 0 18px 0;
+  border:1px solid rgba(11,122,63,0.18);
+}
+
+.match-card h2{
+  margin:0 0 8px 0;
+  font-size:1.15rem;
+  color:#000000;
+}
+
+.scoreline{
+  font-weight:800;
+  font-size:1.3rem;
+  color:#000000;
+  margin-bottom:6px;
+}
+
+.trophies{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.trophy{
+  background: rgba(0,0,0,0.05);
+  border-radius:8px;
+  padding:8px 12px;
+  font-weight:600;
+  color:#000000;
+  border:1px solid rgba(0,0,0,0.1);
+}
+
+.fan-chant{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:8px;
+  background: linear-gradient(90deg, rgba(11,122,63,0.06), rgba(0,0,0,0.05));
+  border-left:6px solid var(--primary);
+  color:#000000;
+  font-style:italic;
+}
+
+@media (max-width:720px){
+  .tori-kontener{padding:18px;margin:18px}
+  .tori-kontener h1{font-size:1.4rem}
+  .match-card h2{font-size:1rem}
+}
+
+@media print{
+  :root{--primary:#000;--muted:#222}
+  .tori-kontener{box-shadow:none;border:none;background:#fff;color:#000}
+  .tori-kontener h1::before{display:none}
+}
