@@ -11,6 +11,8 @@ const FF1s = () => {
             );
 
             const adat = await response.json();
+            console.log(adat);
+            
 
             if (response.ok) {
                 console.log(adat.players);

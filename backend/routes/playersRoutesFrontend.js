@@ -6,7 +6,7 @@ const {
 
 const router = express.Router();
 
-//router.get('/', getAllPlayersFrontend);
+router.get('/', getAllPlayersFrontend);
 //router.get('/:id',getOneUserBackend);
 //router.get('/',postUserBackend);
 //router.get('/modosit/:id',updateOneUserBackend);

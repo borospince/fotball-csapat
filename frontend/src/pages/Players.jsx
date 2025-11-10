@@ -1,6 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
 import '../pages/players.css';
-import { useEffect, useState } from 'react';
 
 const Players = () => {
     return (
