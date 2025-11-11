@@ -1,18 +1,100 @@
-.tartalom-kontener {
+/* Teljes kártya */
+.u19-card {
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    padding: 1em;
+    align-items: center;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 1.5em;
+    max-width: 350px;
+    margin: 1.5em auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.u19-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Kép konténer */
 .u19-kep-kontener {
-    margin: auto;
-    width: 80%;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #f0f0f0;
+    margin-bottom: 1em;
 }
 
 .u19-kep-kontener img {
-    height: 300px;
-    object-fit: cover;
     width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
-    
+
+/* Szövegek */
+.u19-adatok {
+    text-align: center;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #333;
+}
+
+.u19-nev {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 0.2em;
+}
+
+.u19-nemzetiseg {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5em;
+}
+
+.u19-szuletes,
+.u19-poszt {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.2em 0;
+}
+
+/* Statisztikák */
+.u19-stats {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0.5em 0;
+    border-top: 1px solid #ddd;
+    gap: 1em; /* térköz, hogy ne folyjanak össze */
+    flex-wrap: wrap;
+}
+
+.u19-stats p {
+    margin: 0;
+    font-weight: 500;
+    color: #444;
+    text-align: center;
+    min-width: 80px;
+}
+
+/* Reszponzív */
+@media (max-width: 500px) {
+    .u19-card {
+        max-width: 90%;
+        padding: 1em;
+    }
+
+    .u19-nev {
+        font-size: 1.2rem;
+    }
+
+    .u19-stats {
+        flex-direction: column;
+        gap: 0.3em;
+    }
+}

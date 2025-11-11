@@ -1,25 +1,100 @@
-.tartalom-kontener {
+/* A teljes kártya */
+.ff1-card {
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    padding: 1em;
-    max-width: 800px;
-    margin: 0 auto;
+    align-items: center;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 1.5em;
+    max-width: 350px;
+    margin: 1.5em auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.ff1-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* A kép */
 .ff1-kep-kontener {
     width: 100%;
-    max-width: 600px;
-    aspect-ratio: 16 / 9; /* megtartja az arányt, a magasság %-ban alakul */
+    max-width: 300px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: 12px;
     background-color: #f0f0f0;
-    margin: 0 auto;
+    margin-bottom: 1em;
 }
 
 .ff1-kep-kontener img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* a teljes kép látszik */
+    object-fit: contain;
     display: block;
+}
+
+/* Szövegek */
+.ff1-adatok {
+    text-align: center;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #333;
+}
+
+.ff1-nev {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 0.2em;
+}
+
+.ff1-nemzetiseg {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5em;
+}
+
+.ff1-szuletes,
+.ff1-poszt {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.2em 0;
+}
+
+/* Statisztikák doboz – ugyanaz mint az U19-ben */
+.ff1-stats {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0.5em 0;
+    border-top: 1px solid #ddd;
+    gap: 1em; /* kis térköz az elemek között */
+    flex-wrap: wrap; /* ha nem fér ki, tördelje új sorba */
+}
+
+.ff1-stats p {
+    margin: 0;
+    font-weight: 500;
+    color: #444;
+    text-align: center; /* egységes megjelenés */
+    min-width: 80px; /* ne csússzanak össze */
+}
+
+/* Reszponzív (mobilbarát) */
+@media (max-width: 500px) {
+    .ff1-card {
+        max-width: 90%;
+        padding: 1em;
+    }
+
+    .ff1-nev {
+        font-size: 1.2rem;
+    }
+
+    .ff1-stats {
+        flex-direction: column;
+        gap: 0.3em;
+    }
 }
