@@ -1,9 +1,9 @@
 const express = require('express');
-const pictureUploader = require('../middlewares/pictureUpload');
+const pictureUploader = require('../middlewares/itemPictureUpload');
 const {
     getNewItemBackend,
     postNewItemBackend,
-} = require('../controllers/newTermekControllersBackend');
+} = require('../controllers/newItemControllersBackend.js');
 
 const router = express.Router();
 

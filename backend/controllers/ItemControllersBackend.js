@@ -1,13 +1,13 @@
-const Termek = require('../models/termek');
+const Termek = require('../models/Termek');
 
-exports.getAllItemsFrontend = async (req, res) => {
+exports.getAllItemsBackend = async (req, res) => {
     try {
-        const items = await Termek.find({});
+        const termekek = await Termek.find({});
         res.statusCode = 200;
-        return res.json({ items });
+        return res.render('items.ejs', { termekek });
     } catch (error) {
-        res.statusCode = 500;
-        return res.json({ msg: error.msg });
+        res.statusCode = 404;
+        return res.render('404.ejs');
     }
 };
 
@@ -50,14 +50,17 @@ exports.getAllItemsFrontend = async (req, res) => {
 //     }
 // };
 
-// exports.deleteOneUserBackend = async (req,res) => {
-//     try {
-//         const { id } = req.params;
-//         await User.findByIdAndDelete({_id: id });
-//         res.statusCode = 200;
-//         return res.json({msg:'sikeres törtlés!'});
-//     } catch (error) {
-//         res.statusCode = 409;
-//         return res.json({msg:'valami hiba történt!'});
-//     }
-// };
+exports.deleteOneUserBackend = async (req,res) => {
+    try {
+        const { id } = req.params;
+        console.log('====================================');
+        console.log(id);
+        console.log('====================================');
+        await Footballer.findByIdAndDelete({_id: id });
+        res.statusCode = 200;
+        return res.json({msg:'sikeres törtlés!'});
+    } catch (error) {
+        res.statusCode = 409;
+        return res.json({msg:'valami hiba történt!'});
+    }
+};

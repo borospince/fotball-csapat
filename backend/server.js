@@ -38,4 +38,7 @@ app.get('/api', (req, res) => {
 app.use('/api/players-backend', require('./routes/playersRoutesBackend.js'));
 app.use('/api/new-player', require('./routes/newPlayerRoutesBackend.js'));
 app.use('/api/players-frontend', require('./routes/playersRoutesFrontend.js'));
+app.use('/api/items-backend',require('./routes/ItemsRoutesBackend.js'));
+app.use('/api/new-item',require('./routes/newItemRoutesBackend.js'));
+app.use('/api/items-frontend',require('./routes/itemsRoutesFrontend.js'));
 // app.use('/users-backend', require('./routes/userRoutesBackend.js'));

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-consttermekSchema = new mongoose.Schema(
+const termekSchema = new mongoose.Schema(
     {
         nev: {
             type: String,
@@ -14,6 +14,14 @@ consttermekSchema = new mongoose.Schema(
             type:Number,
             required:true,
         },
+        mennyiseg:{
+            type:Number,
+            required:true,
+        },
+        mennyisegiEgyseg:{
+            type:String,
+            required:true,
+        },
         kep: {
             type: String,
             required: true,
@@ -22,6 +30,6 @@ consttermekSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const TermekModel = mongoose.model('footballer', termekSchema);
+const TermekModel = mongoose.model('item', termekSchema);
 
 module.exports = TermekModel;

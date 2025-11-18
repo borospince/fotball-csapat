@@ -1,8 +1,8 @@
 const express = require('express');
-const pictureDeleter = require('../middlewares/pictureDelete');
+const pictureDeleter = require('../middlewares/pictureDelete.js');
 const {
     deleteOneUserBackend, getAllItemsBackend
-} = require('../controllers/ItemControllersBackend');
+} = require('../controllers/ItemControllersBackend.js');
 
 const router = express.Router();
 

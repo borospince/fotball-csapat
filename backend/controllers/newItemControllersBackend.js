@@ -1,16 +1,16 @@
-const Termek = require('../models/termek');
+const Termek = require('../models/Termek');
 
-exports.getNewTermekBackend = async (req, res) => {
+exports.getNewItemBackend = async (req, res) => {
     try {
         res.statusCode = 200;
-        return res.render('new-items.ejs');
+        return res.render('new-item.ejs');
     } catch (error) {
         res.statusCode = 404;
         return res.render('404.ejs');
     }
 };
 
-exports.postNewTermekBackend = async (req, res) => {
+exports.postNewItemBackend = async (req, res) => {
     try {
         const {
             nev,

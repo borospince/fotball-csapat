@@ -1,8 +1,10 @@
-async function letrehoz(event) {
+async function Termekletrehoz(event) {
     event.preventDefault();
     const nev = document.querySelector('#nev').value;
-    const Termekleiras = document.querySelector('#termekleiras').value;
+    const termekleiras = document.querySelector('#termekleiras').value;
     const ar = document.querySelector('#ar').value;
+    const mennyiseg = document.querySelector('#mennyiseg').value;
+    const mennyisegiEgyseg = document.querySelector('#mennyisegiEgyseg').value;
     const kep = document.querySelector('#kep').value;
 
     const response = await fetch('/api/new-items', {
@@ -14,6 +16,8 @@ async function letrehoz(event) {
             nev,
             termekleiras,
             ar,
+            mennyiseg,
+            mennyisegiEgyseg,
             kep,
         }),
     });
