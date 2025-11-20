@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary').v2;
-const Item = require('../models/Termek');
+const Termek = require('../models/Termek');
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_API_CLOUD_NAME,
@@ -12,7 +12,9 @@ const pictureDeleter = async (req, res, next) => {
     console.log('====================================');
     console.log(id);
     console.log('====================================');
-    const torolKep = await Item.findById({ _id: id });
+    const torolKep = await Termek.findById({ _id: id });
+    console.log(torolKep);
+    
     const kep = torolKep.kep.split('/')[6].split('?')[0];
     console.log(kep);
 

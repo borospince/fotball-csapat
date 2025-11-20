@@ -13,6 +13,8 @@ const pictureDeleter = async (req, res, next) => {
     console.log(id);
     console.log('====================================');
     const torolKep = await Footballer.findById({ _id: id });
+    console.log(torolKep);
+    
     const kep = torolKep.kep.split('/')[6].split('?')[0];
     console.log(kep);
 

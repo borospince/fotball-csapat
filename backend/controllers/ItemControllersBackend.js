@@ -56,7 +56,7 @@ exports.deleteOneUserBackend = async (req,res) => {
         console.log('====================================');
         console.log(id);
         console.log('====================================');
-        await Footballer.findByIdAndDelete({_id: id });
+        await Termek.findByIdAndDelete({_id: id });
         res.statusCode = 200;
         return res.json({msg:'sikeres törtlés!'});
     } catch (error) {

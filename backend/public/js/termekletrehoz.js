@@ -7,7 +7,7 @@ async function Termekletrehoz(event) {
     const mennyisegiEgyseg = document.querySelector('#mennyisegiEgyseg').value;
     const kep = document.querySelector('#kep').value;
 
-    const response = await fetch('/api/new-items', {
+    const response = await fetch('/api/new-item', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

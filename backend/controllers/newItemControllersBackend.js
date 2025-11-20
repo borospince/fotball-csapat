@@ -16,6 +16,8 @@ exports.postNewItemBackend = async (req, res) => {
             nev,
             termekleiras,
             ar,
+            mennyiseg,
+            mennyisegiEgyseg,
             kep,
         } = req.body;
 
@@ -23,6 +25,8 @@ exports.postNewItemBackend = async (req, res) => {
             nev,
             termekleiras,
             ar,
+            mennyiseg,
+            mennyisegiEgyseg,
             kep,
         });
         console.log(newTermekBackend);
