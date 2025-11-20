@@ -19,7 +19,7 @@ const termekSchema = new mongoose.Schema(
             required:true,
         },
         mennyisegiEgyseg:{
-            type:String,
+            type:Number,
             required:true,
         },
         kep: {

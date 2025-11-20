@@ -8,6 +8,6 @@ const pictureUploader = require('../middlewares/pictureUpload.js');
 const router = express.Router();
 
 router.get('/', getNewItemBackend);
-router.post('/', pictureUploader, postNewItemBackend);
+router.post('/', postNewItemBackend);
 
 module.exports = router;
