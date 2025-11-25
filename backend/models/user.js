@@ -6,9 +6,17 @@ const userSchema = new mongoose.Schema(
             type:String,
             required:true,
         },
-        statusz:{
+        email:{
             type:String,
             required:true,
+        },
+        jelszo:{
+            type:String,
+            required:true,
+        },
+        statusz:{
+            type:String,
+            default: false
         },
     },
     {timestamps:true}

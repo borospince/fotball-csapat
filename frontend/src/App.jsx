@@ -10,6 +10,8 @@ import Fans from './pages/Fans';
 import './App.css';
 import FF1s from './components/FF1s';
 import U19s from './components/U19s';
+import Shops from './components/Shops';
+import Register from './pages/Register/Register';
 
 function App() {
     return (
@@ -22,11 +24,11 @@ function App() {
                         element={<Home />}
                     />
                     <Route
-                        path="/Ticket"
+                        path="/ticket"
                         element={<Ticket />}
                     ></Route>
                     <Route
-                        path="/Players"
+                        path="/players"
                         element={<Players />}
                     >
                         <Route
@@ -39,19 +41,28 @@ function App() {
                         />
                     </Route>
                     <Route
-                        path="/News"
+                        path="/news"
                         element={<News />}
                     ></Route>
                     <Route
-                        path="/Clothes"
+                        path="/clothes"
                         element={<Clothes />}
-                    ></Route>
+                    >
+                        <Route
+                        path="shops"
+                        element={<Shops/>}
+                        />
+                    </Route>
                     <Route
-                        path="/History"
+                        path="/history"
                         element={<History />}
                     ></Route>
                     <Route
-                        path="/Fans"
+                        path="/register"
+                        element={<Register />}
+                    ></Route>
+                    <Route
+                        path="/fans"
                         element={<Fans />}
                     ></Route>
                 </Routes>

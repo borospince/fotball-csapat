@@ -1,11 +1,11 @@
 require('dotenv').config();
 
-const Path = require('node:path');
+const path = require('node:path');
 const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(express.static(Path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(cors());
@@ -41,4 +41,6 @@ app.use('/api/players-frontend', require('./routes/playersRoutesFrontend.js'));
 app.use('/api/items-backend',require('./routes/ItemsRoutesBackend.js'));
 app.use('/api/new-item',require('./routes/newItemRoutesBackend.js'));
 app.use('/api/items-frontend',require('./routes/itemsRoutesFrontend.js'));
-// app.use('/users-backend', require('./routes/userRoutesBackend.js'));
+app.use('/api/register-frontend',require('./routes/users/userRegisterRoutes.js'));
+
+app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));

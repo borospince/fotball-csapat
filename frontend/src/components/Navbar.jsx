@@ -10,7 +10,8 @@ const Navbar = () => {
             <Link to="/news">Hírek</Link>
             <Link to="/clothes">Web áruház</Link>
             <Link to="/history">Történelem</Link>
-            <Link to="/Fans">Szurkolók</Link>
+            <Link to="/fans">Szurkolók</Link>
+            <Link to="/register">Regisztráció</Link>
         </div>
     );
 };
