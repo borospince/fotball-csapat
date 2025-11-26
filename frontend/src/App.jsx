@@ -12,6 +12,8 @@ import FF1s from './components/FF1s';
 import U19s from './components/U19s';
 import Shops from './components/Shops';
 import Register from './pages/Register/Register';
+import Login from './pages/Login/Login';
+
 
 function App() {
     return (
@@ -60,6 +62,10 @@ function App() {
                     <Route
                         path="/register"
                         element={<Register />}
+                    ></Route>
+                    <Route
+                        path="/login"
+                        element={<Login />}
                     ></Route>
                     <Route
                         path="/fans"
