@@ -26,7 +26,7 @@ function App() {
                         element={<Home />}
                     />
                     <Route
-                        path="/ticket"
+                        path="/tickets"
                         element={<Ticket />}
                     ></Route>
                     <Route
@@ -47,12 +47,12 @@ function App() {
                         element={<News />}
                     ></Route>
                     <Route
-                        path="/clothes"
-                        element={<Clothes />}
+                        path="/shops"
+                        element={<Shops />}
                     >
                         <Route
-                        path="shops"
-                        element={<Shops/>}
+                        path="clothes"
+                        element={<Clothes />}
                         />
                     </Route>
                     <Route

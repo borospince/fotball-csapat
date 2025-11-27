@@ -1,0 +1,63 @@
+.shop-card{
+    display: grid;
+    /* grid-template-columns: repeat(4, 1fr); */
+}
+
+.shop-card img {
+    /* margin-top: 20%; */
+    /* border-radius: 10px; */
+    /* border: 1px solid gray; */
+    width: 100%;
+    
+}
+
+.atfedo {
+    position: relative;
+    /* border: 1px solid blue; */
+    height: 200px;
+    margin-top: 2em;
+    width: 250px;
+}
+
+.shop-kep-kontener {
+    /* border: 1px solid green; */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.shop-kep-kontener img {
+    /* border-radius: 10px; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.meret-kartya {
+    /* border: 1px solid red; */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* padding: 5px; */
+    /* border-radius: 5px; */
+    /* list-style-type: none; */
+    height: 100%;
+    width: 100%;
+}
+
+.kart{
+    position: absolute;
+    top: 150px;
+    right: 10px;
+    /* background-color: transparent; */
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 25%;
+    height: 25%;
+}

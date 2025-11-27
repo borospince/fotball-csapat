@@ -1,0 +1,83 @@
+/* Konténer */
+.login-kontener {
+    width: 380px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #f5fff5;
+    border-radius: 12px;
+    box-shadow: 0 0 18px rgba(0, 80, 0, 0.18);
+    border: 2px solid #91d79b;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Cím */
+.login-kontener h1 {
+    color: #2f8f45;
+    margin-bottom: 25px;
+}
+
+/* Táblázat formázás */
+table {
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+    color: #2f6f35;
+}
+
+input {
+    width: 95%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 2px solid #91d79b;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #3fbf53;
+    outline: none;
+    box-shadow: 0 0 5px rgba(63, 191, 83, 0.4);
+}
+
+/* Gomb */
+button {
+    padding: 10px 20px;
+    background: #3fbf53;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 10px;
+    width: 140px;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #32a645;
+    box-shadow: 0 0 8px rgba(50, 166, 69, 0.5);
+}
+
+/* Regisztráció szekció */
+.registergomb {
+    margin-top: 25px;
+}
+
+.registergomb p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #2f6f35;
+}
+
+.registergomb button {
+    width: 150px;
+    background: #2ea249;
+}
+
+.registergomb button:hover {
+    background: #24853a;
+}

@@ -10,7 +10,7 @@ const Navbar = () => {
             <Link to="/tickets">Jegyek</Link>
             <Link to="/players/ff1s">Játékosok</Link>
             <Link to="/news">Hírek</Link>
-            <Link to="/clothes">Web áruház</Link>
+            <Link to="/shops">Web áruház</Link>
             <Link to="/history">Történelem</Link>
             <Link to="/fans">Szurkolók</Link>
             <Link to="/login"><CgProfile size={30} /></Link>

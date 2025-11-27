@@ -1,5 +1,6 @@
 import Shop from './Shop';
 import { useEffect, useState } from 'react';
+import './Shops.css';
 
 const Shops = () => {
     const [items, setItems] = useState([]);
@@ -8,6 +9,8 @@ const Shops = () => {
         const TermekLeker = async () => {
             const response = await fetch('http://localhost:3500/api/items-frontend');
             const adat = await response.json();
+            console.log(adat);
+            
 
             if (response.ok) {
                 setItems(adat.items);
@@ -21,7 +24,7 @@ const Shops = () => {
 
     return (
         <div>
-            <div className="main-kontener">
+            <div className="shops-kontener">
                 {items.map((item, index) => (
                     <Shop key={index} shop={item} />
                 ))}

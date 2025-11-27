@@ -43,5 +43,6 @@ app.use('/api/new-item',require('./routes/newItemRoutesBackend.js'));
 app.use('/api/items-frontend',require('./routes/itemsRoutesFrontend.js'));
 app.use('/api/register-frontend',require('./routes/users/userRegisterRoutes.js'));
 app.use('/api/login-frontend',require('./routes/users/userLoginRoutes.js'));
-
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
+app.use('/api/tickets', require('./routes/ticketRoutes.js'));
+
