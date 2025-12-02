@@ -1,0 +1,71 @@
+.register-kontener {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.register-kontener h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px 5px;
+  vertical-align: middle;
+}
+
+label {
+  font-size: 16px;
+  color: #444;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+input:focus {
+  border-color: #4e8cff;
+  box-shadow: 0 0 5px rgba(78, 140, 255, 0.4);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4e8cff, #0059ff);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #0059ff, #003bb8);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: scale(0.98);
+}

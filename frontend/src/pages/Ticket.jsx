@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './Ticket.css'
 
 function Ticket() {
     const [form, setForm] = useState({
