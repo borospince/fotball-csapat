@@ -28,7 +28,7 @@ const Login = () => {
 
 	return (
 		<div className='login-kontener'>
-			<h1>Regisztráció</h1>
+			<h1>Bejelentkezés</h1>
 			<form>
 				<table>
 					<tbody>
