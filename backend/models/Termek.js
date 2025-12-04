@@ -22,6 +22,10 @@ const termekSchema = new mongoose.Schema(
             type:Number,
             required:true,
         },
+        vAdatok: [{
+            type: String,
+            required:true,
+        }],
         kep: {
             type: String,
             required: true,

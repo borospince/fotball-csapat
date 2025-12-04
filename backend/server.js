@@ -12,6 +12,7 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3500;
 
+// MongoDB kapcsolat
 const dbConneciton = require('./utils/dbConnection.js');
 
 dbConneciton()
@@ -35,14 +36,17 @@ app.get('/api', (req, res) => {
     }
 });
 
+// EDDIGI ROUTE-OK
 app.use('/api/players-backend', require('./routes/playersRoutesBackend.js'));
 app.use('/api/new-player', require('./routes/newPlayerRoutesBackend.js'));
 app.use('/api/players-frontend', require('./routes/playersRoutesFrontend.js'));
-app.use('/api/items-backend',require('./routes/ItemsRoutesBackend.js'));
-app.use('/api/new-item',require('./routes/newItemRoutesBackend.js'));
-app.use('/api/items-frontend',require('./routes/itemsRoutesFrontend.js'));
-app.use('/api/register-frontend',require('./routes/users/userRegisterRoutes.js'));
-app.use('/api/login-frontend',require('./routes/users/userLoginRoutes.js'));
+app.use('/api/items-backend', require('./routes/ItemsRoutesBackend.js'));
+app.use('/api/new-item', require('./routes/newItemRoutesBackend.js'));
+app.use('/api/items-frontend', require('./routes/itemsRoutesFrontend.js'));
+app.use('/api/register-frontend', require('./routes/users/userRegisterRoutes.js'));
+app.use('/api/login-frontend', require('./routes/users/userLoginRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/tickets', require('./routes/ticketRoutes.js'));
 
+// 🔥 ÚJ FAN MAIL ROUTE – EZT ADTAM HOZZÁ 🔥
+app.use('/api/fans', require('./routes/users/fanMailRoutes.js'));

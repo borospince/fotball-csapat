@@ -26,7 +26,7 @@ const Shops = () => {
         <div>
             <div className="shops-kontener">
                 {items.map((item, index) => (
-                    <Shop key={index} shop={item} />
+                    <Shop key={index} props={{item, index}} />
                 ))}
             </div>
         </div>
