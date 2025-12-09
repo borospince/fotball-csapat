@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../../controllers/Users/fanMailController');
+const { sendMessage, getMessages} = require('../../controllers/Users/fanMailController');
 
-router.post('/send', controller.sendMessage);
-router.get('/all', controller.getMessages);
+router.post('/', sendMessage);
+router.get('/', getMessages);
 
 module.exports = router;

@@ -4,6 +4,7 @@ import './Login.css';
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [jelszo, setJelszo] = useState('');
+	const [user, setUser] = useState({});
 
 	async function bejelentkezes(event) {
 		event.preventDefault();
@@ -17,9 +18,12 @@ const Login = () => {
 		});
 
 		const valasz = await response.json();
+		console.log(valasz.letezoUser[0]);
+		
 
 		if (response.ok) {
 			window.alert(valasz.msg);
+			localStorage.setItem('user', JSON.stringify(valasz.letezoUser[0]));
 			window.location.href = '/';
 		} else {
 			window.alert(valasz.msg);
@@ -41,7 +45,7 @@ const Login = () => {
 						<td><input type="password" id="jelszo" onChange={(e) => setJelszo(e.target.value)} /></td>
 					</tr>
 					<tr>
-						<td><button onClick={bejelentkezes}>Bejelentkezés: </button></td>
+						<td><button onClick={(event) => bejelentkezes(event)}>Bejelentkezés: </button></td>
 						<td></td>
 					</tr>
 					</tbody>

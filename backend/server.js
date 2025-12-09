@@ -49,4 +49,4 @@ app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/tickets', require('./routes/ticketRoutes.js'));
 
 // 🔥 ÚJ FAN MAIL ROUTE – EZT ADTAM HOZZÁ 🔥
-app.use('/api/fans', require('./routes/users/fanMailRoutes.js'));
+app.use('/api/fans/all', require('./routes/users/fanMailRoutes.js'));
