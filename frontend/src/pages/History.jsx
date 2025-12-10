@@ -6,41 +6,41 @@ const History = () => {
     <div className="tori-kontener">
     <h1>Ízeltlábúak FC története</h1>
     <p>
-      Alapítás: 1932, Bogárvár (fiktív magyar város, erdők és mezők ölelésében)
-      Stadion: Kitinvár Aréna (38 000 férőhely, 2001-ben épült)
+      Alapítás: <b>1932</b>, Bogárvár (fiktív magyar város, erdők és mezők ölelésében)
+      Stadion: Kitinvár Aréna (<b>38 000</b> férőhely, <b>2001</b>-ben épült)
       Színek: Zöld–fekete
-      A kezdetek (1932–1950)
+      A kezdetek (<b>1932–1950</b>)
       A csapatot rovarász egyetemisták és helyi munkások alapították, innen ered a különleges név. Már az első évtizedben megmutatták erejüket, főként a helyi bajnokságban.
-      1939: első jelentős siker, megnyerték a Regionális Kupát.
+      <b>1939</b>: első jelentős siker, megnyerték a Regionális Kupát.
       Legenda született: „Sáska” Sándor, a balszélső, aki elképesztő gyorsaságáról kapta becenevét.
-      Az aranyévek (1955–1975)
+      Az aranyévek (<b>1955–1975</b>)
       Az Ízeltlábúak FC a hatvanas években Magyarország egyik legerősebb klubjává vált.
-      1957: első NB I bajnoki cím
-      1961–1963: háromszoros bajnok sorozatban
+      <b>1957</b>: első NB I bajnoki cím
+      <b>1961–1963</b>: háromszoros bajnok sorozatban
       Ikonikus játékos: Bogár Béla, középhátvéd, aki mindenkit „összezúzott” a védelemben.
-      1965: Magyar Kupa-győzelem
-      1970: UEFA Kupa negyeddöntő, ahol legyőzték a Sevillát, de kiestek a Juventus ellen.
-      Hullámvölgy és túlélés (1980–1995)
+      <b>1965</b>: Magyar Kupa-győzelem
+      <b>1970</b>: UEFA Kupa negyeddöntő, ahol legyőzték a Sevillát, de kiestek a Juventus ellen.
+      Hullámvölgy és túlélés (<b>1980–1995</b>)
       A nyolcvanas években a klub pénzügyi gondokkal küzdött, és több tehetség külföldre távozott.
-      1987-ben kiestek az NB I-ből.
+      <b>1987</b>-ben kiestek az NB I-ből.
       Ennek ellenére ekkor tűnt fel a klub egyik legnagyobb ikonja: „Pók” Péter, a kapus, akinek elképesztő reflexeit a szurkolók hálós ugrásokhoz hasonlították.
-      1992-ben visszajutottak az első osztályba.
-      Modern korszak (2000–napjainkig)
-      2001: felépült a Kitinvár Aréna, modern stadion zöld-fekete székekkel.
-      2008: Magyar Kupa-győzelem, döntőben 3–1-re verték a Dunavárosi Sasokat.
-      2014: új bajnoki cím, az első 51 év után!
-      2016: EL-csoportkör, bravúros 2–0 a Lazio ellen.
-      2023: 90 éves jubileum, különleges mezekkel ünnepeltek.
+      <b>1992</b>-ben visszajutottak az első osztályba.
+      Modern korszak (<b>2000</b>–napjainkig)
+      <b>2001</b>: felépült a Kitinvár Aréna, modern stadion zöld-fekete székekkel.
+      <b>2008</b>: Magyar Kupa-győzelem, döntőben <b>3–1</b>-re verték a Dunavárosi Sasokat.
+      <b>2014</b>: új bajnoki cím, az első <b>51</b> év után!
+      <b>2016</b>: EL-csoportkör, bravúros <b>2–0</b> a Lazio ellen.
+      <b>2023</b>: <b>90</b> éves jubileum, különleges mezekkel ünnepeltek.
       Kiemelt játékosok
-      „Sáska” Sándor (1930–40-es évek) – villámgyors balszélső
-      Bogár Béla (1950–60-as évek) – legendás középhátvéd
-      „Pók” Péter (1980–90-es évek) – akrobatikus kapus
-      Hangya Henrik (2005–2015) – szívós középpályás, beceneve: „A Dolgozó”
-      Carlos Mandíbula (2012–2018) – spanyol csatár, a „csáprágó” gólvágó
+      „Sáska” Sándor (<b>1930–40</b>-es évek) – villámgyors balszélső
+      Bogár Béla (<b>1950–60</b>-as évek) – legendás középhátvéd
+      „Pók” Péter (<b>1980–90</b>-es évek) – akrobatikus kapus
+      Hangya Henrik (<b>2005–2015</b>) – szívós középpályás, beceneve: „A Dolgozó”
+      Carlos Mandíbula (<b>2012–2018</b>) – spanyol csatár, a „csáprágó” gólvágó
       Megnyert trófeák
-      NB I bajnoki címek: 5 (1957, 1961, 1962, 1963, 2014)
-      Magyar Kupa: 3 (1965, 2008, 2017)
-      Szuperkupa: 1 (2014)
+      NB I bajnoki címek: <b>5 (1957, 1961, 1962, 1963, 2014)</b>
+      Magyar Kupa: <b>3 (1965, 2008, 2017)</b>
+      Szuperkupa: <b>1 (2014)</b>
       Szurkolói kultúra
       A szurkolók neve: „A Raj”.
       Meccs előtt mindig zúgó zümmögéssel kezdik a szurkolást, mintha rovarraj lenne a stadionban.
@@ -51,27 +51,27 @@ const History = () => {
       A két csapat meccsét „Kitin-derbinek” nevezik.
       A szurkolók ilyenkor azt skandálják: „Raj zúg, páncél roppan, Ízeltlábú mindig jobban!”
       </p>
-      <h1>A Legendás Kitin-derbi – 2014. május 24.</h1>
+      <h1>A Legendás Kitin-derbi – <b>2014. május 24.</b></h1>
       <p>
-       egy igazi fordulópontot, amit a szurkolók ma is emlegetnek.
-      NB I, 30. forduló – bajnoki döntő
-      Ízeltlábúak FC – Páncélosok SC 3–2 (1–1)
-      Helyszín: Kitinvár Aréna – 38 000 néző (teltház)
+       Egy igazi fordulópontot, amit a szurkolók ma is emlegetnek.
+      NB I, <b>30</b>. forduló – bajnoki döntő
+      Ízeltlábúak FC – Páncélosok SC <b>3–2 (1–1)</b>
+      Helyszín: Kitinvár Aréna – <b>38 000</b> néző (teltház)
       A tét
       Az Ízeltlábúak és a Páncélosok pontegyenlőséggel érkeztek az utolsó fordulóhoz.
       A győztes bajnok lett, döntetlen esetén a Páncélosok vitték volna a trófeát.
       A város már napok óta zümmögött – mindenhol zöld-fekete zászlók lógtak az ablakokból, a szurkolók pedig „rajba rendeződve” vonultak a stadionhoz.
       A mérkőzés menete
-      1. félidő
-      A 18. percben a Páncélosok szereztek vezetést egy gyors kontra után: 0–1. A vendégszektor felrobbant, a hazai szurkolók azonban azonnal rázendítettek a híres zümmögésre.
-      A 41. percben jött a válasz: Hangya Henrik óriási kapáslövéssel egyenlített (1–1). A stadion dübörgött, mintha egy óriási méhkas ébredt volna fel.
-      2. félidő
-      A 60. percben Carlos Mandíbula betalált egy szöglet után – a „Csáprágó” a védőket félrelökve fejelte be a labdát. 2–1 az Ízeltlábúaknak!
-      A 75. percben azonban dráma jött: tizenegyest kaptak a Páncélosok. A közönség fütyült, zúgott, de a csatár belőtte. 2–2.
-      Már úgy tűnt, döntetlen lesz, amikor a 89. percben villant a cserejátékos: „Szöcske” Szabolcs beugrott a védők közé, és egy hatalmas ollózós gólt lőtt. 3–2!
+      <b>1</b>. félidő
+      A <b>18</b>. percben a Páncélosok szereztek vezetést egy gyors kontra után: <b>0–1</b>. A vendégszektor felrobbant, a hazai szurkolók azonban azonnal rázendítettek a híres zümmögésre.
+      A <b>41</b>. percben jött a válasz: Hangya Henrik óriási kapáslövéssel egyenlített <b>(1–1)</b>. A stadion dübörgött, mintha egy óriási méhkas ébredt volna fel.
+      <b>2</b>. félidő
+      A <b>60</b>. percben Carlos Mandíbula betalált egy szöglet után – a „Csáprágó” a védőket félrelökve fejelte be a labdát. <b>2–1</b> az Ízeltlábúaknak!
+      A <b>75</b>. percben azonban dráma jött: tizenegyest kaptak a Páncélosok. A közönség fütyült, zúgott, de a csatár belőtte. <b>2–2</b>.
+      Már úgy tűnt, döntetlen lesz, amikor a <b>89</b>. percben villant a cserejátékos: „Szöcske” Szabolcs beugrott a védők közé, és egy hatalmas ollózós gólt lőtt. <b>3–2</b>!
       A végjáték
       A hosszabbítás perceiben a Páncélosok még egyenlíthettek volna, de „Pók” Péter utódja, Bajusz Bence kapus elképesztő bravúrral védett.
-      A bíró lefújta: Ízeltlábúak FC bajnok lett, 51 év után újra!
+      A bíró lefújta: Ízeltlábúak FC bajnok lett, <b>51</b> év után újra!
       Az ünneplés
       A „Raj” betódult a pályára, zöld-fekete füst és zümmögés töltötte meg a stadiont.
       A játékosok a szurkolókkal együtt körtáncot jártak, mintha egy óriási raj mozdult volna együtt.

@@ -12,6 +12,7 @@ body{
 }
 
 .tori-kontener{
+  text-align: left;
   max-width:980px;
   margin:30px auto;
   padding:28px;
