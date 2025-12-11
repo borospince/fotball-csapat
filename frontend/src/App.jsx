@@ -13,6 +13,8 @@ import U19s from './components/U19s';
 import Shops from './components/Shops';
 import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
+import ProductDetail from './components/Product.jsx';
+
 
 
 function App() {
@@ -54,6 +56,10 @@ function App() {
                         path="clothes"
                         element={<Clothes />}
                         />
+                        {/* <Route
+                            path="/product"
+                            element={<ProductDetail/>}
+                            /> */}
                     </Route>
                     <Route
                         path="/history"

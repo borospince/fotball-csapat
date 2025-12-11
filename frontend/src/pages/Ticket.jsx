@@ -43,7 +43,7 @@ function Ticket() {
 
     return (
         <div className="ticket-container">
-            <h1>jegyfoglalás</h1>
+            <h1>Jegyfoglalás</h1>
 
             <form onSubmit={handleSubmit}>
                 <input name="name" placeholder="Név" onChange={handleChange} required />

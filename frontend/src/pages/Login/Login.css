@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Passero+One&family=Sigmar+One&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 /* Konténer */
 .login-kontener {
     width: 380px;
@@ -8,7 +10,9 @@
     box-shadow: 0 0 18px rgba(0, 80, 0, 0.18);
     border: 2px solid #91d79b;
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 /* Cím */

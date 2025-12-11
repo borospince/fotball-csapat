@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
 /* Teljes kártya */
 .u19-card {
     display: flex;
@@ -10,6 +12,7 @@
     max-width: 350px;
     margin: 1.5em auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
 }
 
 .u19-card:hover {
@@ -40,6 +43,10 @@
     text-align: center;
     font-family: "Segoe UI", Roboto, sans-serif;
     color: #333;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    /* font-weight: weight; */
+    font-style: normal;
 }
 
 .u19-nev {

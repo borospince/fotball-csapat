@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Asset&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Passero+One&family=Sigmar+One&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 .homebody-kontener {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   background-image: url("../public/img/Blue\ and\ White\ Modern\ Football\ Club\ Desktop\ Wallpaper.png");
 } 
 

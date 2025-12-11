@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 .ticket-container {
   max-width: 420px;
   margin: 40px auto;
@@ -5,7 +7,10 @@
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+
 }
 
 .ticket-container h1 {

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
 /* A teljes kártya */
 .ff1-card {
     display: flex;
@@ -10,6 +12,7 @@
     max-width: 350px;
     margin: 1.5em auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
 }
 
 .ff1-card:hover {
@@ -26,6 +29,7 @@
     border-radius: 12px;
     background-color: #f0f0f0;
     margin-bottom: 1em;
+    
 }
 
 .ff1-kep-kontener img {
@@ -40,6 +44,10 @@
     text-align: center;
     font-family: "Segoe UI", Roboto, sans-serif;
     color: #333;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    /* font-weight: weight; */
+    font-style: normal;
 }
 
 .ff1-nev {

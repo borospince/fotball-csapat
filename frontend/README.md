@@ -25,3 +25,18 @@ const News = () => {
       const res = await fetch(
         `https://newsapi.org/v2/everything?q=futball OR football&language=hu&sortBy=publishedAt&pageSize=9&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
       );
+
+
+
+            <div className="meret-kartya"style={{display: 'none'}}>
+        {props.item.vAdatok.map((meret, idx) => (
+          <li key={idx}>
+            <Link to={`/egyedi-polo/?id=${props.item._id}&meret=${meret}`}>{meret.toLowerCase()}</Link>
+          </li>
+        ))}
+        {/* <li><Link to={`/egyedi-polo/?id=${props.item._id}&meret=XS`}>xs</Link></li>
+        <li><Link to={`/egyedi-polo/?id=${props.item._id}&meret=S`}>s</Link></li>
+        <li><Link to={`/egyedi-polo/?id=${props.item._id}&meret=M`}>m</Link></li>
+        <li><Link to={`/egyedi-polo/?id=${props.item._id}&meret=L`}>l</Link></li>
+        <li><Link to={`/egyedi-polo/?id=${props.item._id}&meret=XL`}>xl</Link></li> */}
+      </div>

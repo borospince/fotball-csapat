@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Sigmar+One&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 body{
     background-color: lavenderblush;
 }
@@ -20,10 +22,12 @@ body{
   border-radius:var(--radius);
   border:1px solid rgba(11,122,63,0.12);
   box-shadow: 0 12px 30px rgba(4,8,6,0.35), inset 0 1px 0 rgba(255,255,255,0.02);
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color:#000000;
   backdrop-filter: blur(4px);
   -webkit-font-smoothing:antialiased;
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .tori-kontener h1{
