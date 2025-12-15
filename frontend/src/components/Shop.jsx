@@ -14,7 +14,7 @@ const Shop = (incoming) => {
 
   return (
    
-    <Link to={`/Product/${productId}`} className="shop-card-link" aria-label={`Megnyitás: ${item?.nev ?? 'termék'}`}>
+    <Link to={`/product/${item._id}`} className="shop-card-link" aria-label={`Megnyitás: ${item?.nev ?? 'termék'}`}>
       <article className="shop-card" tabIndex="0" aria-labelledby={`shop-nev-${productId}`}>
         <div className="shop-kep-kontener">
           <img src={item?.kep} alt={item?.nev ?? 'Termék kép'} className="shop-kep" />

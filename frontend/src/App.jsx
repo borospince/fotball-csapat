@@ -56,11 +56,12 @@ function App() {
                         path="clothes"
                         element={<Clothes />}
                         />
-                        {/* <Route
-                            path="/product"
-                            element={<ProductDetail/>}
-                            /> */}
+                       
                     </Route>
+                     <Route
+                            path="/product/:id"
+                            element={<ProductDetail/>}
+                            />
                     <Route
                         path="/history"
                         element={<History />}

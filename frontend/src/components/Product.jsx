@@ -7,36 +7,59 @@ import './Product.css';
 // - Route: <Route path="/product/:id" element={<ProductDetail />} />
 // - Or: <ProductDetail product={productObject} /> to pass product directly
 
-export default function ProductDetail({ product: incomingProduct }) {
-  const { id: idFromRoute } = useParams() ?? {};
+export default function ProductDetail() {
+  const { id } = useParams();
 
   // demo fallback product (if you don't pass one or don't have backend yet)
-  const demoProduct = {
-    id: idFromRoute ?? 'demo-1',
-    nev: 'Minta Termék',
-    kep: 'https://via.placeholder.com/800x800.png?text=Term%C3%A9k',
-    termekleiras: 'Kiváló minőségű minta termék. Részletes leírás itt.',
-    mennyisegEgyseg: '1 db',
-    ar: 8990,
-    mennyiseg: 12
-  };
+  // const demoProduct = {
+  //   id: idFromRoute ?? 'demo-1',
+  //   nev: 'Minta Termék',
+  //   kep: 'https://via.placeholder.com/800x800.png?text=Term%C3%A9k',
+  //   termekleiras: 'Kiváló minőségű minta termék. Részletes leírás itt.',
+  //   mennyisegEgyseg: '1 db',
+  //   ar: 8990,
+  //   mennyiseg: 12
+  // };
 
-  const product = incomingProduct ?? demoProduct;
+  // const product = incomingProduct ?? demoProduct;
 
-  const sizes = ['XS','S','M','L','XL'];
-  const [selectedSize, setSelectedSize] = useState(sizes[1]); // alap S
+  // const sizes = ['XS','S','M','L','XL'];
+  // const [selectedSize, setSelectedSize] = useState(sizes[1]); // alap S
+ const [product, setProduct] = useState({});
+
+  
+    useEffect(() => {
+        const TermekLeker = async () => {
+            const response = await fetch('http://localhost:3500/api/items-frontend');
+            const adat = await response.json();
+            console.log(adat);
+            
+            const elem = adat.items.filter(elem => elem._id === id);
+            console.log(elem);
+
+            if (response.ok) {
+                setProduct(elem[0]);
+            } else {
+                window.alert(adat.msg);
+            }
+        };
+
+        TermekLeker();
+    }, []);
+  
 
   // small effect: when product changes, reset size
-  useEffect(() => setSelectedSize(sizes[1]), [product.id]);
+  // useEffect(() => setSelectedSize(sizes[1]), [product.id]);
 
-  function addToCart(e) {
-    e.preventDefault();
-    // itt tedd be a kosár logikát (context / redux / api call)
-    alert(`${product.nev} (${selectedSize}) hozzáadva a kosárhoz`);
-  }
+  // function addToCart(e) {
+  //   e.preventDefault();
+  //   // itt tedd be a kosár logikát (context / redux / api call)
+  //   alert(`${product.nev} (${selectedSize}) hozzáadva a kosárhoz`);
+  // }
 
   return (
     <div className="pd-page">
+      {/* <img src={product.kep} alt="" /> */}
       <div className="pd-wrap" role="main" aria-labelledby="pd-title">
         <div className="pd-image-wrap">
           <div className="pd-image-frame">
@@ -53,8 +76,9 @@ export default function ProductDetail({ product: incomingProduct }) {
 
           <div className="pd-sizes">
             <div className="pd-sizes-label">Méret</div>
-            <div className="pd-sizes-list" role="list">
-              {sizes.map(sz => (
+            {/* <div className="pd-sizes-list" role="list">
+              {product.vAdatok.map(sz => (
+                
                 <button
                   key={sz}
                   onClick={() => setSelectedSize(sz)}
@@ -64,11 +88,11 @@ export default function ProductDetail({ product: incomingProduct }) {
                   {sz}
                 </button>
               ))}
-            </div>
+            </div> */}
           </div>
 
           <div className="pd-actions">
-            <button className="pd-add" onClick={addToCart}>Kosárba ({selectedSize})</button>
+            {/* <button className="pd-add" onClick={addToCart}>Kosárba ({selectedSize})</button> */}
             <Link to="/" className="pd-buy">Vásárlás</Link>
           </div>
         </aside>
