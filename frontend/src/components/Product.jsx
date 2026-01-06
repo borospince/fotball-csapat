@@ -2,6 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './Product.css';
 
+  useEffect(() => {
+    const TermekLeker = async () => {
+      const response = await fetch("http://localhost:3500/api/items-frontend");
+      const adat = await response.json();
+
+      const elem = adat.items.find(elem => elem._id === id);
+
+      if (response.ok) {
+        setProduct(elem);
+      } else {
+        window.alert(adat.msg);
+      }
+    };
+
+    TermekLeker();
+  }, [id]);
+
 // ProductDetail - styles moved to ProductDetail.css
 // Usage:
 // - Route: <Route path="/product/:id" element={<ProductDetail />} />
@@ -92,7 +109,7 @@ export default function ProductDetail() {
           </div>
 
           <div className="pd-actions">
-            {/* <button className="pd-add" onClick={addToCart}>Kosárba ({selectedSize})</button> */}
+            {/* { <button className="pd-add" onClick={addToCart}>Kosárba ({selectedSize})</button> Ü} */}
             <Link to="/" className="pd-buy">Vásárlás</Link>
           </div>
         </aside>
