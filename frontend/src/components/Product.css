@@ -1,84 +1,159 @@
-:root{
-  --bg:#f6fbf6;
-  --card:#ffffff;
-  --text:#0f1724;
-  --muted:#65748b;
-  --green:#14683b;
-  --green-dark:#0f4d30;
-  --accent: rgba(20,104,59,0.08);
+/* ALAP */
+.pd-page {
+  min-height: 100vh;
+  background-color: #f4f6f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.pd-page{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--bg);
-  padding:40px 20px;
-  box-sizing:border-box;
+/* FŐ KÁRTYA */
+.pd-wrap {
+  width: 95%;
+  max-width: 1300px;
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 50px;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-.pd-wrap{
-  width:100%;
-  max-width:1100px;
-  background:var(--card);
-  border-radius:14px;
-  box-shadow:0 12px 40px rgba(10,20,30,0.08);
-  overflow:hidden;
-  display:flex;
-  gap:28px;
-  padding:28px;
-  align-items:center;
+/* KÉP */
+.pd-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Left: kép (középen) */
-.pd-image-wrap{
-  flex:1 1 520px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-width:280px;
+.pd-image {
+  width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fafafa;
 }
-.pd-image-frame{
-  width:100%;
-  aspect-ratio:1/1;
-  max-width:560px;
-  border-radius:10px;
-  overflow:hidden;
-  background:linear-gradient(180deg, rgba(20,104,59,0.04), rgba(0,0,0,0.02));
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+/* INFO OLDAL */
+.pd-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.pd-image{ width:100%; height:100%; object-fit:contain; display:block; transition: transform 260ms ease; }
 
-/* Right: adatok */
-.pd-info{ width:380px; flex:0 0 380px; display:flex; flex-direction:column; gap:14px; }
-.pd-title{ font-size:20px; font-weight:700; color:var(--text); margin:0 0 4px 0; }
-.pd-cat{ font-size:13px; color:var(--muted); margin:0; }
-.pd-price{ font-size:22px; font-weight:800; color:var(--green-dark); margin-top:6px; }
-.pd-stock{ font-size:13px; color:var(--muted); }
-.pd-desc{ font-size:14px; color:var(--text); line-height:1.45; margin-top:10px; }
+/* CÍM */
+.pd-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #000;
+}
 
-/* sizes */
-.pd-sizes{ margin-top:12px; display:flex; flex-direction:column; gap:10px; }
-.pd-sizes-label{ font-size:13px; color:var(--muted); font-weight:600; }
-.pd-sizes-list{ display:flex; gap:8px; flex-wrap:wrap; }
-.pd-size-btn{ min-width:44px; height:44px; padding:0 12px; border-radius:10px; border:1px solid rgba(10,20,30,0.06); background:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; cursor:pointer; transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease; }
-.pd-size-btn:hover{ transform:translateY(-3px); box-shadow:0 8px 20px rgba(10,20,30,0.06); }
-.pd-size-btn.active{ background:var(--green); color:#fff; border-color:var(--green-dark); box-shadow:0 8px 18px rgba(15,77,48,0.12); }
+/* ÁR */
+.pd-price {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0a7a3d; /* ZÖLD */
+}
 
-/* actions */
-.pd-actions{ display:flex; gap:12px; margin-top:8px; }
-.pd-add{ background: linear-gradient(180deg,var(--green),var(--green-dark)); color:#fff; padding:12px 16px; border-radius:10px; border:none; cursor:pointer; font-weight:700; box-shadow:0 10px 30px rgba(15,77,48,0.12); }
-.pd-buy{ background:transparent; color:var(--green-dark); padding:12px 14px; border-radius:10px; border:1px solid var(--accent); cursor:pointer; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+/* KÉSZLET */
+.pd-stock {
+  font-size: 16px;
+  color: #000;
+  opacity: 0.8;
+}
 
-/* subtle image hover pulse when hovering the page */
-.pd-wrap:hover .pd-image{ transform:scale(1.02); }
+/* LEÍRÁS */
+.pd-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000;
+  margin-top: 10px;
+}
 
-/* centered layout on small screens -> stacked */
-@media (max-width:920px){
-  .pd-wrap{ flex-direction:column; padding:20px; }
-  .pd-info{ width:100%; flex:1 1 auto; }
-  .pd-image-wrap{ order:0; }
+/* MÉRETEK */
+.pd-sizes {
+  margin-top: 25px;
+}
+
+.pd-sizes span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+.pd-sizes-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.pd-size-btn {
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 700;
+  border: 2px solid #0a7a3d;
+  background: #ffffff;
+  color: #0a7a3d;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* HOVER */
+.pd-size-btn:hover {
+  background: #0a7a3d;
+  color: #ffffff;
+}
+
+/* AKTÍV MÉRET */
+.pd-size-btn.active {
+  background: #0a7a3d;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(10,122,61,0.4);
+}
+
+/* VÁSÁRLÁS */
+.pd-actions {
+  margin-top: auto;
+}
+
+.pd-buy {
+  margin-top: 30px;
+  padding: 18px;
+  font-size: 20px;
+  font-weight: 700;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: #000;
+  color: #0a7a3d;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.pd-buy:hover {
+  background: #0a7a3d;
+  color: #ffffff;
+}
+
+/* LETILTOTT */
+.pd-buy:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* MOBIL */
+@media (max-width: 900px) {
+  .pd-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-image {
+    max-height: 400px;
+  }
 }
