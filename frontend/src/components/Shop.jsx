@@ -19,9 +19,9 @@ const Shop = (incoming) => {
         <div className="shop-kep-kontener">
           <img src={item?.kep} alt={item?.nev ?? 'Termék kép'} className="shop-kep" />
           
-          <Link><button className="cart-btn" aria-hidden="true" tabIndex="-1">
+          <><button className="cart-btn" aria-hidden="true" tabIndex="-1">
             <FaCartArrowDown />
-          </button></Link>
+          </button></>
         </div>
 
         <div className="shop-adatok">

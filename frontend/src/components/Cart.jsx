@@ -1,60 +1,28 @@
-import { createContext, useContext, useState } from "react";
+import { useContext, useEffect, useState } from 'react'
+import { CartContext } from './kosar/CartContext';
 
-const CartContext = createContext();
+const Cart = () => {
+	const [items, setItems] = useState([]);
+	const { cartItems } = useContext(CartContext);
 
-export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
-
-  const addToCart = (product, size) => {
-    const existing = cartItems.find(
-      item => item._id === product._id && item.size === size
-    );
-
-    if (existing) {
-      setCartItems(
-        cartItems.map(item =>
-          item === existing
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
-    } else {
-      setCartItems([
-        ...cartItems,
-        {
-          ...product,
-          size,
-          quantity: 1
-        }
-      ]);
-    }
-  };
-
-  const removeFromCart = (id, size) => {
-    setCartItems(cartItems.filter(item => !(item._id === id && item.size === size)));
-  };
-
-  const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.ar * item.quantity,
-    0
-  );
-
-  const totalCount = cartItems.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
-
+	useEffect(() => {
+		const tomb = JSON.parse(localStorage.getItem('kosar'));
+		
+		cartItems && cartItems.length > 0 ? setItems(cartItems) : setItems(tomb);
+	}, []);
+	
   return (
-    <CartContext.Provider value={{
-      cartItems,
-      addToCart,
-      removeFromCart,
-      totalPrice,
-      totalCount
-    }}>
-      {children}
-    </CartContext.Provider>
-  );
+	  <div style={{marginTop: '5em'}}>
+		  {items ? items.map(elem => (
+			  <div key={ elem._id }>
+				  <p>Leírás: { elem.nev }</p>
+				  <img src={elem.kep} alt="" />
+			  </div>
+		  )) : <>
+				  <p style={{marginTop: '5em'}}>A kosár üres!</p>
+		  </> }
+	</div>
+  )
 }
 
-export const useCart = () => useContext(CartContext);
+export default Cart;

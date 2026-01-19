@@ -1,35 +1,42 @@
-import { createContext, useContext, useState } from "react";
-import { useCart } from "../context/CartContext";
+import { createContext, useEffect, useState } from "react";
 
-const { addToCart } = useCart();
+export const CartContext = createContext();
 
-const CartContext = createContext();
-
-export function CartProvider({ children }) {
+function CartProvider(props) {
   const [cartItems, setCartItems] = useState([]);
 
+  useEffect(() => { 
+    const tomb = JSON.parse(localStorage.getItem('kosar'));
+    console.log(tomb);
+    
+    if (tomb) setCartItems(tomb);
+    else setCartItems([]);
+  }, []);
+  
   const addToCart = (product, size) => {
     const existing = cartItems.find(
       item => item._id === product._id && item.size === size
     );
 
     if (existing) {
-      setCartItems(
-        cartItems.map(item =>
-          item === existing
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
+      let tombi = cartItems.map(item =>
+        item === existing
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ); 
+      setCartItems(tombi);
+      localStorage.setItem('kosar', JSON.stringify(tombi));
     } else {
-      setCartItems([
+      let tomb = [
         ...cartItems,
         {
           ...product,
           size,
           quantity: 1
         }
-      ]);
+      ];
+      setCartItems(tomb);
+      localStorage.setItem('kosar', JSON.stringify(tomb));
     }
   };
 
@@ -55,9 +62,9 @@ export function CartProvider({ children }) {
       totalPrice,
       totalCount
     }}>
-      {children}
+      {props.children}
     </CartContext.Provider>
   );
 }
 
-export default CartContext;
+export default CartProvider;

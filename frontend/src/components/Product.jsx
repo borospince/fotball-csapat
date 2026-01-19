@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import './Product.css';
+import { CartContext } from './kosar/CartContext';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
+  const { addToCart } = useContext(CartContext);
 
-  const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+  // const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
   useEffect(() => {
     const TermekLeker = async () => {
@@ -17,6 +20,12 @@ export default function ProductDetail() {
       const elem = adat.items.filter(elem => elem._id === id);
 
       if (response.ok) {
+        console.log(elem[0]);
+        if (elem[0].vAdatok.length > 0) setSizes(elem[0].vAdatok);
+        else {
+          let uresAdat = ['egy méret'];
+          setSizes(uresAdat);
+        }
         setProduct(elem[0]);
       } else {
         window.alert(adat.msg);
@@ -25,6 +34,10 @@ export default function ProductDetail() {
 
     TermekLeker();
   }, [id]);
+
+  const kosarbaTesz = (termek, meret) => { 
+    addToCart(termek, meret);
+  };
 
   return (
     <div className="pd-page">
@@ -60,7 +73,8 @@ export default function ProductDetail() {
           <div className="pd-actions">
             <button
               className="pd-buy"
-              disabled={!selectedSize}
+              disabled={ !selectedSize }
+              onClick={() => kosarbaTesz(product, selectedSize)}
             >
               Vásárlás {selectedSize && `(${selectedSize})`}
             </button>

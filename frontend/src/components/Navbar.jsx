@@ -34,7 +34,7 @@ const Navbar = () => {
             <Link to="/shops">Web áruház</Link>
             <Link to="/history">Történelem</Link>
             <Link to="/fans">Szurkolók</Link>
-            <Link to="/Cart">kosár</Link>
+            <Link to="/Cart">Kosár</Link>
             {isLoggedIn === 0 ? 
                  <Link to="/login"><CgProfile size={30} /></Link>
             : 

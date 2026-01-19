@@ -14,7 +14,7 @@ import Shops from './components/Shops';
 import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 import ProductDetail from './components/Product.jsx';
-import Cart, { CartProvider } from "./components/Cart.jsx";
+import Cart from "./components/Cart.jsx";
 
 
 
@@ -77,7 +77,7 @@ function App() {
                         path="/login"
                         element={<Login />}
                         ></Route>
-                        <Route />   
+                        <Route path="/cart" element={<Cart />} />   
                     <Route
                         path="/fans"
                         element={<Fans />}
