@@ -11,17 +11,17 @@ exports.getAllItemsBackend = async (req, res) => {
     }
 };
 
-// exports.getOneUserBackend = async (req,res) => {
-//     try{
-//         const { id } = req.params;
-//         const userBackend = await User.findById({_id: id });
-//         res.statusCode = 200;
-//         return res.render('user.ejs', {userBackend});
-//     } catch (error){
-//         res.statusCode = 404;
-//         return res.render('404.ejs');
-//     }
-// };
+exports.getOneItemBackend = async (req,res) => {
+    try{
+        const { id } = req.params;
+        const itemBackend = await Termek.findById({_id: id });
+        res.statusCode = 200;
+        return res.render('item.ejs', {itemBackend});
+    } catch (error){
+        res.statusCode = 404;
+        return res.render('404.ejs');
+    }
+};
 
 // exports.postUserBackend = async (req,res) => {
 //     try {
@@ -37,18 +37,22 @@ exports.getAllItemsBackend = async (req, res) => {
 
 // };
 
-// exports.updateOneUserBackend = async (req, res) => {
-//     try{
-//         const { id } = req.params;
-//         const { nev, statusz } = req.body;
-//         await User.findByIdAndUpdate({_id: id }, { nev, statusz});
-//         res.statusCode = 201;
-//         return res.json({msg:'sikeres módosítás!'});
-//     }catch (error) {
-//         res.statusCode = 404;
-//         return res.json({msg:'valami hiba történt!'});
-//     }
-// };
+exports.updateOneItemBackend = async (req, res) => {
+    try{
+        const { id } = req.params;
+        const { nev,
+            termekleiras,
+            ar,
+            mennyiseg,
+            mennyisegiEgyseg, } = req.body;
+        await Termek.findByIdAndUpdate({_id: id }, { $set: { nev, termekleiras, ar, mennyiseg, mennyisegiEgyseg } } );
+        res.statusCode = 201;
+        return res.json({msg:'sikeres módosítás!'});
+    }catch (error) {
+        res.statusCode = 404;
+        return res.json({msg:'valami hiba történt!' + error.message });
+    }
+};
 
 exports.deleteOneUserBackend = async (req,res) => {
     try {

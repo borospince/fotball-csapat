@@ -41,44 +41,44 @@ async function termektorles(id) {
     }
 }
 
-async function termekmodositas(id) {
-    console.log('Módosítás:', id);
+// async function termekmodositas(id) {
+//     console.log('Módosítás:', id);
     
-    try {
-        // Adatok bekérése
-        const ujNev = window.prompt('Új név:', '');
-        if (ujNev === null) return; // Mégse
+//     try {
+//         // Adatok bekérése
+//         const ujNev = window.prompt('Új név:', '');
+//         if (ujNev === null) return; // Mégse
         
-        if (!ujNev.trim()) {
-            window.alert('A név nem lehet üres!');
-            return;
-        }
+//         if (!ujNev.trim()) {
+//             window.alert('A név nem lehet üres!');
+//             return;
+//         }
         
-        // Adatok összeállítása
-        const updateData = {
-            nev: ujNev.trim()
-        };
+//         // Adatok összeállítása
+//         const updateData = {
+//             nev: ujNev.trim()
+//         };
         
         
-        // PUT kérés küldése
-        const response = await fetch(`/api/items-backend/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updateData)
-        });
+//         // PUT kérés küldése
+//         const response = await fetch(`/api/items-backend/${id}`, {
+//             method: 'PUT',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(updateData)
+//         });
 
-        const valasz = await response.json();
+//         const valasz = await response.json();
 
-        if (response.ok) {
-            window.alert(valasz.msg || 'Sikeres módosítás!');
-            window.location.reload();
-        } else {
-            window.alert(valasz.msg || 'Hiba történt a módosítás során!');
-        }
-    } catch (error) {
-        console.error('Hiba:', error);
-        window.alert('Hiba történt!');
-    }
-}
+//         if (response.ok) {
+//             window.alert(valasz.msg || 'Sikeres módosítás!');
+//             window.location.reload();
+//         } else {
+//             window.alert(valasz.msg || 'Hiba történt a módosítás során!');
+//         }
+//     } catch (error) {
+//         console.error('Hiba:', error);
+//         window.alert('Hiba történt!');
+//     }
+// }

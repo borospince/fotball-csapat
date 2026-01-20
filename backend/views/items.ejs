@@ -27,7 +27,8 @@
                 <p>Termék leírás:<%=elem.termekleiras%></p>
                 <p>Ár: <%= elem.ar %></p>
                 <button onclick="termektorles('<%= elem._id%>')">Törlés</button>
-                <button onclick="termekmodositas('<%= elem._id%>')">Modositás</button>
+                <a class="modosit" href="/api/items-backend/<%= elem._id %>">Lekérés</a>
+                <!-- <button onclick="modositas('<%= elem._id%>')">Módositás</button> -->
             </div>
             <% }) %>
         </div>
