@@ -8,7 +8,7 @@ export default function ProductDetail() {
   const [product, setProduct] = useState({});
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
-  const [quantity, setQuantity] = useState(1); // <-- ÚJ: mennyiség (alapból 1)
+  const [quantity, setQuantity] = useState(1); // ✅ mennyiség (alapból 1)
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
@@ -16,17 +16,15 @@ export default function ProductDetail() {
       const response = await fetch('http://localhost:3500/api/items-frontend');
       const adat = await response.json();
 
-      const elem = adat.items.filter(elem => elem._id === id);
+      const elem = adat.items.filter((elem) => elem._id === id);
 
       if (response.ok) {
-        console.log(elem[0]);
-
-        if (elem[0].vAdatok.length > 0) setSizes(elem[0].vAdatok);
+        if (elem[0]?.vAdatok?.length > 0) setSizes(elem[0].vAdatok);
         else setSizes(['egy méret']);
 
-        setProduct(elem[0]);
+        setProduct(elem[0] || {});
 
-        // ha új termékre váltasz, reseteljünk
+        // ✅ termékváltáskor reset
         setSelectedSize('');
         setQuantity(1);
       } else {
@@ -37,10 +35,37 @@ export default function ProductDetail() {
     TermekLeker();
   }, [id]);
 
-  // <-- MÓDOSÍTVA: db paraméter is megy a kosárba
-  const kosarbaTesz = (termek, meret, db) => {
-    addToCart(termek, meret, db);
+  // ✅ KÉSZLETLEVONÁS + KOSÁRBA TÉTEL
+  const kosarbaTesz = async (termek, meret, db) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3500/api/items-frontend/${termek._id}/decrease-stock`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ quantity: db }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data?.msg || 'Nem sikerült a készletlevonás!');
+        return;
+      }
+
+      // ✅ ha sikerült készletet levonni, akkor mehet a kosár
+      addToCart(termek, meret, db);
+
+      // ✅ friss készlet UI-ban is
+      setProduct((prev) => ({ ...prev, mennyiseg: data.mennyiseg }));
+    } catch (e) {
+      alert('Hálózati hiba!');
+    }
   };
+
+  // ✅ max 5, de nem több mint a készlet
+  const maxQty = Math.min(5, Number(product?.mennyiseg || 0));
 
   return (
     <div className="pd-page">
@@ -53,14 +78,14 @@ export default function ProductDetail() {
           <h1 className="pd-title">{product.nev}</h1>
           <p className="pd-price">{product.ar} Ft</p>
           <p className="pd-stock">
-            Készlet: {product.mennyiseg} {product.mennyisegEgyseg}
+            Készlet: {product.mennyiseg}
           </p>
 
           {/* MÉRET VÁLASZTÁS */}
           <div className="pd-sizes">
             <span>Méret:</span>
             <div className="pd-sizes-list">
-              {sizes.map(size => (
+              {sizes.map((size) => (
                 <button
                   key={size}
                   className={`pd-size-btn ${selectedSize === size ? 'active' : ''}`}
@@ -72,19 +97,24 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          {/* MENNYISÉG VÁLASZTÁS (1-5) */}
+          {/* MENNYISÉG VÁLASZTÁS (1-5, de max készlet) */}
           <div className="pd-quantity">
             <label htmlFor="quantity">Mennyiség:</label>
             <select
               id="quantity"
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
+              disabled={maxQty <= 0}
             >
-              {[1, 2, 3, 4, 5].map(num => (
-                <option key={num} value={num}>
-                  {num} db
-                </option>
-              ))}
+              {maxQty > 0 ? (
+                Array.from({ length: maxQty }, (_, i) => i + 1).map((num) => (
+                  <option key={num} value={num}>
+                    {num} db
+                  </option>
+                ))
+              ) : (
+                <option value={0}>Nincs készleten</option>
+              )}
             </select>
           </div>
 
@@ -92,7 +122,7 @@ export default function ProductDetail() {
           <div className="pd-actions">
             <button
               className="pd-buy"
-              disabled={!selectedSize}
+              disabled={!selectedSize || maxQty <= 0}
               onClick={() => kosarbaTesz(product, selectedSize, quantity)}
             >
               Vásárlás ({quantity} db{selectedSize && `, ${selectedSize}`})

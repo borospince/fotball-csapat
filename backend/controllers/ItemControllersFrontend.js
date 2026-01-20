@@ -1,63 +1,71 @@
 const Termek = require('../models/Termek');
 
 exports.getAllItemsFrontend = async (req, res) => {
-    try {
-        const items = await Termek.find({});
-        res.statusCode = 200;
-        return res.json({ items });
-    } catch (error) {
-        res.statusCode = 500;
-        return res.json({ msg: error.msg });
-    }
+  try {
+    const items = await Termek.find({});
+    return res.status(200).json({ items });
+  } catch (error) {
+    return res.status(500).json({ msg: error?.message || 'Szerver hiba' });
+  }
 };
 
-// exports.getOneUserBackend = async (req,res) => {
-//     try{
-//         const { id } = req.params;
-//         const userBackend = await User.findById({_id: id });
-//         res.statusCode = 200;
-//         return res.render('user.ejs', {userBackend});
-//     } catch (error){
-//         res.statusCode = 404;
-//         return res.render('404.ejs');
-//     }
-// };
+// ✅ készlet csökkentés: csak akkor von le, ha van elég készlet (nem mehet mínuszba)
+exports.decreaseStockFrontend = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const qty = Number(req.body.quantity);
 
-// exports.postUserBackend = async (req,res) => {
-//     try {
-//         const {nev,statusz} = req.body;
-//         const newUserBackend = User({nev,statusz});
-//         await newUserBackend.save();
-//         res.statusCode = 201;
-//         return res.json({msg:'létre jött az új felhasználó'});
-//     } catch (error) {
-//         res.statusCode = 409;
-//         return res.json({ msg: 'Nem jött létre az új felhasználó!'});
-//     }
+    if (!qty || qty < 1) {
+      return res.status(400).json({ msg: 'Hibás mennyiség!' });
+    }
 
-// };
+    // Atomikus csökkentés: csak ha mennyiseg >= qty
+    const updated = await Termek.findOneAndUpdate(
+      { _id: id, mennyiseg: { $gte: qty } },
+      { $inc: { mennyiseg: -qty } },
+      { new: true }
+    );
 
-// exports.updateOneUserBackend = async (req, res) => {
-//     try{
-//         const { id } = req.params;
-//         const { nev, statusz } = req.body;
-//         await User.findByIdAndUpdate({_id: id }, { nev, statusz});
-//         res.statusCode = 201;
-//         return res.json({msg:'sikeres módosítás!'});
-//     }catch (error) {
-//         res.statusCode = 404;
-//         return res.json({msg:'valami hiba történt!'});
-//     }
-// };
+    if (!updated) {
+      return res.status(409).json({ msg: 'Nincs ennyi készleten!' });
+    }
 
-// exports.deleteOneUserBackend = async (req,res) => {
-//     try {
-//         const { id } = req.params;
-//         await User.findByIdAndDelete({_id: id });
-//         res.statusCode = 200;
-//         return res.json({msg:'sikeres törtlés!'});
-//     } catch (error) {
-//         res.statusCode = 409;
-//         return res.json({msg:'valami hiba történt!'});
-//     }
-// };
+    return res.status(200).json({
+      ok: true,
+      mennyiseg: updated.mennyiseg,
+      item: updated,
+    });
+  } catch (error) {
+    return res.status(500).json({ msg: error?.message || 'Szerver hiba' });
+  }
+};
+
+// ✅ készlet növelés: visszaadjuk a készletre (pl. kosárból törlésnél)
+exports.increaseStockFrontend = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const qty = Number(req.body.quantity);
+
+    if (!qty || qty < 1) {
+      return res.status(400).json({ msg: 'Hibás mennyiség!' });
+    }
+
+    const updated = await Termek.findByIdAndUpdate(
+      { _id: id },
+      { $inc: { mennyiseg: qty } },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({ msg: 'Termék nem található!' });
+    }
+
+    return res.status(200).json({
+      ok: true,
+      mennyiseg: updated.mennyiseg,
+      item: updated,
+    });
+  } catch (error) {
+    return res.status(500).json({ msg: error?.message || 'Szerver hiba' });
+  }
+};

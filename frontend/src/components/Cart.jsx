@@ -1,49 +1,18 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext } from 'react';
 import { CartContext } from './kosar/CartContext';
 import './Cart.css';
 
 const Cart = () => {
-  const { cartItems, removeFromCart, addToCart, totalPrice, totalCount } = useContext(CartContext);
-  const [items, setItems] = useState([]);
+  const {
+    cartItems,
+    removeFromCart,
+    increaseCartItem,
+    decreaseCartItem,
+    totalPrice,
+    totalCount
+  } = useContext(CartContext);
 
-  // mindig szinkronban a contexttel (és fallback localStorage-ből)
-  useEffect(() => {
-    const tomb = JSON.parse(localStorage.getItem('kosar')) || [];
-    if (cartItems && cartItems.length >= 0) setItems(cartItems.length ? cartItems : tomb);
-  }, [cartItems]);
-
-  const formatFt = (n) => {
-    const num = Number(n) || 0;
-    return num.toLocaleString('hu-HU');
-  };
-
-  const eltavolitas = (id, size) => {
-    removeFromCart(id, size);
-  };
-
-  // -1 mennyiség: ha 1-ről csökkentenéd, akkor eltávolítjuk
-  const csokkent = (elem) => {
-    if ((elem.quantity || 1) <= 1) {
-      removeFromCart(elem._id, elem.size);
-      return;
-    }
-    // meglévő addToCart csak növel, ezért itt manuálisan csökkentünk
-    const uj = items.map((it) =>
-      it._id === elem._id && it.size === elem.size
-        ? { ...it, quantity: (it.quantity || 1) - 1 }
-        : it
-    );
-    setItems(uj);
-    localStorage.setItem('kosar', JSON.stringify(uj));
-  };
-
-  // +1 mennyiség a contexten keresztül (ez frissíti a localStorage-t is)
-  const noveles = (elem) => {
-    addToCart(elem, elem.size, 1);
-  };
-
-  const osszeg = useMemo(() => totalPrice, [totalPrice]);
-  const darab = useMemo(() => totalCount, [totalCount]);
+  const formatFt = (n) => (Number(n) || 0).toLocaleString('hu-HU');
 
   return (
     <div className="cart-page">
@@ -51,14 +20,14 @@ const Cart = () => {
         <header className="cart-header">
           <h1>Kosár</h1>
           <p className="cart-subtitle">
-            {darab ? `${darab} db termék a kosárban` : 'A kosár jelenleg üres'}
+            {totalCount ? `${totalCount} db termék a kosárban` : 'A kosár üres'}
           </p>
         </header>
 
-        {items && items.length > 0 ? (
+        {cartItems && cartItems.length > 0 ? (
           <>
             <div className="cart-list">
-              {items.map((elem) => (
+              {cartItems.map((elem) => (
                 <div className="cart-item" key={`${elem._id}-${elem.size}`}>
                   <div className="cart-img-wrap">
                     <img src={elem.kep} alt={elem.nev} />
@@ -75,8 +44,7 @@ const Cart = () => {
 
                       <button
                         className="remove-btn"
-                        onClick={() => eltavolitas(elem._id, elem.size)}
-                        aria-label="Termék eltávolítása"
+                        onClick={() => removeFromCart(elem._id, elem.size)}
                         title="Eltávolítás"
                       >
                         ✕
@@ -89,19 +57,20 @@ const Cart = () => {
                         <b>{formatFt(elem.ar)} Ft</b>
                       </div>
 
+                      {/* ✅ + / − mennyiség, készletkezeléssel */}
                       <div className="quantity-controls">
-                        <button onClick={() => csokkent(elem)} aria-label="Mennyiség csökkentése">
+                        <button onClick={() => decreaseCartItem(elem._id, elem.size)} aria-label="Csökkentés">
                           −
                         </button>
-                        <span>{elem.quantity || 1}</span>
-                        <button onClick={() => noveles(elem)} aria-label="Mennyiség növelése">
+                        <span>{elem.quantity}</span>
+                        <button onClick={() => increaseCartItem(elem._id, elem.size)} aria-label="Növelés">
                           +
                         </button>
                       </div>
 
                       <div className="cart-line-total">
                         <span>Részösszeg:</span>
-                        <b>{formatFt((elem.ar || 0) * (elem.quantity || 1))} Ft</b>
+                        <b>{formatFt((elem.ar || 0) * (elem.quantity || 0))} Ft</b>
                       </div>
                     </div>
                   </div>
@@ -113,29 +82,22 @@ const Cart = () => {
               <div className="summary-card">
                 <div className="summary-row">
                   <span>Összes termék:</span>
-                  <b>{darab} db</b>
+                  <b>{totalCount} db</b>
                 </div>
                 <div className="summary-row">
                   <span>Végösszeg:</span>
-                  <b className="summary-total">{formatFt(osszeg)} Ft</b>
+                  <b className="summary-total">{formatFt(totalPrice)} Ft</b>
                 </div>
 
-                <button className="checkout-btn">
-                  Tovább a fizetéshez
-                </button>
-
-                <p className="summary-note">
-                  A szállítási költség a pénztárnál kerül kiszámításra.
-                </p>
+                <button className="checkout-btn">Tovább a fizetéshez</button>
+                <p className="summary-note">A szállítási költség a pénztárnál számolódik.</p>
               </div>
             </aside>
           </>
         ) : (
           <div className="cart-empty">
             <p>A kosár üres!</p>
-            <a className="cart-back" href="/">
-              Vissza a vásárláshoz
-            </a>
+            <a className="cart-back" href="/shops">Vissza a vásárláshoz</a>
           </div>
         )}
       </div>
