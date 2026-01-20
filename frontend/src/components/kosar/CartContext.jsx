@@ -39,9 +39,11 @@ function CartProvider(props) {
       localStorage.setItem('kosar', JSON.stringify(tomb));
     }
   };
-
+  
   const removeFromCart = (id, size) => {
-    setCartItems(cartItems.filter(item => !(item._id === id && item.size === size)));
+    const tomb = cartItems.filter(item => !(item._id === id && item.size === size));
+    setCartItems(tomb);
+    localStorage.setItem('kosar', JSON.stringify(tomb));
   };
 
   const totalPrice = cartItems.reduce(
