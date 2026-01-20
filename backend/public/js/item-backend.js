@@ -40,3 +40,37 @@ async function termektorles(id) {
     window.alert(valasz.msg);
     }
 }
+
+async function termekmodositas(id) {
+    // Első lépés: lekérjük az aktuális adatokat
+    const response = await fetch(`/api/items-backend/${id}`, {
+        method: 'GET',
+    });
+
+    const item = await response.json();
+
+    if (!response.ok) {
+        window.alert('Hiba az adatok lekérésekor: ' + (item.msg || 'Ismeretlen hiba'));
+        return;
+    }
+
+    const updateData = {
+                text: szoveg,
+                ...(veglegesKepUrl && { image: veglegesKepUrl })
+            };
+
+            const updateResponse = await fetch(`/api/items-backend/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updateData)
+            });
+
+            const valasz = await updateResponse.json();
+
+            if (updateResponse.ok) {
+                window.alert(valasz.msg || 'Sikeres mentés!');
+                document.body.removeChild(modal);
+}
+}
