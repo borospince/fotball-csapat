@@ -8,6 +8,7 @@ export default function ProductDetail() {
   const [product, setProduct] = useState({});
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   const { addToCart } = useContext(CartContext);
 
   // const sizes = ['XS', 'S', 'M', 'L', 'XL'];
@@ -35,8 +36,8 @@ export default function ProductDetail() {
     TermekLeker();
   }, [id]);
 
-  const kosarbaTesz = (termek, meret) => { 
-    addToCart(termek, meret);
+  const kosarbaTesz = (termek, meret, mennyiseg) => { 
+    addToCart(termek, meret, mennyiseg);
   };
 
   return (
@@ -71,10 +72,26 @@ export default function ProductDetail() {
 
           {/* VÁSÁRLÁS */}
           <div className="pd-actions">
+            <label className="pd-quantity" htmlFor="pd-quantity-input">
+              Mennyiség
+              <input
+                id="pd-quantity-input"
+                type="number"
+                min="1"
+                max={product.mennyiseg ?? 99}
+                value={selectedQuantity}
+                onChange={(event) => {
+                  const nextValue = Number(event.target.value);
+                  const maxValue = product.mennyiseg ?? 99;
+                  const clamped = Math.min(Math.max(nextValue, 1), maxValue);
+                  setSelectedQuantity(clamped);
+                }}
+              />
+            </label>
             <button
               className="pd-buy"
               disabled={ !selectedSize }
-              onClick={() => kosarbaTesz(product, selectedSize)}
+              onClick={() => kosarbaTesz(product, selectedSize, selectedQuantity)}
             >
               Vásárlás {selectedSize && `(${selectedSize})`}
             </button>

@@ -118,10 +118,29 @@
 /* VÁSÁRLÁS */
 .pd-actions {
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pd-quantity {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.pd-quantity input {
+  width: 140px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 .pd-buy {
-  margin-top: 30px;
   padding: 18px;
   font-size: 20px;
   font-weight: 700;

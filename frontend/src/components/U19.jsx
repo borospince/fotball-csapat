@@ -1,4 +1,4 @@
-import './u19.css';
+import './U19.css';
 
 const U19 = ({ u19 }) => {
   return (

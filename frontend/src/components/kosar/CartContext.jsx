@@ -13,7 +13,8 @@ function CartProvider(props) {
     else setCartItems([]);
   }, []);
   
-  const addToCart = (product, size) => {
+  const addToCart = (product, size, quantity = 1) => {
+    const safeQuantity = Math.max(1, Number(quantity) || 1);
     const existing = cartItems.find(
       item => item._id === product._id && item.size === size
     );
@@ -21,7 +22,7 @@ function CartProvider(props) {
     if (existing) {
       let tombi = cartItems.map(item =>
         item === existing
-          ? { ...item, quantity: item.quantity + 1 }
+          ? { ...item, quantity: item.quantity + safeQuantity }
           : item
       ); 
       setCartItems(tombi);
@@ -32,7 +33,7 @@ function CartProvider(props) {
         {
           ...product,
           size,
-          quantity: 1
+          quantity: safeQuantity
         }
       ];
       setCartItems(tomb);
