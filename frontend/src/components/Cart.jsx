@@ -14,6 +14,35 @@ const Cart = () => {
 
   const formatFt = (n) => (Number(n) || 0).toLocaleString('hu-HU');
 
+  const fizetes = async () => {
+        if (cartItems.length === 0) { // Itt 'items' kell, mert nálad az a state neve
+          alert("Üres a kosarad!");
+          return;
+        }
+
+        try {
+          // Itt hívjuk meg a BACKEND-edet (ezt meg kell írnod a szerver oldalon!)
+          const res = await fetch("http://localhost:3500/api/stripe/create-checkout-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: cartItems }) // A te items state-edet küldjük
+          });
+
+          const data = await res.json();
+          console.log(data);
+          
+
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            console.error("Hiba: Nem érkezett URL a szervertől.");
+            
+          }
+        } catch (error) {
+          console.error("Hálózati hiba:", error);
+        }
+      };
+
   return (
     <div className="cart-page">
       <div className="cart-container">
@@ -89,7 +118,7 @@ const Cart = () => {
                   <b className="summary-total">{formatFt(totalPrice)} Ft</b>
                 </div>
 
-                <button className="checkout-btn">Tovább a fizetéshez</button>
+                <button className="checkout-btn" onClick={fizetes}>Tovább a fizetéshez</button>
                 <p className="summary-note">A szállítási költség a pénztárnál számolódik.</p>
               </div>
             </aside>

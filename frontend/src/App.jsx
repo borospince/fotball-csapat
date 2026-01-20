@@ -15,6 +15,8 @@ import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 import ProductDetail from './components/Product.jsx';
 import Cart from "./components/Cart.jsx";
+import Success from './pages/Success.jsx';
+import Cancel from './pages/Cancel.jsx';
 
 
 
@@ -81,6 +83,14 @@ function App() {
                     <Route
                         path="/fans"
                         element={<Fans />}
+                    ></Route>
+                    <Route
+                        path="/success"
+                        element={<Success />}
+                    ></Route>
+                    <Route
+                        path="/cancel"
+                        element={<Cancel />}
                     ></Route>
                 </Routes>
             </BrowserRouter>
