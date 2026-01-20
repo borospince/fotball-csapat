@@ -32,6 +32,22 @@
   margin: 0 0 5px;
 }
 
+.cart-quantity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.cart-quantity select {
+  width: 120px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
 .quantity-controls {
   display: flex;
   align-items: center;

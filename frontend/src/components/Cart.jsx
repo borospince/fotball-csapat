@@ -4,7 +4,7 @@ import './Cart.css';
 
 const Cart = () => {
 	const [items, setItems] = useState([]);
-	const { cartItems } = useContext(CartContext);
+	const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
 	useEffect(() => {
 		const tomb = JSON.parse(localStorage.getItem('kosar'));
@@ -21,8 +21,32 @@ const Cart = () => {
           <div className="cart-item-info">
             <h3>{elem.nev}</h3>
             <p>Méret: {elem.size}</p>
-            <p>Mennyiség: {elem.quantity} db</p>
+            <label className="cart-quantity" htmlFor={`quantity-${elem._id}-${elem.size}`}>
+              Mennyiség
+              <select
+                id={`quantity-${elem._id}-${elem.size}`}
+                value={elem.quantity}
+                onChange={(event) => updateQuantity(elem._id, elem.size, event.target.value)}
+              >
+                {Array.from(
+                  { length: Math.max(1, elem.mennyiseg ?? 99) },
+                  (_, index) => index + 1
+                ).map(optionValue => (
+                  <option key={optionValue} value={optionValue}>
+                    {optionValue}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
+          <button
+            className="remove-btn"
+            type="button"
+            onClick={() => removeFromCart(elem._id, elem.size)}
+            aria-label={`Törlés: ${elem.nev}`}
+          >
+            ×
+          </button>
 			  </div>
 		  )) : (
 				  <p style={{marginTop: '5em'}}>A kosár üres!</p>

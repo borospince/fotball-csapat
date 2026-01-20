@@ -47,6 +47,17 @@ function CartProvider(props) {
     localStorage.setItem('kosar', JSON.stringify(tomb));
   };
 
+  const updateQuantity = (id, size, quantity) => {
+    const safeQuantity = Math.max(1, Number(quantity) || 1);
+    const tomb = cartItems.map(item =>
+      item._id === id && item.size === size
+        ? { ...item, quantity: safeQuantity }
+        : item
+    );
+    setCartItems(tomb);
+    localStorage.setItem('kosar', JSON.stringify(tomb));
+  };
+
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.ar * item.quantity,
     0
@@ -62,6 +73,7 @@ function CartProvider(props) {
       cartItems,
       addToCart,
       removeFromCart,
+      updateQuantity,
       totalPrice,
       totalCount
     }}>
