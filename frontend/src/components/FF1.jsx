@@ -1,4 +1,4 @@
-import './ff1.css';
+import './FF1.css';
 
 const FF1 = ({ ff1 }) => {
   return (

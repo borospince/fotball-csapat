@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import '../pages/players.css';
+import '../pages/Players.css';
 
 const Players = () => {
     return (
