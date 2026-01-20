@@ -8,9 +8,8 @@ export default function ProductDetail() {
   const [product, setProduct] = useState({});
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1); // <-- ÚJ: mennyiség (alapból 1)
   const { addToCart } = useContext(CartContext);
-
-  // const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
   useEffect(() => {
     const TermekLeker = async () => {
@@ -21,12 +20,15 @@ export default function ProductDetail() {
 
       if (response.ok) {
         console.log(elem[0]);
+
         if (elem[0].vAdatok.length > 0) setSizes(elem[0].vAdatok);
-        else {
-          let uresAdat = ['egy méret'];
-          setSizes(uresAdat);
-        }
+        else setSizes(['egy méret']);
+
         setProduct(elem[0]);
+
+        // ha új termékre váltasz, reseteljünk
+        setSelectedSize('');
+        setQuantity(1);
       } else {
         window.alert(adat.msg);
       }
@@ -35,8 +37,9 @@ export default function ProductDetail() {
     TermekLeker();
   }, [id]);
 
-  const kosarbaTesz = (termek, meret) => { 
-    addToCart(termek, meret);
+  // <-- MÓDOSÍTVA: db paraméter is megy a kosárba
+  const kosarbaTesz = (termek, meret, db) => {
+    addToCart(termek, meret, db);
   };
 
   return (
@@ -69,14 +72,30 @@ export default function ProductDetail() {
             </div>
           </div>
 
+          {/* MENNYISÉG VÁLASZTÁS (1-5) */}
+          <div className="pd-quantity">
+            <label htmlFor="quantity">Mennyiség:</label>
+            <select
+              id="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+            >
+              {[1, 2, 3, 4, 5].map(num => (
+                <option key={num} value={num}>
+                  {num} db
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* VÁSÁRLÁS */}
           <div className="pd-actions">
             <button
               className="pd-buy"
-              disabled={ !selectedSize }
-              onClick={() => kosarbaTesz(product, selectedSize)}
+              disabled={!selectedSize}
+              onClick={() => kosarbaTesz(product, selectedSize, quantity)}
             >
-              Vásárlás {selectedSize && `(${selectedSize})`}
+              Vásárlás ({quantity} db{selectedSize && `, ${selectedSize}`})
             </button>
           </div>
         </aside>

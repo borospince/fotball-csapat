@@ -42,35 +42,43 @@ async function termektorles(id) {
 }
 
 async function termekmodositas(id) {
-    // Első lépés: lekérjük az aktuális adatokat
-    const response = await fetch(`/api/items-backend/${id}`, {
-        method: 'GET',
-    });
+    console.log('Módosítás:', id);
+    
+    try {
+        // Adatok bekérése
+        const ujNev = window.prompt('Új név:', '');
+        if (ujNev === null) return; // Mégse
+        
+        if (!ujNev.trim()) {
+            window.alert('A név nem lehet üres!');
+            return;
+        }
+        
+        // Adatok összeállítása
+        const updateData = {
+            nev: ujNev.trim()
+        };
+        
+        
+        // PUT kérés küldése
+        const response = await fetch(`/api/items-backend/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateData)
+        });
 
-    const item = await response.json();
+        const valasz = await response.json();
 
-    if (!response.ok) {
-        window.alert('Hiba az adatok lekérésekor: ' + (item.msg || 'Ismeretlen hiba'));
-        return;
+        if (response.ok) {
+            window.alert(valasz.msg || 'Sikeres módosítás!');
+            window.location.reload();
+        } else {
+            window.alert(valasz.msg || 'Hiba történt a módosítás során!');
+        }
+    } catch (error) {
+        console.error('Hiba:', error);
+        window.alert('Hiba történt!');
     }
-
-    const updateData = {
-                text: szoveg,
-                ...(veglegesKepUrl && { image: veglegesKepUrl })
-            };
-
-            const updateResponse = await fetch(`/api/items-backend/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updateData)
-            });
-
-            const valasz = await updateResponse.json();
-
-            if (updateResponse.ok) {
-                window.alert(valasz.msg || 'Sikeres mentés!');
-                document.body.removeChild(modal);
-}
 }

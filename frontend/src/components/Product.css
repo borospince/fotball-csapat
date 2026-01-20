@@ -157,3 +157,66 @@
     max-height: 400px;
   }
 }
+
+/* MENNYISÉG (LEGÖRDÜLŐ) */
+.pd-quantity {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pd-quantity label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* SELECT STÍLUS */
+.pd-quantity select {
+  width: 180px;
+  max-width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid #0a7a3d;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #0a7a3d;
+  cursor: pointer;
+  outline: none;
+  transition: 0.25s;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+  /* kis nyíl modernizálás (browser kompatibilis) */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* saját nyíl ikon (CSS) */
+  background-image:
+    linear-gradient(45deg, transparent 50%, #0a7a3d 50%),
+    linear-gradient(135deg, #0a7a3d 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.pd-quantity select:hover {
+  background-color: #f1fbf5;
+  transform: translateY(-1px);
+}
+
+.pd-quantity select:focus {
+  border-color: #0a7a3d;
+  box-shadow: 0 0 0 4px rgba(10,122,61,0.18);
+}
+
+/* MOBILON JOBBAN NÉZZEN KI */
+@media (max-width: 900px) {
+  .pd-quantity select {
+    width: 100%;
+  }
+}

@@ -5,45 +5,52 @@ export const CartContext = createContext();
 function CartProvider(props) {
   const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => { 
-    const tomb = JSON.parse(localStorage.getItem('kosar'));
-    console.log(tomb);
-    
+  useEffect(() => {
+    const tomb = JSON.parse(localStorage.getItem("kosar"));
     if (tomb) setCartItems(tomb);
     else setCartItems([]);
   }, []);
-  
-  const addToCart = (product, size) => {
+
+  // ✅ MÓDOSÍTVA: addToCart már fogad mennyiséget is (db)
+  // Használat: addToCart(product, size, quantity)
+  const addToCart = (product, size, quantity = 1) => {
+    const db = Number(quantity) || 1;
+
     const existing = cartItems.find(
-      item => item._id === product._id && item.size === size
+      (item) => item._id === product._id && item.size === size
     );
 
+    let ujKosar;
+
     if (existing) {
-      let tombi = cartItems.map(item =>
-        item === existing
-          ? { ...item, quantity: item.quantity + 1 }
+      // ✅ Ha már létezik ugyanaz a termék+méret, növeljük a mennyiséget db-vel
+      ujKosar = cartItems.map((item) =>
+        item._id === product._id && item.size === size
+          ? { ...item, quantity: (item.quantity || 0) + db }
           : item
-      ); 
-      setCartItems(tombi);
-      localStorage.setItem('kosar', JSON.stringify(tombi));
+      );
     } else {
-      let tomb = [
+      // ✅ Új tétel beszúrása db mennyiséggel
+      ujKosar = [
         ...cartItems,
         {
           ...product,
           size,
-          quantity: 1
-        }
+          quantity: db,
+        },
       ];
-      setCartItems(tomb);
-      localStorage.setItem('kosar', JSON.stringify(tomb));
     }
+
+    setCartItems(ujKosar);
+    localStorage.setItem("kosar", JSON.stringify(ujKosar));
   };
-  
+
   const removeFromCart = (id, size) => {
-    const tomb = cartItems.filter(item => !(item._id === id && item.size === size));
+    const tomb = cartItems.filter(
+      (item) => !(item._id === id && item.size === size)
+    );
     setCartItems(tomb);
-    localStorage.setItem('kosar', JSON.stringify(tomb));
+    localStorage.setItem("kosar", JSON.stringify(tomb));
   };
 
   const totalPrice = cartItems.reduce(
@@ -57,13 +64,15 @@ function CartProvider(props) {
   );
 
   return (
-    <CartContext.Provider value={{
-      cartItems,
-      addToCart,
-      removeFromCart,
-      totalPrice,
-      totalCount
-    }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        totalPrice,
+        totalCount,
+      }}
+    >
       {props.children}
     </CartContext.Provider>
   );
