@@ -1,0 +1,115 @@
+.cancel-wrap {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #fff7ed; /* enyhe narancsos háttér */
+}
+
+.cancel-card {
+  width: 100%;
+  max-width: 560px;
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.cancel-icon {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.cancel-title {
+  margin: 0 0 10px;
+  font-size: 28px;
+  color: #7c2d12; /* sötét narancs */
+}
+
+.cancel-text {
+  margin: 0 0 18px;
+  color: #9a3412;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.cancel-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.cancel-btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  user-select: none;
+}
+
+.cancel-btn:active {
+  transform: scale(0.98);
+}
+
+.cancel-btn.primary {
+  background: #9a3412;
+  color: #ffffff;
+}
+
+.cancel-btn.primary:hover {
+  box-shadow: 0 10px 18px rgba(154, 52, 18, 0.22);
+}
+
+.cancel-btn.secondary {
+  background: #ffffff;
+  color: #9a3412;
+  border-color: #fed7aa;
+}
+
+.cancel-btn.secondary:hover {
+  background: #ffedd5;
+}
+
+.cancel-btn.ghost {
+  background: transparent;
+  color: #9a3412;
+  border-color: transparent;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.cancel-small {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #9a3412;
+  opacity: 0.85;
+}
+
+.cancel-small b {
+  color: #7c2d12;
+}
+
+/* mobil */
+@media (max-width: 480px) {
+  .cancel-card {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .cancel-title {
+    font-size: 24px;
+  }
+
+  .cancel-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

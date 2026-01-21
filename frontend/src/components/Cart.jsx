@@ -34,6 +34,7 @@ const Cart = () => {
 
           if (data.url) {
             window.location.href = data.url;
+            localStorage.setItem("url", data.url);
           } else {
             console.error("Hiba: Nem érkezett URL a szervertől.");
             

@@ -17,12 +17,17 @@ import ProductDetail from './components/Product.jsx';
 import Cart from "./components/Cart.jsx";
 import Success from './pages/Success.jsx';
 import Cancel from './pages/Cancel.jsx';
+import { useEffect, useState } from 'react';
 
 
 
 
 
 function App() {
+    const [url, setUrl] = useState('');
+
+    useEffect(() => {
+      const storedUrl = localStorage.getItem("url");});
     return (
         <>
             <BrowserRouter>
@@ -91,6 +96,10 @@ function App() {
                     <Route
                         path="/cancel"
                         element={<Cancel />}
+                    ></Route>
+                    <Route
+                        path={url}
+                        element={<Cart />}
                     ></Route>
                 </Routes>
             </BrowserRouter>
