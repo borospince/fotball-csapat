@@ -14,10 +14,12 @@ const PORT = process.env.PORT || 3500;
 
 // MongoDB kapcsolat
 const dbConneciton = require('./utils/dbConnection.js');
+const seedMatches = require('./utils/seedMatches.js');
 
 dbConneciton()
     .then(() => {
         console.log('sikeres adatbázis csatlakozás!');
+        seedMatches().catch((error) => console.log(error.message));
         app.listen(PORT, () => {
             console.log(`http://localhost:${PORT}/api`);
         });
@@ -48,6 +50,9 @@ app.use('/api/login-frontend', require('./routes/users/userLoginRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/tickets', require('./routes/ticketRoutes.js'));
 app.use('/api/stripe', require('./routes/stripeRoutes.js'));
+app.use('/api/matches-backend', require('./routes/matchesRoutesBackend.js'));
+app.use('/api/new-match', require('./routes/newMatchRoutesBackend.js'));
+app.use('/api/matches-frontend', require('./routes/matchesRoutesFrontend.js'));
 
-// 🔥 ÚJ FAN MAIL ROUTE – EZT ADTAM HOZZÁ 🔥
+// đź”Ą ĂšJ FAN MAIL ROUTE â€“ EZT ADTAM HOZZĂ đź”Ą
 app.use('/api/fans/all', require('./routes/users/fanMailRoutes.js'));

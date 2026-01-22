@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <link rel="stylesheet" href="/css/new-player.css">
+        <title>Új meccs felvétele</title>
+    </head>
+    <body>
+        <%- include('nav.ejs') %>
+        <div id="new-trainers-kontener">
+            <h1>Új meccs felvétele</h1>
+            <form>
+                <table>
+                    <tr>
+                        <td>Saját csapat:</td>
+                        <td><input type="text" id="sajatCsapat" /></td>
+                    </tr>
+                    <tr>
+                        <td>Ellenfél:</td>
+                        <td><input type="text" id="ellenfel" /></td>
+                    </tr>
+                    <tr>
+                        <td>Helyszín:</td>
+                        <td><input type="text" id="helyszin" /></td>
+                    </tr>
+                    <tr>
+                        <td>Dátum / idő:</td>
+                        <td><input type="datetime-local" id="datum" /></td>
+                    </tr>
+                    <tr>
+                        <td>Hazai / idegen:</td>
+                        <td><input type="text" id="hazaiIdegen" placeholder="hazai vagy idegen" /></td>
+                    </tr>
+                    <tr>
+                        <td>Eredmény:</td>
+                        <td><input type="text" id="eredmeny" placeholder="pl. 2-1" /></td>
+                    </tr>
+                    <tr>
+                        <td>Jegy link:</td>
+                        <td><input type="text" id="jegyLink" /></td>
+                    </tr>
+                    <tr>
+                        <td>Jegy elérhető:</td>
+                        <td>
+                            <select id="jegyElerheto">
+                                <option value="true">igen</option>
+                                <option value="false">nem</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Liga:</td>
+                        <td><input type="text" id="liga" /></td>
+                    </tr>
+                    <tr>
+                        <td>Korosztály:</td>
+                        <td><input type="text" id="korosztaly" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onclick="Meccsletrehoz(event)">Létrehoz</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <script src="/js/matchletrehoz.js"></script>
+    </body>
+</html>

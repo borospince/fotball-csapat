@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Ticket from './pages/Ticket';
+import Tickets from './pages/Tickets';
 import Players from './pages/Players';
 import News from './pages/News';
 import Clothes from './pages/Clothes';
@@ -39,6 +40,10 @@ function App() {
                     />
                     <Route
                         path="/tickets"
+                        element={<Tickets />}
+                    ></Route>
+                    <Route
+                        path="/tickets/:id"
                         element={<Ticket />}
                     ></Route>
                     <Route
