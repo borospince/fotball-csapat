@@ -37,3 +37,24 @@
 .navbar-kontener a:hover{
     background-color: darkgreen;
 }
+
+.lang-toggle {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.lang-toggle button {
+    background: transparent;
+    border: 1px solid #e3e3e3;
+    color: whitesmoke;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: "Lilita One", sans-serif;
+}
+
+.lang-toggle button.active {
+    background: #0f5d0f;
+    border-color: #0f5d0f;
+}

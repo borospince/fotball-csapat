@@ -1,56 +1,60 @@
-import { useContext } from 'react';
-import { CartContext } from './kosar/CartContext';
-import './Cart.css';
+import { useContext } from "react";
+import { CartContext } from "./kosar/CartContext";
+import "./Cart.css";
+import { useT } from "../i18n/LanguageContext.jsx";
 
 const Cart = () => {
+  const t = useT();
   const {
     cartItems,
     removeFromCart,
     increaseCartItem,
     decreaseCartItem,
     totalPrice,
-    totalCount
+    totalCount,
   } = useContext(CartContext);
 
-  const formatFt = (n) => (Number(n) || 0).toLocaleString('hu-HU');
+  const formatFt = (n) => (Number(n) || 0).toLocaleString("hu-HU");
 
   const fizetes = async () => {
-        if (cartItems.length === 0) { // Itt 'items' kell, mert nálad az a state neve
-          alert("Üres a kosarad!");
-          return;
+    if (cartItems.length === 0) {
+      alert(t("cartEmpty"));
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        "http://localhost:3500/api/stripe/create-checkout-session",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: cartItems }),
         }
+      );
 
-        try {
-          // Itt hívjuk meg a BACKEND-edet (ezt meg kell írnod a szerver oldalon!)
-          const res = await fetch("http://localhost:3500/api/stripe/create-checkout-session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: cartItems }) // A te items state-edet küldjük
-          });
+      const data = await res.json();
+      console.log(data);
 
-          const data = await res.json();
-          console.log(data);
-          
-
-          if (data.url) {
-            window.location.href = data.url;
-            localStorage.setItem("url", data.url);
-          } else {
-            console.error("Hiba: Nem érkezett URL a szervertől.");
-            
-          }
-        } catch (error) {
-          console.error("Hálózati hiba:", error);
-        }
-      };
+      if (data.url) {
+        window.location.href = data.url;
+        localStorage.setItem("url", data.url);
+      } else {
+      console.error("No URL returned from server.");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  };
 
   return (
     <div className="cart-page">
       <div className="cart-container">
         <header className="cart-header">
-          <h1>Kosár</h1>
+          <h1>{t("cartTitle")}</h1>
           <p className="cart-subtitle">
-            {totalCount ? `${totalCount} db termék a kosárban` : 'A kosár üres'}
+            {totalCount
+              ? `${totalCount} ${t("cartItems")}`
+              : t("cartEmpty")}
           </p>
         </header>
 
@@ -68,39 +72,49 @@ const Cart = () => {
                       <div>
                         <h3 className="cart-item-title">{elem.nev}</h3>
                         <p className="cart-item-meta">
-                          Méret: <b>{elem.size}</b>
+                          {t("cartSize")}: <b>{elem.size}</b>
                         </p>
                       </div>
 
                       <button
                         className="remove-btn"
                         onClick={() => removeFromCart(elem._id, elem.size)}
-                        title="Eltávolítás"
+                        title={t("cartRemove")}
                       >
-                        ✕
+                        âś•
                       </button>
                     </div>
 
                     <div className="cart-item-bottom">
                       <div className="cart-price">
-                        <span>Egységár:</span>
+                        <span>{t("cartUnitPrice")}:</span>
                         <b>{formatFt(elem.ar)} Ft</b>
                       </div>
 
-                      {/* ✅ + / − mennyiség, készletkezeléssel */}
                       <div className="quantity-controls">
-                        <button onClick={() => decreaseCartItem(elem._id, elem.size)} aria-label="Csökkentés">
-                          −
+                        <button
+                          onClick={() => decreaseCartItem(elem._id, elem.size)}
+                        aria-label={t("cartDecrease")}
+                        >
+                          â’
                         </button>
                         <span>{elem.quantity}</span>
-                        <button onClick={() => increaseCartItem(elem._id, elem.size)} aria-label="Növelés">
+                        <button
+                          onClick={() => increaseCartItem(elem._id, elem.size)}
+                          aria-label={t("cartIncrease")}
+                        >
                           +
                         </button>
                       </div>
 
                       <div className="cart-line-total">
-                        <span>Részösszeg:</span>
-                        <b>{formatFt((elem.ar || 0) * (elem.quantity || 0))} Ft</b>
+                        <span>{t("cartLineTotal")}:</span>
+                        <b>
+                          {formatFt(
+                            (elem.ar || 0) * (elem.quantity || 0)
+                          )}{" "}
+                          Ft
+                        </b>
                       </div>
                     </div>
                   </div>
@@ -111,23 +125,27 @@ const Cart = () => {
             <aside className="cart-summary">
               <div className="summary-card">
                 <div className="summary-row">
-                  <span>Összes termék:</span>
+                  <span>{t("cartTotalItems")}:</span>
                   <b>{totalCount} db</b>
                 </div>
                 <div className="summary-row">
-                  <span>Végösszeg:</span>
+                  <span>{t("cartTotal")}:</span>
                   <b className="summary-total">{formatFt(totalPrice)} Ft</b>
                 </div>
 
-                <button className="checkout-btn" onClick={fizetes}>Tovább a fizetéshez</button>
-                <p className="summary-note">A szállítási költség a pénztárnál számolódik.</p>
+                <button className="checkout-btn" onClick={fizetes}>
+                  {t("cartCheckout")}
+                </button>
+                <p className="summary-note">{t("cartShippingNote")}</p>
               </div>
             </aside>
           </>
         ) : (
           <div className="cart-empty">
-            <p>A kosár üres!</p>
-            <a className="cart-back" href="/shops">Vissza a vásárláshoz</a>
+            <p>{t("cartEmpty")}!</p>
+            <a className="cart-back" href="/shops">
+              {t("cartBackShop")}
+            </a>
           </div>
         )}
       </div>

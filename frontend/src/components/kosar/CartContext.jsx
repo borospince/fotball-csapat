@@ -1,9 +1,14 @@
 import { createContext, useEffect, useState } from "react";
+import { translations } from "../../i18n/translations";
 
 export const CartContext = createContext();
 
 function CartProvider(props) {
   const [cartItems, setCartItems] = useState([]);
+  const t = (key) => {
+    const lang = localStorage.getItem("lang") || "hu";
+    return translations[lang]?.[key] ?? translations.hu?.[key] ?? key;
+  };
 
   useEffect(() => {
     const tomb = JSON.parse(localStorage.getItem("kosar"));
@@ -16,7 +21,6 @@ function CartProvider(props) {
     localStorage.setItem("kosar", JSON.stringify(newCart));
   };
 
-  // ✅ egyszerű kosárba adás (készletlevonást NEM itt csináljuk, hanem ProductDetail-ben)
   const addToCart = (product, size, quantity = 1) => {
     const db = Number(quantity) || 1;
 
@@ -46,7 +50,6 @@ function CartProvider(props) {
     saveCart(ujKosar);
   };
 
-  // ✅ TERMÉK TELJES TÖRLÉSE: visszaadjuk az összes darabot készletre
   const removeFromCart = async (id, size) => {
     const item = cartItems.find((x) => x._id === id && x.size === size);
     const qtyToReturn = Number(item?.quantity || 0);
@@ -62,13 +65,11 @@ function CartProvider(props) {
           body: JSON.stringify({ quantity: qtyToReturn }),
         });
       } catch (e) {
-        console.log("Készlet visszaadás hiba:", e);
+        console.log("Stock return error:", e);
       }
     }
   };
 
-  // ✅ + gomb a kosárban:
-  // először levonunk 1-et készletből, ha sikerül → kosár mennyiség +1
   const increaseCartItem = async (id, size) => {
     const item = cartItems.find((x) => x._id === id && x.size === size);
     if (!item) return;
@@ -83,7 +84,7 @@ function CartProvider(props) {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data?.msg || "Nincs ennyi készleten!");
+        alert(data?.msg || t("cartNotEnoughStock"));
         return;
       }
 
@@ -95,32 +96,26 @@ function CartProvider(props) {
 
       saveCart(ujKosar);
     } catch (e) {
-      alert("Hálózati hiba!");
+      alert(t("networkError"));
     }
   };
 
-  // ✅ - gomb a kosárban:
-  // kosár mennyiség -1, és visszaadunk 1-et készletre
-  // ha 1 volt → törlés + visszaadás 1-re
   const decreaseCartItem = async (id, size) => {
     const item = cartItems.find((x) => x._id === id && x.size === size);
     if (!item) return;
 
     const currentQty = Number(item.quantity || 0);
 
-    // ha 1 volt, akkor teljesen töröljük (removeFromCart már visszaadja az 1-et is)
     if (currentQty <= 1) {
       await removeFromCart(id, size);
       return;
     }
 
-    // különben csökkentjük 1-gyel
     const ujKosar = cartItems.map((x) =>
       x._id === id && x.size === size ? { ...x, quantity: currentQty - 1 } : x
     );
     saveCart(ujKosar);
 
-    // és visszaadunk 1-et készletre
     try {
       await fetch(`http://localhost:3500/api/items-frontend/${id}/increase-stock`, {
         method: "PATCH",
@@ -128,7 +123,7 @@ function CartProvider(props) {
         body: JSON.stringify({ quantity: 1 }),
       });
     } catch (e) {
-      console.log("Készlet visszaadás hiba:", e);
+      console.log("Stock return error:", e);
     }
   };
 

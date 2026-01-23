@@ -1,10 +1,28 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Tickets.css";
+import { useLanguage, useT } from "../i18n/LanguageContext.jsx";
 
 const API_BASE = "http://localhost:3500";
 
 function Tickets() {
+  const t = useT();
+  const { lang } = useLanguage();
+  const dateLocale = lang === "hu" ? "hu-HU" : "en-GB";
+  const translateLeague = (value) => {
+    if (lang === "en") {
+      if (value === "Bajnokok Ligája") return "Champions League";
+    }
+    return value;
+  };
+  const translateAge = (value) => {
+    if (lang === "en") {
+      const v = String(value || "").toLowerCase();
+      if (v === "felnőtt" || v === "felnott") return "Senior";
+      if (v === "u19") return "U19";
+    }
+    return value;
+  };
   const [matches, setMatches] = useState([]);
   const [liga, setLiga] = useState("osszes");
   const [korosztaly, setKorosztaly] = useState("osszes");
@@ -53,55 +71,55 @@ function Tickets() {
 
   return (
     <div className="container-match">
-      <h1>Meccsek</h1>
+      <h1>{t("ticketsTitle")}</h1>
 
       <div className="match-filters">
         <label>
-          Liga
+          {t("filterLeague")}
           <select value={liga} onChange={(e) => setLiga(e.target.value)}>
             {ligak.map((l) => (
               <option key={l} value={l}>
-                {l}
+                {l === "osszes" ? t("filterAll") : translateLeague(l)}
               </option>
             ))}
           </select>
         </label>
 
         <label>
-          Korosztály
+          {t("filterAge")}
           <select
             value={korosztaly}
             onChange={(e) => setKorosztaly(e.target.value)}
           >
             {korosztalyok.map((k) => (
               <option key={k} value={k}>
-                {k}
+                {k === "osszes" ? t("filterAll") : translateAge(k)}
               </option>
             ))}
           </select>
         </label>
 
         <label>
-          Hazai / idegen
+          {t("filterHomeAway")}
           <select
             value={hazaiIdegen}
             onChange={(e) => setHazaiIdegen(e.target.value)}
           >
-            <option value="osszes">osszes</option>
-            <option value="hazai">hazai</option>
-            <option value="idegen">idegen</option>
+            <option value="osszes">{t("filterAll")}</option>
+            <option value="hazai">{t("filterHome")}</option>
+            <option value="idegen">{t("filterAway")}</option>
           </select>
         </label>
 
         <label>
-          Jegy elérhető
+          {t("filterTicket")}
           <select
             value={jegyElerheto}
             onChange={(e) => setJegyElerheto(e.target.value)}
           >
-            <option value="osszes">osszes</option>
-            <option value="igen">igen</option>
-            <option value="nem">nem</option>
+            <option value="osszes">{t("filterAll")}</option>
+            <option value="igen">{t("ticketYes")}</option>
+            <option value="nem">{t("ticketNo")}</option>
           </select>
         </label>
       </div>
@@ -113,25 +131,43 @@ function Tickets() {
               {match.sajatCsapat} - {match.ellenfel}
             </div>
             <div className="match-meta">
-              <div>Helyszín: {match.helyszin}</div>
               <div>
-                Dátum:{" "}
+                {t("matchLocation")}: {match.helyszin}
+              </div>
+              <div>
+                {t("matchDate")}:{" "}
                 {match.datum
-                  ? new Date(match.datum).toLocaleString("hu-HU")
+                  ? new Date(match.datum).toLocaleString(dateLocale)
                   : ""}
               </div>
-              <div>Hazai/idegen: {match.hazaiIdegen}</div>
-              <div>Liga: {match.liga}</div>
-              <div>Korosztály: {match.korosztaly}</div>
-              <div>Eredmény: {match.eredmeny || "-"}</div>
-              <div>Jegy elérhető: {match.jegyElerheto ? "igen" : "nem"}</div>
+              <div>
+                {t("matchHomeAway")}:{" "}
+                {match.hazaiIdegen === "hazai"
+                  ? t("filterHome")
+                  : match.hazaiIdegen === "idegen"
+                  ? t("filterAway")
+                  : match.hazaiIdegen}
+              </div>
+              <div>
+                {t("matchLeague")}: {translateLeague(match.liga)}
+              </div>
+              <div>
+                {t("matchAge")}: {translateAge(match.korosztaly)}
+              </div>
+              <div>
+                {t("matchResult")}: {match.eredmeny || "-"}
+              </div>
+              <div>
+                {t("ticketAvailable")}:{" "}
+                {match.jegyElerheto ? t("ticketYes") : t("ticketNo")}
+              </div>
             </div>
             {match.jegyElerheto ? (
               <Link className="match-cta" to={`/tickets/${match._id}`}>
-                Jegyvásárlás
+                {t("ticketBuy")}
               </Link>
             ) : (
-              <div className="match-cta disabled">Nincs jegy</div>
+              <div className="match-cta disabled">{t("ticketNone")}</div>
             )}
           </div>
         ))}

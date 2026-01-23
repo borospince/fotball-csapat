@@ -2,11 +2,29 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import StadiumSVG from "./StadiumSVG";
 import "./Ticket.css";
+import { useLanguage, useT } from "../i18n/LanguageContext.jsx";
 
 function Ticket() {
+  const t = useT();
+  const { lang } = useLanguage();
+  const dateLocale = lang === "hu" ? "hu-HU" : "en-GB";
+  const translateLeague = (value) => {
+    if (lang === "en") {
+      if (value === "Bajnokok Ligája") return "Champions League";
+    }
+    return value;
+  };
+  const translateAge = (value) => {
+    if (lang === "en") {
+      const v = String(value || "").toLowerCase();
+      if (v === "felnőtt" || v === "felnott") return "Senior";
+      if (v === "u19") return "U19";
+    }
+    return value;
+  };
   const { id } = useParams();
   const [match, setMatch] = useState(null);
-  const [stadiumName, setStadiumName] = useState("Nemzeti SportarĂ©na");
+  const [stadiumName, setStadiumName] = useState(t("stadiumDefault"));
   const [loading, setLoading] = useState(true);
 
   const [sectors, setSectors] = useState([
@@ -44,7 +62,7 @@ function Ticket() {
     { id: "D8", price: 3500, occupied: false },
 
     { id: "VIP", price: 12000, occupied: false },
-    { id: "SajtĂł", price: 0, occupied: true },
+    { id: "Sajtó", price: 0, occupied: true },
   ]);
 
   const [selectedSector, setSelectedSector] = useState(null);
@@ -80,10 +98,16 @@ function Ticket() {
     loadMatch();
   }, [id]);
 
+  useEffect(() => {
+    if (!match?.helyszin) {
+      setStadiumName(t("stadiumDefault"));
+    }
+  }, [lang, match, t]);
+
   const handleSelect = (id) => {
     const sector = sectors.find((s) => s.id === id);
     if (sector.occupied) {
-      alert("Ez a szektor mĂˇr foglalt!");
+      alert(t("ticketAlertTaken"));
       return;
     }
     setSelectedSector(id);
@@ -91,60 +115,70 @@ function Ticket() {
 
   const handlePurchase = async () => {
     if (match && match.jegyElerheto === false) {
-      alert("Erre a meccsre most nem lehet jegyet foglalni.");
+      alert(t("ticketAlertMatchClosed"));
       return;
     }
     if (!selectedSector) {
-      alert("VĂˇlassz egy szektort!");
+      alert(t("ticketAlertPickSector"));
       return;
     }
     if (!customer.name || !customer.email || !customer.phone) {
-      alert("TĂ¶lts ki minden adatot!");
+      alert(t("ticketAlertFillAll"));
       return;
     }
 
     const sector = sectors.find((s) => s.id === selectedSector);
+    if (!sector || sector.price <= 0) {
+      alert(t("ticketAlertNoPurchase"));
+      return;
+    }
     const matchLabel = match
       ? `${match.sajatCsapat} - ${match.ellenfel}`
       : "Ismeretlen meccs";
 
     try {
-      const response = await fetch("http://localhost:3500/api/tickets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: customer.name,
-          email: customer.email,
-          match: matchLabel,
-          quantity: 1,
-          category: selectedSector,
-          price: sector?.price || 0,
-        }),
-      });
+      const ticketDraft = {
+        name: customer.name,
+        email: customer.email,
+        match: matchLabel,
+        quantity: 1,
+        category: selectedSector,
+        price: sector?.price || 0,
+      };
+
+      const response = await fetch(
+        "http://localhost:3500/api/stripe/create-ticket-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            item: {
+              name: matchLabel,
+              description: `${stadiumName} - ${selectedSector}`,
+              price: sector?.price || 0,
+              quantity: 1,
+            },
+          }),
+        }
+      );
 
       if (!response.ok) {
         const err = await response.json();
-        alert(err.message || "Hiba tĂ¶rtĂ©nt a foglalĂˇskor!");
+        alert(err.error || t("ticketPayError"));
         return;
       }
+
+      const data = await response.json();
+      localStorage.setItem("ticketDraft", JSON.stringify(ticketDraft));
+      localStorage.setItem("url", `/tickets/${id}`);
+      window.location.href = data.url;
     } catch (error) {
       console.error(error);
-      alert("Hiba tĂ¶rtĂ©nt a foglalĂˇskor!");
+      alert(t("ticketPayError"));
       return;
     }
-
-    setSectors((prev) =>
-      prev.map((s) =>
-        s.id === selectedSector ? { ...s, occupied: true } : s
-      )
-    );
-
-    alert(`Sikeres foglalĂˇs!\nSzektor: ${selectedSector}`);
-
-    setSelectedSector(null);
-    setCustomer({ name: "", email: "", phone: "" });
   };
 
   const matchInfo = useMemo(() => {
@@ -152,7 +186,7 @@ function Ticket() {
     return {
       label: `${match.sajatCsapat} - ${match.ellenfel}`,
       datum: match.datum
-        ? new Date(match.datum).toLocaleString("hu-HU")
+        ? new Date(match.datum).toLocaleString(dateLocale)
         : "",
       liga: match.liga,
       korosztaly: match.korosztaly,
@@ -162,39 +196,43 @@ function Ticket() {
 
   return (
     <div className="ticket-container">
-      <h1>JegyfoglalĂˇs</h1>
+      <h1>{t("ticketBooking")}</h1>
 
-      {loading && <p className="selected-info">BetĂ¶ltĂ©s</p>}
+      {loading && <p className="selected-info">{t("ticketLoading")}</p>}
 
       {!loading && matchInfo && (
         <div className="match-summary">
           <div>{matchInfo.label}</div>
           <div>{matchInfo.datum}</div>
           <div>
-            {matchInfo.liga} â€“ {matchInfo.korosztaly} â€“{" "}
-            {matchInfo.hazaiIdegen}
+            {translateLeague(matchInfo.liga)} –{" "}
+            {translateAge(matchInfo.korosztaly)} –{" "}
+            {matchInfo.hazaiIdegen === "hazai"
+              ? t("filterHome")
+              : matchInfo.hazaiIdegen === "idegen"
+              ? t("filterAway")
+              : matchInfo.hazaiIdegen}
           </div>
           <div>
-            Jegy elĂ©rhetĹ‘: {match?.jegyElerheto ? "igen" : "nem"}
+            {t("ticketAvailable")}:{" "}
+            {match?.jegyElerheto ? t("ticketYes") : t("ticketNo")}
           </div>
         </div>
       )}
 
       <h2 className="stadium-title">{stadiumName}</h2>
 
-      {/* SVG STADION */}
       <StadiumSVG
         sectors={sectors}
         selectedSector={selectedSector}
         onSelect={handleSelect}
       />
 
-      {/* VĂSĂRLĂ“I ADATOK */}
       <div className="customer-form">
-        <h3>VĂˇsĂˇrlĂˇs adatai</h3>
+        <h3>{t("ticketData")}</h3>
 
         <input
-          placeholder="NĂ©v"
+          placeholder={t("ticketName")}
           value={customer.name}
           onChange={(e) =>
             setCustomer({ ...customer, name: e.target.value })
@@ -202,7 +240,7 @@ function Ticket() {
         />
 
         <input
-          placeholder="Email"
+          placeholder={t("ticketEmail")}
           value={customer.email}
           onChange={(e) =>
             setCustomer({ ...customer, email: e.target.value })
@@ -210,7 +248,7 @@ function Ticket() {
         />
 
         <input
-          placeholder="TelefonszĂˇm"
+          placeholder={t("ticketPhone")}
           value={customer.phone}
           onChange={(e) =>
             setCustomer({ ...customer, phone: e.target.value })
@@ -219,7 +257,7 @@ function Ticket() {
 
         {selectedSector && (
           <p className="selected-info">
-            KivĂˇlasztott szektor: {selectedSector}
+            {t("ticketSector")}: {selectedSector}
           </p>
         )}
 
@@ -227,7 +265,7 @@ function Ticket() {
           onClick={handlePurchase}
           disabled={match && match.jegyElerheto === false}
         >
-          FoglalĂˇs
+          {t("ticketReserve")}
         </button>
       </div>
     </div>

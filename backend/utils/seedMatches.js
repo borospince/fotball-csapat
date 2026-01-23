@@ -8,9 +8,12 @@ const seedMatches = async () => {
             {
                 $set: {
                     sajatCsapat: 'Izeltlábúak FC',
-                    jegyElerheto: true,
                 },
             }
+        );
+        await Match.updateMany(
+            { jegyElerheto: { $exists: false } },
+            { $set: { jegyElerheto: true } }
         );
         return;
     }

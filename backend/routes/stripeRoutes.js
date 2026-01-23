@@ -68,6 +68,45 @@ router.post("/create-checkout-session", async (req, res) => {
     }
 });
 
+router.post("/create-ticket-session", async (req, res) => {
+    try {
+        const { item } = req.body;
+
+        if (!item || !item.name || item.price === undefined) {
+            return res.status(400).json({ error: "Hiányzó adatok" });
+        }
+
+        if (Number(item.price) <= 0) {
+            return res.status(400).json({ error: "Érvénytelen ár" });
+        }
+
+        const session = await stripe.checkout.sessions.create({
+            mode: "payment",
+            payment_method_types: ["card"],
+            line_items: [
+                {
+                    price_data: {
+                        currency: "huf",
+                        product_data: {
+                            name: item.name,
+                            description: item.description || "Meccsjegy",
+                        },
+                        unit_amount: Math.round(parseFloat(item.price) * 100),
+                    },
+                    quantity: item.quantity || 1,
+                },
+            ],
+            success_url: "http://localhost:5173/success",
+            cancel_url: "http://localhost:5173/cancel",
+        });
+
+        res.status(200).json({ url: session.url });
+    } catch (error) {
+        console.error("Stripe hiba:", error.message);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;
 
 

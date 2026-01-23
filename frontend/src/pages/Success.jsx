@@ -1,17 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./success.css";
+import { useT } from "../i18n/LanguageContext.jsx";
 
 const Success = () => {
+  const t = useT();
   const navigate = useNavigate();
   const [seconds, setSeconds] = useState(8);
 
-  // Kosár törlése egyszer, amikor betölt az oldal
   useEffect(() => {
     localStorage.removeItem("kosar");
   }, []);
 
-  // Visszaszámláló + automata átirányítás
+  useEffect(() => {
+    const draft = localStorage.getItem("ticketDraft");
+    if (!draft) return;
+
+    const createTicket = async () => {
+      try {
+        const payload = JSON.parse(draft);
+        const res = await fetch("http://localhost:3500/api/tickets", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          console.error(err.message || "Ticket save error");
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        localStorage.removeItem("ticketDraft");
+      }
+    };
+
+    createTicket();
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((prev) => {
@@ -33,26 +62,26 @@ const Success = () => {
   return (
     <div className="success-wrap">
       <div className="success-card">
-        <div className="success-icon" aria-hidden="true">✅</div>
+        <div className="success-icon" aria-hidden="true">
+          âś…
+        </div>
 
-        <h1 className="success-title">Sikeres vásárlás!</h1>
+        <h1 className="success-title">{t("successTitle")}</h1>
 
-        <p className="success-text">
-          Köszönjük a rendelésed. A kosarad kiürítettük, és hamarosan kapsz visszaigazolást.
-        </p>
+        <p className="success-text">{t("successText")}</p>
 
         <div className="success-actions">
           <Link to="/" className="success-btn primary">
-            Vissza a főoldalra
+            {t("successHome")}
           </Link>
 
           <Link to="/shop" className="success-btn secondary">
-            Vásárlás folytatása
+            {t("successContinue")}
           </Link>
         </div>
 
         <p className="success-small">
-          Automatikus átirányítás: <b>{seconds}</b> mp
+          {t("successRedirect")}: <b>{seconds}</b> {t("secondsShort")}
         </p>
       </div>
     </div>

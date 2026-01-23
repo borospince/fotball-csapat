@@ -1,18 +1,20 @@
-import { Link, Outlet } from 'react-router-dom';
-import '../pages/players.css';
+import { Link, Outlet } from "react-router-dom";
+import "../pages/players.css";
+import { useT } from "../i18n/LanguageContext.jsx";
 
 const Players = () => {
-    return (
-        <div className="players-kontener">
-            <div className="sidebar-kontener">
-                <Link to="/players/ff1s">Férfi Felnőt 1</Link>
-                <Link to="/players/u19s">Utánpótlás 19</Link>
-            </div>
-            <div className="players-main-kontener">
-                <Outlet />
-            </div>
-        </div>
-    );
+  const t = useT();
+  return (
+    <div className="players-kontener">
+      <div className="sidebar-kontener">
+        <Link to="/players/ff1s">{t("playersAdults")}</Link>
+        <Link to="/players/u19s">{t("playersU19")}</Link>
+      </div>
+      <div className="players-main-kontener">
+        <Outlet />
+      </div>
+    </div>
+  );
 };
 
 export default Players;
