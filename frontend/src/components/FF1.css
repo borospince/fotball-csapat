@@ -20,6 +20,12 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
+.player-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 /* A kép */
 .ff1-kep-kontener {
     width: 100%;

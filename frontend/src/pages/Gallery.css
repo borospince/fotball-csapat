@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap");
+
+.gallery-page {
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+  background: radial-gradient(circle at top, #f5f7ff 0%, #e9eef7 45%, #f7f7f7 100%);
+  font-family: "Oswald", sans-serif;
+}
+
+.gallery-hero {
+  max-width: 1100px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.gallery-hero h1 {
+  font-size: 36px;
+  color: #17213a;
+  margin: 0 0 8px;
+  letter-spacing: 1px;
+}
+
+.gallery-hero p {
+  color: #4a4f5e;
+  margin: 0;
+}
+
+.gallery-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.gallery-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(23, 33, 58, 0.12);
+  overflow: hidden;
+  display: grid;
+}
+
+.gallery-image {
+  height: 180px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(27, 92, 255, 0.25), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(0, 163, 255, 0.25), transparent 40%),
+    linear-gradient(135deg, #0f1f3a, #1b5cff);
+  position: relative;
+}
+
+.gallery-image-badge {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: #17213a;
+}
+
+.gallery-info {
+  padding: 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.gallery-info h2 {
+  margin: 0;
+  color: #17213a;
+  font-size: 20px;
+}
+
+.gallery-info span {
+  color: #4a4f5e;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

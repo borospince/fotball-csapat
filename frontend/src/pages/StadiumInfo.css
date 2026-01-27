@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap");
+
+.stadium-page {
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+  background: radial-gradient(circle at top, #f5f7ff 0%, #e9eef7 45%, #f7f7f7 100%);
+  font-family: "Oswald", sans-serif;
+}
+
+.stadium-hero {
+  max-width: 1100px;
+  margin: 0 auto 32px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 24px rgba(23, 33, 58, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stadium-hero h1 {
+  margin: 0;
+  font-size: 36px;
+  color: #17213a;
+}
+
+.stadium-subtitle {
+  margin: 8px 0 0;
+  color: #4a4f5e;
+}
+
+.stadium-capacity {
+  background: linear-gradient(135deg, #1b5cff, #00a3ff);
+  color: #ffffff;
+  padding: 14px 18px;
+  border-radius: 16px;
+  display: grid;
+  gap: 6px;
+  min-width: 160px;
+  text-align: center;
+}
+
+.stadium-capacity strong {
+  font-size: 28px;
+}
+
+.stadium-section {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+}
+
+.stadium-section h2 {
+  color: #17213a;
+  margin-bottom: 8px;
+}
+
+.stadium-section p {
+  color: #3d4456;
+  line-height: 1.6;
+}
+
+.stadium-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.stadium-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(23, 33, 58, 0.08);
+}
+
+.stadium-card h3 {
+  margin-top: 0;
+  color: #17213a;
+}
+
+.stadium-card ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: #3d4456;
+}
+
+.stadium-seating-note {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(23, 33, 58, 0.08);
+  color: #3d4456;
+}

@@ -33,13 +33,39 @@ const Navbar = () => {
       <Link to="/">
         <MdStadium size={30} />
       </Link>
-      <Link to="/tickets">{t("navTickets")}</Link>
-      <Link to="/players/ff1s">{t("navPlayers")}</Link>
-      <Link to="/news">{t("navNews")}</Link>
-      <Link to="/shops">{t("navShop")}</Link>
-      <Link to="/history">{t("navHistory")}</Link>
-      <Link to="/fans">{t("navFans")}</Link>
-      <Link to="/Cart">{t("navCart")}</Link>
+      <div className="nav-group">
+        <span className="nav-trigger">{t("navGroupMatches")}</span>
+        <div className="nav-menu">
+          <Link to="/tickets">{t("navTickets")}</Link>
+          <Link to="/schedule">{t("navSchedule")}</Link>
+          <Link to="/standings">{t("navStandings")}</Link>
+        </div>
+      </div>
+      <div className="nav-group">
+        <span className="nav-trigger">{t("navGroupTeam")}</span>
+        <div className="nav-menu">
+          <Link to="/players/ff1s">{t("navPlayers")}</Link>
+          <Link to="/staff">{t("navStaff")}</Link>
+        </div>
+      </div>
+      <div className="nav-group">
+        <span className="nav-trigger">{t("navGroupClub")}</span>
+        <div className="nav-menu">
+          <Link to="/news">{t("navNews")}</Link>
+          <Link to="/history">{t("navHistory")}</Link>
+          <Link to="/fans">{t("navFans")}</Link>
+          <Link to="/stadium">{t("navStadium")}</Link>
+          <Link to="/gallery">{t("navGallery")}</Link>
+          <Link to="/sponsors">{t("navSponsors")}</Link>
+        </div>
+      </div>
+      <div className="nav-group">
+        <span className="nav-trigger">{t("navGroupShop")}</span>
+        <div className="nav-menu">
+          <Link to="/shops">{t("navShop")}</Link>
+          <Link to="/Cart">{t("navCart")}</Link>
+        </div>
+      </div>
       {isLoggedIn === 0 ? (
         <Link to="/login">
           <CgProfile size={30} />

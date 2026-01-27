@@ -5,6 +5,13 @@ import Ticket from './pages/Ticket';
 import Tickets from './pages/Tickets';
 import Players from './pages/Players';
 import News from './pages/News';
+import Schedule from './pages/Schedule';
+import PlayerProfile from './pages/PlayerProfile';
+import Standings from './pages/Standings';
+import Staff from './pages/Staff';
+import StadiumInfo from './pages/StadiumInfo';
+import Gallery from './pages/Gallery';
+import Sponsors from './pages/Sponsors';
 import Clothes from './pages/Clothes';
 import History from './pages/History';
 import Fans from './pages/Fans';
@@ -43,8 +50,20 @@ function App() {
                         element={<Tickets />}
                     ></Route>
                     <Route
+                        path="/schedule"
+                        element={<Schedule />}
+                    ></Route>
+                    <Route
+                        path="/standings"
+                        element={<Standings />}
+                    ></Route>
+                    <Route
                         path="/tickets/:id"
                         element={<Ticket />}
+                    ></Route>
+                    <Route
+                        path="/player/:id"
+                        element={<PlayerProfile />}
                     ></Route>
                     <Route
                         path="/players"
@@ -62,6 +81,22 @@ function App() {
                     <Route
                         path="/news"
                         element={<News />}
+                    ></Route>
+                    <Route
+                        path="/staff"
+                        element={<Staff />}
+                    ></Route>
+                    <Route
+                        path="/stadium"
+                        element={<StadiumInfo />}
+                    ></Route>
+                    <Route
+                        path="/gallery"
+                        element={<Gallery />}
+                    ></Route>
+                    <Route
+                        path="/sponsors"
+                        element={<Sponsors />}
                     ></Route>
                     <Route
                         path="/shops"

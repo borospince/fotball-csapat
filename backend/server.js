@@ -56,3 +56,5 @@ app.use('/api/matches-frontend', require('./routes/matchesRoutesFrontend.js'));
 
 // đź”Ą ĂšJ FAN MAIL ROUTE â€“ EZT ADTAM HOZZĂ đź”Ą
 app.use('/api/fans/all', require('./routes/users/fanMailRoutes.js'));
+
+module.exports = app;

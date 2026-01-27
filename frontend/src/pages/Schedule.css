@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap");
+
+.schedule-page {
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+  background: radial-gradient(circle at top, #f5f7ff 0%, #e9eef7 45%, #f7f7f7 100%);
+  font-family: "Oswald", sans-serif;
+}
+
+.schedule-page h1 {
+  text-align: center;
+  font-size: 36px;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  color: #17213a;
+}
+
+.schedule-filter {
+  max-width: 900px;
+  margin: 0 auto 28px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: #ffffff;
+  padding: 14px 18px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(23, 33, 58, 0.08);
+}
+
+.schedule-filter button {
+  border: 1px solid #d9dce6;
+  background: #f9fbff;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.schedule-filter button.active {
+  background: linear-gradient(135deg, #1b5cff, #00a3ff);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.schedule-empty {
+  text-align: center;
+  color: #4a4f5e;
+}
+
+.schedule-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.schedule-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 24px rgba(23, 33, 58, 0.12);
+  display: grid;
+  gap: 12px;
+}
+
+.schedule-title {
+  font-size: 20px;
+  color: #17213a;
+}
+
+.schedule-meta {
+  display: grid;
+  gap: 6px;
+  color: #3d4456;
+  font-size: 15px;
+}

@@ -4,8 +4,8 @@
     background-color: rgb(34, 110, 34);
     color: whitesmoke;
     display: flex;
-    gap: 7%;
-    padding: 10px;
+    gap: 16px;
+    padding: 10px 16px;
     left: 0;
     top: 0;
     margin: 0;
@@ -18,6 +18,9 @@
     font-family: "Lilita One", sans-serif;
     font-weight: 400;
     font-style: normal;
+    flex-wrap: wrap;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .navbar-kontener a {
@@ -35,6 +38,60 @@
 }
 
 .navbar-kontener a:hover{
+    background-color: darkgreen;
+}
+
+.nav-group {
+    position: relative;
+    margin: 0;
+}
+
+.nav-trigger {
+    cursor: pointer;
+    color: whitesmoke;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.nav-trigger:hover,
+.nav-trigger:focus {
+    background-color: darkgreen;
+}
+
+.nav-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: rgb(34, 110, 34);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    min-width: 180px;
+    display: grid;
+    gap: 6px;
+    z-index: 1200;
+    opacity: 0;
+    transform: translateY(-4px);
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.nav-group:hover .nav-menu,
+.nav-group:focus-within .nav-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nav-menu a {
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.nav-menu a:hover {
     background-color: darkgreen;
 }
 
@@ -57,4 +114,38 @@
 .lang-toggle button.active {
     background: #0f5d0f;
     border-color: #0f5d0f;
+}
+
+@media (max-width: 900px) {
+    .navbar-kontener {
+        gap: 12px;
+        justify-content: flex-start;
+    }
+
+    .nav-menu {
+        position: static;
+        box-shadow: none;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar-kontener {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        white-space: nowrap;
+    }
+
+    .navbar-kontener a,
+    .lang-toggle {
+        flex: 0 0 auto;
+    }
+
+    .nav-group {
+        flex: 0 0 auto;
+    }
 }
