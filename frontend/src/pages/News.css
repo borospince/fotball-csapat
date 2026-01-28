@@ -1,23 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap");
 
 .news-kontener {
     max-width: 1200px;
     margin: 40px auto;
     padding: 20px;
-    font-family: "Oswald", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
+    font-family: "Rajdhani", sans-serif;
+    color: var(--text);
 }
 
 .news-kontener h1 {
     text-align: center;
-    color: #1b5e20;
+    color: var(--text);
     margin-bottom: 30px;
 }
 
 .loading {
     text-align: center;
-    color: #388e3c;
+    color: var(--muted);
     font-weight: bold;
 }
 
@@ -28,13 +27,14 @@
 }
 
 .news-card {
-    background: linear-gradient(135deg, #e8f5e9, #ffffff);
+    background: var(--card);
     border-radius: 16px;
     padding: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     transition: 0.3s;
+    border: 1px solid var(--border);
 }
 
 .news-card:hover {
@@ -51,7 +51,7 @@
 
 .news-card h2 {
     font-size: 18px;
-    color: #2e7d32;
+    color: var(--text);
     margin: 10px 0;
 }
 
@@ -62,7 +62,7 @@
 
 .news-card a {
     margin-top: 10px;
-    color: #1b5e20;
+    color: var(--accent);
     font-weight: bold;
     text-decoration: none;
 }
@@ -74,5 +74,5 @@
 .news-card .date {
     margin-top: 8px;
     font-size: 12px;
-    color: #558b2f;
+    color: var(--muted);
 }

@@ -2,27 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Tickets.css";
 import { useLanguage, useT } from "../i18n/LanguageContext.jsx";
+import { formatDateTime } from "../i18n/formatters.js";
+import { translateAgeGroup, translateLeague } from "../i18n/valueTranslations.js";
 
 const API_BASE = "http://localhost:3500";
 
 function Tickets() {
   const t = useT();
   const { lang } = useLanguage();
-  const dateLocale = lang === "hu" ? "hu-HU" : "en-GB";
-  const translateLeague = (value) => {
-    if (lang === "en") {
-      if (value === "Bajnokok Ligája") return "Champions League";
-    }
-    return value;
-  };
-  const translateAge = (value) => {
-    if (lang === "en") {
-      const v = String(value || "").toLowerCase();
-      if (v === "felnőtt" || v === "felnott") return "Senior";
-      if (v === "u19") return "U19";
-    }
-    return value;
-  };
   const [matches, setMatches] = useState([]);
   const [liga, setLiga] = useState("osszes");
   const [korosztaly, setKorosztaly] = useState("osszes");
@@ -79,7 +66,7 @@ function Tickets() {
           <select value={liga} onChange={(e) => setLiga(e.target.value)}>
             {ligak.map((l) => (
               <option key={l} value={l}>
-                {l === "osszes" ? t("filterAll") : translateLeague(l)}
+                {l === "osszes" ? t("filterAll") : translateLeague(l, lang)}
               </option>
             ))}
           </select>
@@ -93,7 +80,7 @@ function Tickets() {
           >
             {korosztalyok.map((k) => (
               <option key={k} value={k}>
-                {k === "osszes" ? t("filterAll") : translateAge(k)}
+                {k === "osszes" ? t("filterAll") : translateAgeGroup(k, lang)}
               </option>
             ))}
           </select>
@@ -136,9 +123,7 @@ function Tickets() {
               </div>
               <div>
                 {t("matchDate")}:{" "}
-                {match.datum
-                  ? new Date(match.datum).toLocaleString(dateLocale)
-                  : ""}
+                {formatDateTime(match.datum, lang)}
               </div>
               <div>
                 {t("matchHomeAway")}:{" "}
@@ -149,10 +134,10 @@ function Tickets() {
                   : match.hazaiIdegen}
               </div>
               <div>
-                {t("matchLeague")}: {translateLeague(match.liga)}
+                {t("matchLeague")}: {translateLeague(match.liga, lang)}
               </div>
               <div>
-                {t("matchAge")}: {translateAge(match.korosztaly)}
+                {t("matchAge")}: {translateAgeGroup(match.korosztaly, lang)}
               </div>
               <div>
                 {t("matchResult")}: {match.eredmeny || "-"}

@@ -1,221 +1,191 @@
-/* ALAP */
 .pd-page {
   min-height: 100vh;
-  background-color: #f4f6f4;
+  background: radial-gradient(circle at top, rgba(34, 197, 94, 0.18), transparent 55%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 32px 20px 70px;
 }
 
-/* FŐ KÁRTYA */
 .pd-wrap {
-  width: 95%;
-  max-width: 1300px;
-  background: #ffffff;
+  width: min(1200px, 95%);
+  background: var(--card);
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 50px;
-  padding: 40px;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
-/* KÉP */
 .pd-image-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 20px;
 }
 
 .pd-image {
   width: 100%;
-  max-height: 600px;
+  max-height: 520px;
   object-fit: contain;
   border-radius: 12px;
-  background: #fafafa;
+  background: rgba(255, 255, 255, 0.04);
 }
 
-/* INFO OLDAL */
 .pd-info {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  text-align: left;
 }
 
-/* CÍM */
 .pd-title {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
-  color: #000;
+  color: var(--text);
 }
 
-/* ÁR */
 .pd-price {
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 700;
-  color: #0a7a3d; /* ZÖLD */
+  color: var(--accent);
 }
 
-/* KÉSZLET */
 .pd-stock {
-  font-size: 16px;
-  color: #000;
-  opacity: 0.8;
+  font-size: 14px;
+  color: var(--muted);
 }
 
-/* LEÍRÁS */
 .pd-desc {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
-  color: #000;
-  margin-top: 10px;
-}
-
-/* MÉRETEK */
-.pd-sizes {
-  margin-top: 25px;
+  color: var(--muted);
 }
 
 .pd-sizes span {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  color: #000;
+  color: var(--text);
 }
 
 .pd-sizes-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-  margin-top: 14px;
+  gap: 12px;
+  margin-top: 12px;
 }
 
 .pd-size-btn {
-  padding: 14px 0;
-  font-size: 18px;
+  padding: 12px 0;
+  font-size: 16px;
   font-weight: 700;
-  border: 2px solid #0a7a3d;
-  background: #ffffff;
-  color: #0a7a3d;
-  border-radius: 8px;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  background: rgba(6, 12, 9, 0.7);
+  color: var(--text);
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.25s;
 }
 
-/* HOVER */
-.pd-size-btn:hover {
-  background: #0a7a3d;
-  color: #ffffff;
-}
-
-/* AKTÍV MÉRET */
+.pd-size-btn:hover,
 .pd-size-btn.active {
-  background: #0a7a3d;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(10,122,61,0.4);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(34, 197, 94, 0.6));
+  border-color: transparent;
+  color: var(--text);
+  box-shadow: 0 8px 18px rgba(34, 197, 94, 0.25);
 }
 
-/* VÁSÁRLÁS */
 .pd-actions {
   margin-top: auto;
 }
 
 .pd-buy {
-  margin-top: 30px;
-  padding: 18px;
-  font-size: 20px;
+  margin-top: 24px;
+  padding: 16px;
+  font-size: 18px;
   font-weight: 700;
   width: 100%;
   border: none;
-  border-radius: 10px;
-  background: #000;
-  color: #0a7a3d;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #04160b;
   cursor: pointer;
   transition: 0.3s;
 }
 
-/* HOVER */
 .pd-buy:hover {
-  background: #0a7a3d;
-  color: #ffffff;
+  box-shadow: 0 12px 22px rgba(34, 197, 94, 0.25);
+  transform: translateY(-1px);
 }
 
-/* LETILTOTT */
 .pd-buy:disabled {
-  background: #ccc;
-  color: #666;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
   cursor: not-allowed;
 }
 
-/* MOBIL */
-@media (max-width: 900px) {
-  .pd-wrap {
-    grid-template-columns: 1fr;
-  }
-
-  .pd-image {
-    max-height: 400px;
-  }
-}
-
-/* MENNYISÉG (LEGÖRDÜLŐ) */
 .pd-quantity {
-  margin-top: 18px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .pd-quantity label {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
-  color: #000;
+  color: var(--muted);
 }
 
-/* SELECT STÍLUS */
 .pd-quantity select {
   width: 180px;
   max-width: 100%;
   padding: 12px 14px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  border: 2px solid #0a7a3d;
+  border: 1px solid rgba(34, 197, 94, 0.5);
   border-radius: 10px;
-  background: #ffffff;
-  color: #0a7a3d;
+  background: rgba(6, 12, 9, 0.75);
+  color: var(--text);
   cursor: pointer;
   outline: none;
   transition: 0.25s;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-
-  /* kis nyíl modernizálás (browser kompatibilis) */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
-  /* saját nyíl ikon (CSS) */
-  background-image:
-    linear-gradient(45deg, transparent 50%, #0a7a3d 50%),
-    linear-gradient(135deg, #0a7a3d 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) calc(50% - 3px),
+  background-image: linear-gradient(45deg, transparent 50%, rgba(34, 197, 94, 0.8) 50%),
+    linear-gradient(135deg, rgba(34, 197, 94, 0.8) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(50% - 3px),
     calc(100% - 12px) calc(50% - 3px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
 }
 
 .pd-quantity select:hover {
-  background-color: #f1fbf5;
+  background-color: rgba(34, 197, 94, 0.06);
   transform: translateY(-1px);
 }
 
 .pd-quantity select:focus {
-  border-color: #0a7a3d;
-  box-shadow: 0 0 0 4px rgba(10,122,61,0.18);
+  border-color: rgba(34, 197, 94, 0.8);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
 }
 
-/* MOBILON JOBBAN NÉZZEN KI */
 @media (max-width: 900px) {
+  .pd-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-image {
+    max-height: 360px;
+  }
+
   .pd-quantity select {
     width: 100%;
   }

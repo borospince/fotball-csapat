@@ -34,7 +34,7 @@ const Navbar = () => {
         <MdStadium size={30} />
       </Link>
       <div className="nav-group">
-        <span className="nav-trigger">{t("navGroupMatches")}</span>
+        <span className="nav-trigger">{t("navMatches")}</span>
         <div className="nav-menu">
           <Link to="/tickets">{t("navTickets")}</Link>
           <Link to="/schedule">{t("navSchedule")}</Link>
@@ -42,14 +42,14 @@ const Navbar = () => {
         </div>
       </div>
       <div className="nav-group">
-        <span className="nav-trigger">{t("navGroupTeam")}</span>
+        <span className="nav-trigger">{t("navTeam")}</span>
         <div className="nav-menu">
           <Link to="/players/ff1s">{t("navPlayers")}</Link>
           <Link to="/staff">{t("navStaff")}</Link>
         </div>
       </div>
       <div className="nav-group">
-        <span className="nav-trigger">{t("navGroupClub")}</span>
+        <span className="nav-trigger">{t("navClub")}</span>
         <div className="nav-menu">
           <Link to="/news">{t("navNews")}</Link>
           <Link to="/history">{t("navHistory")}</Link>
@@ -60,10 +60,10 @@ const Navbar = () => {
         </div>
       </div>
       <div className="nav-group">
-        <span className="nav-trigger">{t("navGroupShop")}</span>
+        <span className="nav-trigger">{t("navShopMenu")}</span>
         <div className="nav-menu">
           <Link to="/shops">{t("navShop")}</Link>
-          <Link to="/Cart">{t("navCart")}</Link>
+          <Link to="/cart">{t("navCart")}</Link>
         </div>
       </div>
       {isLoggedIn === 0 ? (
@@ -71,7 +71,9 @@ const Navbar = () => {
           <CgProfile size={30} />
         </Link>
       ) : (
-        <button onClick={kilep}>{t("navLogout")}</button>
+        <button className="logout-btn" onClick={kilep}>
+          {t("navLogout")}
+        </button>
       )}
       <div className="lang-toggle">
         <button

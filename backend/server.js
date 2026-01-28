@@ -53,6 +53,7 @@ app.use('/api/stripe', require('./routes/stripeRoutes.js'));
 app.use('/api/matches-backend', require('./routes/matchesRoutesBackend.js'));
 app.use('/api/new-match', require('./routes/newMatchRoutesBackend.js'));
 app.use('/api/matches-frontend', require('./routes/matchesRoutesFrontend.js'));
+app.use('/api/tickets-backend', require('./routes/ticketsRoutesBackend.js'));
 
 // đź”Ą ĂšJ FAN MAIL ROUTE â€“ EZT ADTAM HOZZĂ đź”Ą
 app.use('/api/fans/all', require('./routes/users/fanMailRoutes.js'));

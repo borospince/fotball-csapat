@@ -1,9 +1,10 @@
 .cart-page {
   min-height: 100vh;
-  background: #f4f6f4;
+  background: transparent;
   display: flex;
   justify-content: center;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Rajdhani", sans-serif;
+  color: var(--text);
 }
 
 .cart-container {
@@ -13,24 +14,24 @@
 }
 
 .cart-header {
-  background: #ffffff;
-  border-radius: 14px;
+  background: var(--card);
+  border-radius: var(--radius);
   padding: 22px 22px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
   margin-bottom: 18px;
+  border: 1px solid var(--border);
 }
 
 .cart-header h1 {
   margin: 0;
   font-size: 34px;
   font-weight: 800;
-  color: #000;
+  color: var(--text);
 }
 
 .cart-subtitle {
   margin: 8px 0 0;
-  color: #000;
-  opacity: 0.75;
+  color: var(--muted);
 }
 
 .cart-list {
@@ -47,17 +48,18 @@
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: 16px;
-  background: #ffffff;
+  background: var(--card);
   padding: 16px;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 .cart-img-wrap {
   width: 140px;
   height: 140px;
   border-radius: 12px;
-  background: #fafafa;
+  background: var(--bg-1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,19 +89,19 @@
   margin: 0;
   font-size: 20px;
   font-weight: 800;
-  color: #000;
+  color: var(--text);
 }
 
 .cart-item-meta {
   margin: 6px 0 0;
   font-size: 14px;
-  opacity: 0.75;
+  color: var(--muted);
 }
 
 .remove-btn {
   border: none;
   background: transparent;
-  color: #000;
+  color: var(--text);
   font-size: 22px;
   cursor: pointer;
   opacity: 0.7;
@@ -125,33 +127,35 @@
   flex-direction: column;
   gap: 4px;
   font-size: 14px;
-  opacity: 0.9;
+  color: var(--muted);
 }
 
 .cart-price b,
 .cart-line-total b {
   font-size: 18px;
-  opacity: 1;
+  color: var(--text);
 }
 
 .cart-line-total b {
-  color: #0a7a3d;
+  color: var(--accent);
 }
 
-/* ✅ RÉGI +/- STÍLUS (BEILLESZTVE) */
 .quantity-controls {
   display: flex;
   align-items: center;
   margin-top: 10px;
+  gap: 8px;
 }
 
 .quantity-controls button {
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: #ddd;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  background: var(--bg-1);
   cursor: pointer;
   font-size: 18px;
+  color: var(--text);
+  border-radius: 8px;
 }
 
 .quantity-controls button:hover {
@@ -159,15 +163,16 @@
 }
 
 .quantity-controls span {
-  margin: 0 10px;
+  margin: 0 6px;
   font-weight: bold;
 }
 
 .summary-card {
-  background: #ffffff;
-  border-radius: 14px;
+  background: var(--card);
+  border-radius: var(--radius);
   padding: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 .summary-row {
@@ -175,7 +180,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .summary-row:last-of-type {
@@ -183,7 +188,7 @@
 }
 
 .summary-total {
-  color: #0a7a3d;
+  color: var(--accent);
   font-size: 22px;
 }
 
@@ -193,8 +198,8 @@
   padding: 16px;
   border: none;
   border-radius: 12px;
-  background: #000;
-  color: #0a7a3d;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  color: #0b0f0d;
   font-size: 18px;
   font-weight: 800;
   cursor: pointer;
@@ -202,28 +207,29 @@
 }
 
 .checkout-btn:hover {
-  background: #0a7a3d;
-  color: #ffffff;
+  background: linear-gradient(135deg, #15803d, #16a34a);
 }
 
 .summary-note {
   margin: 10px 0 0;
   font-size: 13px;
-  opacity: 0.7;
+  color: var(--muted);
 }
 
 .cart-empty {
-  background: #ffffff;
-  border-radius: 14px;
+  background: var(--card);
+  border-radius: var(--radius);
   padding: 26px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
   text-align: center;
+  border: 1px solid var(--border);
 }
 
 .cart-empty p {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
+  color: var(--text);
 }
 
 .cart-back {
@@ -232,8 +238,8 @@
   padding: 12px 16px;
   border-radius: 12px;
   text-decoration: none;
-  background: #0a7a3d;
-  color: #fff;
+  background: var(--accent);
+  color: #0b0f0d;
   font-weight: 800;
 }
 

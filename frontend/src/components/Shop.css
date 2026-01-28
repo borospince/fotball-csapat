@@ -89,10 +89,11 @@
 .shop-card {
   max-width: 360px;
   margin: 12px;
-  background: #ffffff;
+  background: var(--card);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
   transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms ease;
   cursor: pointer;
   display: flex;
@@ -122,7 +123,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1; /* négyzetes rács; szükség szerint állítsd */
-  background: #f8f8f8;
+  background: var(--bg-1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,8 +151,8 @@
   right: 10px;
   top: 10px;
   z-index: 10;
-  background: rgba(255,255,255,0.92);
-  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(15, 29, 22, 0.95);
+  border: 1px solid var(--border);
   padding: 8px;
   border-radius: 8px;
   display: inline-flex;
@@ -160,7 +161,7 @@
   font-size: 16px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   pointer-events: none; /* link kattintás ne akadjon meg */
-  color: rgba(0,0,0,0.7);
+  color: var(--text);
 }
 
 /* Adatok rész (alsó rész) */
@@ -174,7 +175,7 @@
 .shop-nev {
   font-size: 16px;
   margin: 0;
-  color: #111827;
+  color: var(--text);
   line-height: 1.15;
   font-weight: 700;
 }
@@ -183,7 +184,7 @@
 .shop-mennyisegEgyseg {
   margin: 0;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--muted);
 }
 
 /* statisztikák sorban (ár + készlet) */
@@ -198,19 +199,19 @@
 .shop-ar, .shop-keszlet {
   margin: 0;
   font-size: 14px;
-  color: #374151;
+  color: var(--muted);
   font-weight: 600;
 }
 
 /* kis hangsúly az árra */
 .ar-ertek {
-  color: #111827;
+  color: var(--accent);
   font-weight: 800;
 }
 
 /* Accessibility: fókusz látható legyen, de ne zavaró */
 .shop-card:focus {
-  box-shadow: 0 0 0 4px rgba(34,131,255,0.12), 0 12px 36px rgba(0,0,0,0.10);
+  box-shadow: 0 0 0 4px rgba(34,197,94,0.2), var(--shadow);
 }
 
 /* Responsív: kisebb képernyőkön is jól nézzen ki */

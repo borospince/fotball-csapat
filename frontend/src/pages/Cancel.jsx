@@ -33,7 +33,7 @@ const Cancel = () => {
     <div className="cancel-wrap">
       <div className="cancel-card">
         <div className="cancel-icon" aria-hidden="true">
-          âš ď¸Ź
+          ⚠️
         </div>
 
         <h1 className="cancel-title">{t("cancelTitle")}</h1>

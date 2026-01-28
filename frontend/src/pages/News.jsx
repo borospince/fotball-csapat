@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./News.css";
 import { useLanguage, useT } from "../i18n/LanguageContext.jsx";
+import { formatDate } from "../i18n/formatters.js";
 
 const News = () => {
   const t = useT();
   const { lang } = useLanguage();
-  const dateLocale = lang === "hu" ? "hu-HU" : "en-GB";
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -55,7 +55,7 @@ const News = () => {
             </a>
 
             <span className="date">
-              {new Date(item.publishedAt).toLocaleDateString(dateLocale)}
+              {formatDate(item.publishedAt, lang)}
             </span>
           </div>
         ))}

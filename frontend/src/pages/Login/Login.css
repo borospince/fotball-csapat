@@ -1,87 +1,103 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Passero+One&family=Sigmar+One&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-
-/* Konténer */
 .login-kontener {
-    width: 380px;
-    margin: 80px auto;
-    padding: 30px;
-    background: #f5fff5;
-    border-radius: 12px;
-    box-shadow: 0 0 18px rgba(0, 80, 0, 0.18);
-    border: 2px solid #91d79b;
-    text-align: center;
-    font-family: "Oswald", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
+  max-width: 480px;
+  margin: 40px auto 60px;
+  padding: 28px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  text-align: left;
 }
 
-/* Cím */
 .login-kontener h1 {
-    color: #2f8f45;
-    margin-bottom: 25px;
+  margin: 0 0 20px;
+  font-size: 26px;
+  letter-spacing: 1px;
+  text-align: center;
+  color: var(--text);
 }
 
-/* Táblázat formázás */
-table {
-    width: 100%;
+.login-kontener table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-label {
-    font-weight: bold;
-    color: #2f6f35;
+.login-kontener td {
+  padding: 10px 6px;
+  vertical-align: middle;
 }
 
-input {
-    width: 95%;
-    padding: 8px;
-    margin: 5px 0;
-    border: 2px solid #91d79b;
-    border-radius: 8px;
-    background: #ffffff;
-    transition: 0.3s;
+.login-kontener label {
+  font-size: 15px;
+  color: var(--muted);
 }
 
-input:focus {
-    border-color: #3fbf53;
-    outline: none;
-    box-shadow: 0 0 5px rgba(63, 191, 83, 0.4);
+.login-kontener input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(6, 12, 9, 0.75);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Gomb */
-button {
-    padding: 10px 20px;
-    background: #3fbf53;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    margin-top: 10px;
-    width: 140px;
-    transition: 0.2s;
+.login-kontener input:focus {
+  border-color: rgba(34, 197, 94, 0.6);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
 }
 
-button:hover {
-    background: #32a645;
-    box-shadow: 0 0 8px rgba(50, 166, 69, 0.5);
+.login-kontener button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #04160b;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Regisztráció szekció */
+.login-kontener button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(34, 197, 94, 0.25);
+}
+
+.login-kontener button:active {
+  transform: scale(0.98);
+}
+
 .registergomb {
-    margin-top: 25px;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 10px;
+  text-align: center;
 }
 
 .registergomb p {
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #2f6f35;
+  margin: 0;
+  color: var(--muted);
 }
 
 .registergomb button {
-    width: 150px;
-    background: #2ea249;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .registergomb button:hover {
-    background: #24853a;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 520px) {
+  .login-kontener {
+    margin: 24px 16px 40px;
+    padding: 22px;
+  }
 }

@@ -1,113 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
-
-/* Teljes kártya */
 .u19-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    padding: 1.5em;
-    max-width: 350px;
-    margin: 1.5em auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1.5em;
+  max-width: 360px;
+  margin: 1.5em auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .u19-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
 }
 
 .player-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
-/* Kép konténer */
 .u19-kep-kontener {
-    width: 100%;
-    max-width: 300px;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #f0f0f0;
-    margin-bottom: 1em;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.04);
+  margin-bottom: 1em;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .u19-kep-kontener img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
-/* Szövegek */
 .u19-adatok {
-    text-align: center;
-    font-family: "Segoe UI", Roboto, sans-serif;
-    color: #333;
-    font-family: "Oswald", sans-serif;
-    font-optical-sizing: auto;
-    /* font-weight: weight; */
-    font-style: normal;
+  text-align: center;
+  color: var(--text);
 }
 
 .u19-nev {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #222;
-    margin-bottom: 0.2em;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.2em;
 }
 
 .u19-nemzetiseg {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 0.5em;
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 0.5em;
 }
 
 .u19-szuletes,
 .u19-poszt {
-    font-size: 0.95rem;
-    color: #555;
-    margin: 0.2em 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0.2em 0;
 }
 
-/* Statisztikák */
 .u19-stats {
-    margin-top: 1em;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    padding: 0.5em 0;
-    border-top: 1px solid #ddd;
-    gap: 1em; /* térköz, hogy ne folyjanak össze */
-    flex-wrap: wrap;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0.5em 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 1em;
+  flex-wrap: wrap;
 }
 
 .u19-stats p {
-    margin: 0;
-    font-weight: 500;
-    color: #444;
-    text-align: center;
-    min-width: 80px;
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  min-width: 80px;
 }
 
-/* Reszponzív */
 @media (max-width: 500px) {
-    .u19-card {
-        max-width: 90%;
-        padding: 1em;
-    }
+  .u19-card {
+    max-width: 92%;
+    padding: 1.1em;
+  }
 
-    .u19-nev {
-        font-size: 1.2rem;
-    }
+  .u19-nev {
+    font-size: 1.2rem;
+  }
 
-    .u19-stats {
-        flex-direction: column;
-        gap: 0.3em;
-    }
+  .u19-stats {
+    flex-direction: column;
+    gap: 0.3em;
+  }
 }

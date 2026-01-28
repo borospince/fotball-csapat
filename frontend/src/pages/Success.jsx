@@ -29,6 +29,9 @@ const Success = () => {
 
         if (!res.ok) {
           const err = await res.json();
+          if (res.status === 409) {
+            alert(t("seatServerTaken"));
+          }
           console.error(err.message || "Ticket save error");
         }
       } catch (error) {
@@ -63,7 +66,7 @@ const Success = () => {
     <div className="success-wrap">
       <div className="success-card">
         <div className="success-icon" aria-hidden="true">
-          âś…
+          ✓
         </div>
 
         <h1 className="success-title">{t("successTitle")}</h1>
@@ -75,7 +78,7 @@ const Success = () => {
             {t("successHome")}
           </Link>
 
-          <Link to="/shop" className="success-btn secondary">
+          <Link to="/shops" className="success-btn secondary">
             {t("successContinue")}
           </Link>
         </div>

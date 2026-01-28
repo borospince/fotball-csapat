@@ -3,37 +3,23 @@ import { useParams } from "react-router-dom";
 import StadiumSVG from "./StadiumSVG";
 import "./Ticket.css";
 import { useLanguage, useT } from "../i18n/LanguageContext.jsx";
+import { formatDateTime } from "../i18n/formatters.js";
+import { translateAgeGroup, translateLeague } from "../i18n/valueTranslations.js";
 
 function Ticket() {
   const t = useT();
   const { lang } = useLanguage();
-  const dateLocale = lang === "hu" ? "hu-HU" : "en-GB";
-  const translateLeague = (value) => {
-    if (lang === "en") {
-      if (value === "Bajnokok Ligája") return "Champions League";
-    }
-    return value;
-  };
-  const translateAge = (value) => {
-    if (lang === "en") {
-      const v = String(value || "").toLowerCase();
-      if (v === "felnőtt" || v === "felnott") return "Senior";
-      if (v === "u19") return "U19";
-    }
-    return value;
-  };
   const { id } = useParams();
   const [match, setMatch] = useState(null);
   const [stadiumName, setStadiumName] = useState(t("stadiumDefault"));
   const [loading, setLoading] = useState(true);
 
-  const [sectors, setSectors] = useState([
+  const initialSectors = [
     { id: "A1", price: 5000, occupied: false },
     { id: "A2", price: 5000, occupied: false },
     { id: "A3", price: 5000, occupied: false },
     { id: "A4", price: 5000, occupied: true },
     { id: "A5", price: 5000, occupied: false },
-
     { id: "B1", price: 4500, occupied: false },
     { id: "B2", price: 4500, occupied: false },
     { id: "B3", price: 4500, occupied: false },
@@ -43,7 +29,6 @@ function Ticket() {
     { id: "B7", price: 4500, occupied: false },
     { id: "B8", price: 4500, occupied: false },
     { id: "B9", price: 4500, occupied: false },
-
     { id: "C1", price: 4000, occupied: false },
     { id: "C2", price: 4000, occupied: false },
     { id: "C3", price: 4000, occupied: false },
@@ -51,7 +36,6 @@ function Ticket() {
     { id: "C5", price: 4000, occupied: false },
     { id: "C6", price: 4000, occupied: true },
     { id: "C7", price: 4000, occupied: false },
-
     { id: "D1", price: 3500, occupied: false },
     { id: "D2", price: 3500, occupied: false },
     { id: "D3", price: 3500, occupied: false },
@@ -60,12 +44,26 @@ function Ticket() {
     { id: "D6", price: 3500, occupied: false },
     { id: "D7", price: 3500, occupied: false },
     { id: "D8", price: 3500, occupied: false },
-
     { id: "VIP", price: 12000, occupied: false },
     { id: "Sajtó", price: 0, occupied: true },
-  ]);
+  ];
+
+  const [sectors, setSectors] = useState(initialSectors);
+  const [seatsBySector, setSeatsBySector] = useState(() => {
+    const map = {};
+    initialSectors.forEach((sector) => {
+      map[sector.id] = Array.from({ length: 40 }, (_, i) => ({
+        id: i + 1,
+        occupied: false,
+      }));
+    });
+    return map;
+  });
+  const [occupiedBySector, setOccupiedBySector] = useState({});
 
   const [selectedSector, setSelectedSector] = useState(null);
+  const [selectedSeat, setSelectedSeat] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [customer, setCustomer] = useState({
     name: "",
     email: "",
@@ -99,18 +97,84 @@ function Ticket() {
   }, [id]);
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setIsLoggedIn(true);
+      setCustomer((prev) => ({
+        ...prev,
+        name: user.nev || prev.name,
+        email: user.email || prev.email,
+      }));
+    }
+  }, []);
+
+  useEffect(() => {
+    const loadOccupiedSeats = async () => {
+      if (!id) return;
+      try {
+        const res = await fetch(
+          `http://localhost:3500/api/tickets/occupied?matchId=${id}`
+        );
+        const data = await res.json();
+        if (!res.ok) return;
+
+        const map = {};
+        (data.tickets || []).forEach((ticket) => {
+          if (!ticket.sector || ticket.seat === undefined) return;
+          const seatNumber = Number(ticket.seat);
+          if (Number.isNaN(seatNumber)) return;
+          if (!map[ticket.sector]) {
+            map[ticket.sector] = new Set();
+          }
+          map[ticket.sector].add(seatNumber);
+        });
+        setOccupiedBySector(map);
+        setSeatsBySector((prev) => {
+          const next = { ...prev };
+          Object.entries(map).forEach(([sectorId, seats]) => {
+            const list = next[sectorId];
+            if (!list) return;
+            next[sectorId] = list.map((seat) =>
+              seats.has(seat.id) ? { ...seat, occupied: true } : seat
+            );
+          });
+          return next;
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadOccupiedSeats();
+  }, [id]);
+
+  useEffect(() => {
     if (!match?.helyszin) {
       setStadiumName(t("stadiumDefault"));
     }
   }, [lang, match, t]);
 
-  const handleSelect = (id) => {
-    const sector = sectors.find((s) => s.id === id);
+  const handleSelect = (sectorId) => {
+    const sector = sectors.find((s) => s.id === sectorId);
     if (sector.occupied) {
       alert(t("ticketAlertTaken"));
       return;
     }
-    setSelectedSector(id);
+    setSelectedSector(sectorId);
+    setSelectedSeat(null);
+  };
+
+  const handleSeatSelect = (seatId) => {
+    if (!selectedSector) return;
+    const seats = seatsBySector[selectedSector] || [];
+    const seat = seats.find((s) => s.id === seatId);
+    const occupiedSet = occupiedBySector[selectedSector];
+    const isOccupied = (occupiedSet && occupiedSet.has(seatId)) || seat?.occupied;
+    if (isOccupied) {
+      alert(t("seatTakenAlert"));
+      return;
+    }
+    setSelectedSeat(seatId);
   };
 
   const handlePurchase = async () => {
@@ -122,7 +186,11 @@ function Ticket() {
       alert(t("ticketAlertPickSector"));
       return;
     }
-    if (!customer.name || !customer.email || !customer.phone) {
+    if (!selectedSeat) {
+      alert(t("seatPickAlert"));
+      return;
+    }
+    if (!isLoggedIn && (!customer.name || !customer.email || !customer.phone)) {
       alert(t("ticketAlertFillAll"));
       return;
     }
@@ -141,8 +209,11 @@ function Ticket() {
         name: customer.name,
         email: customer.email,
         match: matchLabel,
+        matchId: id,
+        sector: selectedSector,
+        seat: selectedSeat,
         quantity: 1,
-        category: selectedSector,
+        category: `${selectedSector}-${selectedSeat}`,
         price: sector?.price || 0,
       };
 
@@ -156,7 +227,7 @@ function Ticket() {
           body: JSON.stringify({
             item: {
               name: matchLabel,
-              description: `${stadiumName} - ${selectedSector}`,
+              description: `${stadiumName} - ${selectedSector}/${selectedSeat}`,
               price: sector?.price || 0,
               quantity: 1,
             },
@@ -171,6 +242,21 @@ function Ticket() {
       }
 
       const data = await response.json();
+      setSeatsBySector((prev) => {
+        const next = { ...prev };
+        const list = next[selectedSector] || [];
+        next[selectedSector] = list.map((seat) =>
+          seat.id === selectedSeat ? { ...seat, occupied: true } : seat
+        );
+        return next;
+      });
+      setOccupiedBySector((prev) => {
+        const next = { ...prev };
+        const set = new Set(next[selectedSector] || []);
+        set.add(selectedSeat);
+        next[selectedSector] = set;
+        return next;
+      });
       localStorage.setItem("ticketDraft", JSON.stringify(ticketDraft));
       localStorage.setItem("url", `/tickets/${id}`);
       window.location.href = data.url;
@@ -185,17 +271,16 @@ function Ticket() {
     if (!match) return null;
     return {
       label: `${match.sajatCsapat} - ${match.ellenfel}`,
-      datum: match.datum
-        ? new Date(match.datum).toLocaleString(dateLocale)
-        : "",
+      datum: formatDateTime(match.datum, lang),
       liga: match.liga,
       korosztaly: match.korosztaly,
       hazaiIdegen: match.hazaiIdegen,
     };
-  }, [match]);
+  }, [match, lang]);
 
   return (
-    <div className="ticket-container">
+    <div className="ticket-page">
+      <div className="ticket-container">
       <h1>{t("ticketBooking")}</h1>
 
       {loading && <p className="selected-info">{t("ticketLoading")}</p>}
@@ -205,8 +290,8 @@ function Ticket() {
           <div>{matchInfo.label}</div>
           <div>{matchInfo.datum}</div>
           <div>
-            {translateLeague(matchInfo.liga)} –{" "}
-            {translateAge(matchInfo.korosztaly)} –{" "}
+            {translateLeague(matchInfo.liga, lang)} –{" "}
+            {translateAgeGroup(matchInfo.korosztaly, lang)} –{" "}
             {matchInfo.hazaiIdegen === "hazai"
               ? t("filterHome")
               : matchInfo.hazaiIdegen === "idegen"
@@ -220,54 +305,138 @@ function Ticket() {
         </div>
       )}
 
-      <h2 className="stadium-title">{stadiumName}</h2>
+      <div className="ticket-layout">
+        <section className="ticket-stage">
+          <h2 className="stadium-title">{stadiumName}</h2>
+          <StadiumSVG
+            sectors={sectors}
+            selectedSector={selectedSector}
+            onSelect={handleSelect}
+          />
+          <div className="seat-legend">
+            <span className="legend-item">
+              <span className="legend-dot available"></span>
+              {t("seatLegendAvailable")}
+            </span>
+            <span className="legend-item">
+              <span className="legend-dot selected"></span>
+              {t("seatLegendSelected")}
+            </span>
+            <span className="legend-item">
+              <span className="legend-dot occupied"></span>
+              {t("seatLegendOccupied")}
+            </span>
+          </div>
+        </section>
 
-      <StadiumSVG
-        sectors={sectors}
-        selectedSector={selectedSector}
-        onSelect={handleSelect}
-      />
+        <aside className="ticket-side">
+          {selectedSector && (
+            <div className="seat-picker">
+              <h4>
+                {t("seatTitle")} – {selectedSector} (
+                {sectors.find((s) => s.id === selectedSector)?.price ?? "-"} Ft)
+              </h4>
+              <div className="seat-grid seat-grid-labeled">
+                {(() => {
+                  const seats = seatsBySector[selectedSector] || [];
+                  const cols = 8;
+                  const rows = 5;
+                  const cells = [];
+                  cells.push(
+                    <div key="corner" className="seat-label corner"></div>
+                  );
+                  for (let c = 1; c <= cols; c++) {
+                    cells.push(
+                      <div key={`col-${c}`} className="seat-label">
+                        {c}
+                      </div>
+                    );
+                  }
+                  for (let r = 1; r <= rows; r++) {
+                    cells.push(
+                      <div key={`row-${r}`} className="seat-label row">
+                        {r}
+                      </div>
+                    );
+                    for (let c = 1; c <= cols; c++) {
+                      const seatId = (r - 1) * cols + c;
+                      const seat = seats.find((s) => s.id === seatId);
+                      const occupiedSet = occupiedBySector[selectedSector];
+                      const isOccupied =
+                        (occupiedSet && occupiedSet.has(seatId)) ||
+                        seat?.occupied;
+                      cells.push(
+                        <button
+                          key={`${selectedSector}-${seatId}`}
+                          className={`seat-btn${
+                            isOccupied ? " occupied" : ""
+                          }${selectedSeat === seatId ? " selected" : ""} row-${r}`}
+                          onClick={() => handleSeatSelect(seatId)}
+                          disabled={isOccupied}
+                        >
+                          {seatId}
+                        </button>
+                      );
+                    }
+                  }
+                  return cells;
+                })()}
+              </div>
+            </div>
+          )}
 
-      <div className="customer-form">
+          <div className="customer-form">
         <h3>{t("ticketData")}</h3>
 
-        <input
-          placeholder={t("ticketName")}
-          value={customer.name}
-          onChange={(e) =>
-            setCustomer({ ...customer, name: e.target.value })
-          }
-        />
+        {!isLoggedIn && (
+          <>
+            <input
+              placeholder={t("ticketName")}
+              value={customer.name}
+              onChange={(e) =>
+                setCustomer({ ...customer, name: e.target.value })
+              }
+            />
 
-        <input
-          placeholder={t("ticketEmail")}
-          value={customer.email}
-          onChange={(e) =>
-            setCustomer({ ...customer, email: e.target.value })
-          }
-        />
+            <input
+              placeholder={t("ticketEmail")}
+              value={customer.email}
+              onChange={(e) =>
+                setCustomer({ ...customer, email: e.target.value })
+              }
+            />
 
-        <input
-          placeholder={t("ticketPhone")}
-          value={customer.phone}
-          onChange={(e) =>
-            setCustomer({ ...customer, phone: e.target.value })
-          }
-        />
+            <input
+              placeholder={t("ticketPhone")}
+              value={customer.phone}
+              onChange={(e) =>
+                setCustomer({ ...customer, phone: e.target.value })
+              }
+            />
+          </>
+        )}
 
         {selectedSector && (
           <p className="selected-info">
             {t("ticketSector")}: {selectedSector}
           </p>
         )}
+        {selectedSeat && (
+          <p className="selected-info">
+            {t("seatSelected")}: {selectedSeat}
+          </p>
+        )}
 
-        <button
-          onClick={handlePurchase}
-          disabled={match && match.jegyElerheto === false}
-        >
-          {t("ticketReserve")}
-        </button>
+            <button
+              onClick={handlePurchase}
+              disabled={match && match.jegyElerheto === false}
+            >
+              {t("ticketReserve")}
+            </button>
+          </div>
+        </aside>
       </div>
+    </div>
     </div>
   );
 }

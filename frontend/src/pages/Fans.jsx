@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Fans.css";
 import { useLanguage, useT } from "../i18n/LanguageContext.jsx";
+import { formatDateTime } from "../i18n/formatters.js";
 
 function Fans() {
   const t = useT();
   const { lang } = useLanguage();
-  const dateLocale = lang === "hu" ? "hu-HU" : "en-GB";
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -64,7 +64,7 @@ function Fans() {
             <div key={msg._id} className="fan-mail-item">
               <strong>{msg.username}:</strong>
               <p>{msg.message}</p>
-              <small>{new Date(msg.createdAt).toLocaleString(dateLocale)}</small>
+              <small>{formatDateTime(msg.createdAt, lang)}</small>
             </div>
           );
         })}

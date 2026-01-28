@@ -3,18 +3,19 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  background: #fff7ed; /* enyhe narancsos háttér */
+  background: radial-gradient(circle at top, rgba(34, 197, 94, 0.14), transparent 55%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1));
 }
 
 .cancel-card {
   width: 100%;
   max-width: 560px;
-  background: #ffffff;
-  border: 1px solid #fed7aa;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 28px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow);
 }
 
 .cancel-icon {
@@ -26,12 +27,12 @@
 .cancel-title {
   margin: 0 0 10px;
   font-size: 28px;
-  color: #7c2d12; /* sötét narancs */
+  color: var(--text);
 }
 
 .cancel-text {
   margin: 0 0 18px;
-  color: #9a3412;
+  color: var(--muted);
   line-height: 1.6;
   font-size: 16px;
 }
@@ -60,27 +61,27 @@
 }
 
 .cancel-btn.primary {
-  background: #9a3412;
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #04160b;
 }
 
 .cancel-btn.primary:hover {
-  box-shadow: 0 10px 18px rgba(154, 52, 18, 0.22);
+  box-shadow: 0 10px 18px rgba(34, 197, 94, 0.25);
 }
 
 .cancel-btn.secondary {
-  background: #ffffff;
-  color: #9a3412;
-  border-color: #fed7aa;
+  background: transparent;
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .cancel-btn.secondary:hover {
-  background: #ffedd5;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .cancel-btn.ghost {
   background: transparent;
-  color: #9a3412;
+  color: var(--text);
   border-color: transparent;
   text-decoration: underline;
   font-weight: 600;
@@ -89,15 +90,14 @@
 .cancel-small {
   margin-top: 16px;
   font-size: 13px;
-  color: #9a3412;
+  color: var(--muted);
   opacity: 0.85;
 }
 
 .cancel-small b {
-  color: #7c2d12;
+  color: var(--text);
 }
 
-/* mobil */
 @media (max-width: 480px) {
   .cancel-card {
     padding: 20px;
