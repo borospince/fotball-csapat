@@ -7,7 +7,7 @@
 
 .ticket-container {
   max-width: 1100px;
-  margin: 0 auto;
+  margin: 50px auto;
   display: grid;
   gap: 16px;
 }
