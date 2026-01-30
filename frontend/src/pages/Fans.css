@@ -1,7 +1,7 @@
 /* Fan mail - themed */
 .fan-mail-container {
     max-width: 900px;
-    margin: 40px auto;
+    margin: 50px auto;
     padding: 30px;
     background: var(--card);
     border-radius: var(--radius);

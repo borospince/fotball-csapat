@@ -1,4 +1,5 @@
 .players-kontener {
+  margin-top: 50px;
   display: flex;
   gap: 20px;
   padding: 30px;

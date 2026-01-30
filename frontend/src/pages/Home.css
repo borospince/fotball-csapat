@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Staatliches&display=swap");
 
 .homebody-kontener {
+  /* margin-top: 50px; */
   font-family: "Rajdhani", sans-serif;
   min-height: 100vh;
   background:
