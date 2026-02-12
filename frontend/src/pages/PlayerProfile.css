@@ -44,7 +44,7 @@
 }
 
 .player-profile-name {
-  font-size: 32px;
+  font-size: clamp(24px, 4.8vw, 32px);
   color: var(--text);
   margin: 0;
 }
@@ -103,5 +103,15 @@
 @media (max-width: 800px) {
   .player-profile-card {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .player-profile-page {
+    padding: 32px 16px 70px;
+  }
+
+  .player-profile-card {
+    padding: 18px;
   }
 }

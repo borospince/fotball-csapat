@@ -101,3 +101,30 @@
     padding: 22px;
   }
 }
+
+@media (max-width: 600px) {
+  .login-kontener h1 {
+    font-size: 22px;
+  }
+
+  .login-kontener table,
+  .login-kontener tbody,
+  .login-kontener tr,
+  .login-kontener td {
+    display: block;
+    width: 100%;
+  }
+
+  .login-kontener tr {
+    margin-bottom: 14px;
+  }
+
+  .login-kontener td {
+    padding: 0;
+  }
+
+  .login-kontener label {
+    display: block;
+    margin-bottom: 6px;
+  }
+}

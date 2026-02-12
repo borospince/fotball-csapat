@@ -22,7 +22,7 @@
 
 .stadium-hero h1 {
   margin: 0;
-  font-size: 36px;
+  font-size: clamp(28px, 4.8vw, 36px);
   color: var(--text);
 }
 
@@ -95,4 +95,20 @@
   border: 1px solid var(--border);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .stadium-page {
+    padding: 32px 16px 70px;
+  }
+
+  .stadium-hero {
+    margin: 32px auto;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .stadium-capacity {
+    width: 100%;
+  }
 }

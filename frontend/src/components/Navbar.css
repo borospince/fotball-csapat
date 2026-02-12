@@ -53,6 +53,10 @@
     padding: 6px 10px;
     border-radius: 8px;
     display: inline-block;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
 }
 
 .nav-trigger:hover,
@@ -81,6 +85,12 @@
 
 .nav-group:hover .nav-menu,
 .nav-group:focus-within .nav-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nav-group.open .nav-menu {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -144,21 +154,38 @@
     }
 
     .nav-menu {
-        position: static;
-        box-shadow: none;
+        position: absolute;
+        left: 0;
+        top: calc(100% + 6px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.15);
+        opacity: 0;
+        transform: translateY(-4px);
+        pointer-events: none;
+    }
+
+    .nav-group:hover .nav-menu,
+    .nav-group:focus-within .nav-menu {
+        opacity: 0;
+        transform: translateY(-4px);
+        pointer-events: none;
+    }
+
+    .nav-group.open .nav-menu {
         opacity: 1;
-        transform: none;
+        transform: translateY(0);
         pointer-events: auto;
     }
 }
 
 @media (max-width: 600px) {
     .navbar-kontener {
-        flex-wrap: nowrap;
-        overflow-x: auto;
+        flex-wrap: wrap;
+        overflow-x: visible;
         justify-content: flex-start;
-        white-space: nowrap;
+        white-space: normal;
+        gap: 8px;
+        padding: 8px 10px;
     }
 
     .navbar-kontener a,
@@ -168,5 +195,20 @@
 
     .nav-group {
         flex: 0 0 auto;
+    }
+
+    .nav-trigger {
+        font-size: 14px;
+        padding: 5px 8px;
+    }
+
+    .nav-menu {
+        min-width: 150px;
+        max-width: calc(100vw - 24px);
+    }
+
+    .logout-btn {
+        padding: 6px 10px;
+        font-size: 13px;
     }
 }

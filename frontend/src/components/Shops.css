@@ -2,9 +2,11 @@
 
 .shops-kontener{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px 16px;
-    margin-top: 80px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px 16px;
+    margin: 80px auto 0;
+    max-width: 1100px;
+    padding: 0 8px;
     font-family: "Rajdhani", sans-serif;
     font-weight: 600;
 }
@@ -12,6 +14,21 @@
 .shop-container img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;   /* így nem torzul, és nem lóg ki */
+  object-fit: contain;   /* Ă­gy nem torzul, Ă©s nem lĂłg ki */
   display: block;
+}
+
+@media (max-width: 720px) {
+    .shops-kontener{
+        margin-top: 40px;
+        gap: 18px 12px;
+        padding: 0 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shops-kontener{
+        grid-template-columns: 1fr;
+        margin-top: 24px;
+    }
 }

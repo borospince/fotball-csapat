@@ -101,6 +101,18 @@
     font-size: 12px;
 }
 
+@media (max-width: 720px) {
+    .fan-mail-container {
+        margin: 28px auto;
+        padding: 20px;
+    }
+
+    .fan-mail-form button {
+        align-self: stretch;
+        text-align: center;
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

@@ -27,7 +27,7 @@ body {
 
 .container-match h1 {
   text-align: center;
-  font-size: 44px;
+  font-size: clamp(30px, 5.5vw, 44px);
   letter-spacing: 2px;
   margin-bottom: 18px;
   color: #ecfdf3;
@@ -136,5 +136,16 @@ body {
 
   .container-match h1 {
     font-size: 36px;
+  }
+}
+
+@media (max-width: 520px) {
+  .match-card {
+    padding: 16px;
+  }
+
+  .match-cta {
+    justify-self: stretch;
+    text-align: center;
   }
 }

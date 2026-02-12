@@ -219,4 +219,25 @@
   .shop-card { max-width: 100%; margin: 8px 0; border-radius: 10px; }
   .shop-adatok { padding: 10px; }
   .shop-nev { font-size: 15px; }
+  .shop-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cart-btn {
+    right: 8px;
+    top: 8px;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .shop-termekleiras,
+  .shop-mennyisegEgyseg,
+  .shop-ar,
+  .shop-keszlet {
+    font-size: 12px;
+  }
 }

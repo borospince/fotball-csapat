@@ -11,7 +11,7 @@
 
 .register-kontener h1 {
   text-align: center;
-  font-size: 26px;
+  font-size: clamp(22px, 4.4vw, 26px);
   margin-bottom: 20px;
   color: var(--text);
   text-transform: uppercase;
@@ -77,5 +77,36 @@
   .register-kontener {
     margin: 24px 16px 40px;
     padding: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .register-kontener h1 {
+    font-size: 22px;
+  }
+
+  .register-kontener table,
+  .register-kontener tbody,
+  .register-kontener tr,
+  .register-kontener td {
+    display: block;
+    width: 100%;
+  }
+
+  .register-kontener tr {
+    margin-bottom: 14px;
+  }
+
+  .register-kontener td {
+    padding: 0;
+  }
+
+  .register-kontener label {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .register-kontener button {
+    margin-top: 6px;
   }
 }

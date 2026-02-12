@@ -42,3 +42,17 @@ select,
 textarea {
   font-family: inherit;
 }
+
+.main-kontener {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .main-kontener {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

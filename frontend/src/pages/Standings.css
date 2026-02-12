@@ -8,7 +8,7 @@
 
 .standings-page h1 {
   text-align: center;
-  font-size: 36px;
+  font-size: clamp(28px, 4.8vw, 36px);
   letter-spacing: 1px;
   margin-bottom: 24px;
   color: var(--text);
@@ -91,4 +91,24 @@
 .standings-table td.pts {
   font-weight: 700;
   color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .standings-page {
+    padding: 32px 16px 70px;
+  }
+
+  .standings-table-wrap {
+    padding: 12px;
+  }
+
+  .standings-table {
+    min-width: 520px;
+  }
+
+  .standings-table th,
+  .standings-table td {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
 }
