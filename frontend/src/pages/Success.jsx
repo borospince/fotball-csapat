@@ -1,11 +1,123 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./success.css";
+import { useT } from "../i18n/LanguageContext.jsx";
 
 const Success = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const t = useT();
+  const navigate = useNavigate();
+  const [seconds, setSeconds] = useState(8);
 
-export default Success
+  useEffect(() => {
+    localStorage.removeItem("kosar");
+  }, []);
+
+  useEffect(() => {
+    const draft = localStorage.getItem("ticketDraft");
+    if (!draft) return;
+
+    const createTicket = async () => {
+      try {
+        const payload = JSON.parse(draft);
+        const seats = Array.isArray(payload?.seats) ? payload.seats : [];
+
+        if (seats.length > 0) {
+          for (const seat of seats) {
+            const ticketPayload = {
+              ...payload,
+              seat,
+              quantity: 1,
+              category: `${payload.sector}-${seat}`,
+            };
+            delete ticketPayload.seats;
+            const res = await fetch("http://localhost:3500/api/tickets", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(ticketPayload),
+            });
+
+            if (!res.ok) {
+              const err = await res.json();
+              if (res.status === 409) {
+                alert(t("seatServerTaken"));
+              }
+              console.error(err.message || "Ticket save error");
+            }
+          }
+        } else {
+          const res = await fetch("http://localhost:3500/api/tickets", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            if (res.status === 409) {
+              alert(t("seatServerTaken"));
+            }
+            console.error(err.message || "Ticket save error");
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        localStorage.removeItem("ticketDraft");
+      }
+    };
+
+    createTicket();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prev) => {
+        if (prev <= 1) return 0;
+        return prev - 1;
+      });
+    }, 1000);
+
+    const timeout = setTimeout(() => {
+      navigate("/");
+    }, 8000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [navigate]);
+
+  return (
+    <div className="success-wrap">
+      <div className="success-card">
+        <div className="success-icon" aria-hidden="true">
+          ✓
+        </div>
+
+        <h1 className="success-title">{t("successTitle")}</h1>
+
+        <p className="success-text">{t("successText")}</p>
+
+        <div className="success-actions">
+          <Link to="/" className="success-btn primary">
+            {t("successHome")}
+          </Link>
+
+          <Link to="/shops" className="success-btn secondary">
+            {t("successContinue")}
+          </Link>
+        </div>
+
+        <p className="success-small">
+          {t("successRedirect")}: <b>{seconds}</b> {t("secondsShort")}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Success;

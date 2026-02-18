@@ -1,13 +1,15 @@
-import './Home.css';
+import "./Home.css";
+import { useT } from "../i18n/LanguageContext.jsx";
 
 const Home = () => {
-  return(
+  const t = useT();
+  return (
     <body className="homebody-kontener">
       <div className="home-kontener">
-      <h1>Ízeltlábúak</h1>
-    </div>
+        <h1>{t("homeTitle")}</h1>
+      </div>
     </body>
-  )
+  );
+};
 
-  };
 export default Home;

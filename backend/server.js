@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dotenv').config({ path: '.env.local', override: true });
 
 const path = require('node:path');
 const express = require('express');
@@ -14,10 +15,12 @@ const PORT = process.env.PORT || 3500;
 
 // MongoDB kapcsolat
 const dbConneciton = require('./utils/dbConnection.js');
+const seedMatches = require('./utils/seedMatches.js');
 
 dbConneciton()
     .then(() => {
         console.log('sikeres adatbázis csatlakozás!');
+        seedMatches().catch((error) => console.log(error.message));
         app.listen(PORT, () => {
             console.log(`http://localhost:${PORT}/api`);
         });
@@ -48,6 +51,14 @@ app.use('/api/login-frontend', require('./routes/users/userLoginRoutes.js'));
 app.use('/api/users-backend', require('./routes/userRoutesBackend.js'));
 app.use('/api/tickets', require('./routes/ticketRoutes.js'));
 app.use('/api/stripe', require('./routes/stripeRoutes.js'));
+app.use('/api/matches-backend', require('./routes/matchesRoutesBackend.js'));
+app.use('/api/new-match', require('./routes/newMatchRoutesBackend.js'));
+app.use('/api/matches-frontend', require('./routes/matchesRoutesFrontend.js'));
+app.use('/api/standings-live', require('./routes/standingsLiveRoutes.js'));
+app.use('/api/tickets-backend', require('./routes/ticketsRoutesBackend.js'));
 
-// 🔥 ÚJ FAN MAIL ROUTE – EZT ADTAM HOZZÁ 🔥
+// UJ FAN MAIL ROUTE - EZT ADTAM HOZZA
 app.use('/api/fans/all', require('./routes/users/fanMailRoutes.js'));
+
+module.exports = app;
+

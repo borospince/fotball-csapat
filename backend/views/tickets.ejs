@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <link
+            rel="stylesheet"
+            href="/css/users.css"
+        />
+        <title>Jegyfoglalások</title>
+    </head>
+    <body>
+        <%- include('nav.ejs') %>
+        <div id="users-kontener">
+            <h1>Jegyfoglalások</h1>
+            <% tickets.forEach(elem => { %>
+                <% const seat = elem.seat; %>
+                <% const row = seat ? Math.floor((seat - 1) / 8) + 1 : '-'; %>
+                <% const col = seat ? ((seat - 1) % 8) + 1 : '-'; %>
+                <div class="player-kontener">
+                    <p>Név: <%= elem.name %></p>
+                    <p>Email: <%= elem.email %></p>
+                    <p>Meccs: <%= elem.match %></p>
+                    <p>Szektor: <%= elem.sector || '-' %></p>
+                    <p>Szék: <%= elem.seat ?? '-' %></p>
+                    <p>Sor/Oszlop: <%= row %> / <%= col %></p>
+                    <p>Ár: <%= elem.price %> Ft</p>
+                    <p>Időpont: <%= elem.createdAt ? new Date(elem.createdAt).toLocaleString('hu-HU') : '' %></p>
+                </div>
+            <% }) %>
+        </div>
+    </body>
+</html>
