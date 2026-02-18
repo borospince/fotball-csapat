@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dotenv').config({ path: '.env.local', override: true });
 
 const path = require('node:path');
 const express = require('express');
@@ -53,9 +54,11 @@ app.use('/api/stripe', require('./routes/stripeRoutes.js'));
 app.use('/api/matches-backend', require('./routes/matchesRoutesBackend.js'));
 app.use('/api/new-match', require('./routes/newMatchRoutesBackend.js'));
 app.use('/api/matches-frontend', require('./routes/matchesRoutesFrontend.js'));
+app.use('/api/standings-live', require('./routes/standingsLiveRoutes.js'));
 app.use('/api/tickets-backend', require('./routes/ticketsRoutesBackend.js'));
 
-// đź”Ą ĂšJ FAN MAIL ROUTE â€“ EZT ADTAM HOZZĂ đź”Ą
+// UJ FAN MAIL ROUTE - EZT ADTAM HOZZA
 app.use('/api/fans/all', require('./routes/users/fanMailRoutes.js'));
 
 module.exports = app;
+

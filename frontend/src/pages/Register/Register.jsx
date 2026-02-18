@@ -34,71 +34,54 @@ const Register = () => {
   }
 
   return (
-    <div className="register-kontener">
-      <h1>{t("registerTitle")}</h1>
-      <form>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <label htmlFor="nev">{t("registerUsername")}:</label>
-              </td>
-              <td>
-                <input
-                  type="text"
-                  id="nev"
-                  onChange={(e) => setNev(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="email">{t("emailLabel")}:</label>
-              </td>
-              <td>
-                <input
-                  type="email"
-                  id="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="jelszo">{t("loginPassword")}:</label>
-              </td>
-              <td>
-                <input
-                  type="password"
-                  id="jelszo"
-                  onChange={(e) => setJelszo(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="jelszo-ujra">
-                  {t("registerPasswordAgain")}:
-                </label>
-              </td>
-              <td>
-                <input
-                  type="password"
-                  id="jelszo-ujra"
-                  onChange={(e) => setJelszoUjra(e.target.value)}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button onClick={regisztracio}>{t("registerBtn")}:</button>
-              </td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
+    <section className="register-page">
+      <div className="register-kontener">
+        <h1>{t("registerTitle")}</h1>
+        <form className="register-form" onSubmit={regisztracio}>
+          <label htmlFor="nev">{t("registerUsername")}:</label>
+          <input
+            type="text"
+            id="nev"
+            value={nev}
+            onChange={(e) => setNev(e.target.value)}
+            autoComplete="username"
+            required
+          />
+
+          <label htmlFor="email">{t("emailLabel")}:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+            required
+          />
+
+          <label htmlFor="jelszo">{t("loginPassword")}:</label>
+          <input
+            type="password"
+            id="jelszo"
+            value={jelszo}
+            onChange={(e) => setJelszo(e.target.value)}
+            autoComplete="new-password"
+            required
+          />
+
+          <label htmlFor="jelszo-ujra">{t("registerPasswordAgain")}:</label>
+          <input
+            type="password"
+            id="jelszo-ujra"
+            value={jelszoUjra}
+            onChange={(e) => setJelszoUjra(e.target.value)}
+            autoComplete="new-password"
+            required
+          />
+
+          <button type="submit">{t("registerBtn")}</button>
+        </form>
+      </div>
+    </section>
   );
 };
 

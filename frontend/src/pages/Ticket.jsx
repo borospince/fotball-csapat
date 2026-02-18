@@ -62,7 +62,7 @@ function Ticket() {
   const [occupiedBySector, setOccupiedBySector] = useState({});
 
   const [selectedSector, setSelectedSector] = useState(null);
-  const [selectedSeat, setSelectedSeat] = useState(null);
+  const [selectedSeats, setSelectedSeats] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [customer, setCustomer] = useState({
     name: "",
@@ -161,7 +161,7 @@ function Ticket() {
       return;
     }
     setSelectedSector(sectorId);
-    setSelectedSeat(null);
+    setSelectedSeats([]);
   };
 
   const handleSeatSelect = (seatId) => {
@@ -174,7 +174,11 @@ function Ticket() {
       alert(t("seatTakenAlert"));
       return;
     }
-    setSelectedSeat(seatId);
+    setSelectedSeats((prev) =>
+      prev.includes(seatId)
+        ? prev.filter((selectedId) => selectedId !== seatId)
+        : [...prev, seatId]
+    );
   };
 
   const handlePurchase = async () => {
@@ -186,7 +190,7 @@ function Ticket() {
       alert(t("ticketAlertPickSector"));
       return;
     }
-    if (!selectedSeat) {
+    if (selectedSeats.length === 0) {
       alert(t("seatPickAlert"));
       return;
     }
@@ -203,6 +207,7 @@ function Ticket() {
     const matchLabel = match
       ? `${match.sajatCsapat} - ${match.ellenfel}`
       : "Ismeretlen meccs";
+    const orderedSeats = [...selectedSeats].sort((a, b) => a - b);
 
     try {
       const ticketDraft = {
@@ -211,9 +216,10 @@ function Ticket() {
         match: matchLabel,
         matchId: id,
         sector: selectedSector,
-        seat: selectedSeat,
-        quantity: 1,
-        category: `${selectedSector}-${selectedSeat}`,
+        seat: orderedSeats[0],
+        seats: orderedSeats,
+        quantity: orderedSeats.length,
+        category: orderedSeats.map((seat) => `${selectedSector}-${seat}`).join(","),
         price: sector?.price || 0,
       };
 
@@ -227,9 +233,9 @@ function Ticket() {
           body: JSON.stringify({
             item: {
               name: matchLabel,
-              description: `${stadiumName} - ${selectedSector}/${selectedSeat}`,
+              description: `${stadiumName} - ${selectedSector}/${orderedSeats.join(",")}`,
               price: sector?.price || 0,
-              quantity: 1,
+              quantity: orderedSeats.length,
             },
           }),
         }
@@ -246,14 +252,14 @@ function Ticket() {
         const next = { ...prev };
         const list = next[selectedSector] || [];
         next[selectedSector] = list.map((seat) =>
-          seat.id === selectedSeat ? { ...seat, occupied: true } : seat
+          orderedSeats.includes(seat.id) ? { ...seat, occupied: true } : seat
         );
         return next;
       });
       setOccupiedBySector((prev) => {
         const next = { ...prev };
         const set = new Set(next[selectedSector] || []);
-        set.add(selectedSeat);
+        orderedSeats.forEach((seatId) => set.add(seatId));
         next[selectedSector] = set;
         return next;
       });
@@ -370,7 +376,7 @@ function Ticket() {
                           key={`${selectedSector}-${seatId}`}
                           className={`seat-btn${
                             isOccupied ? " occupied" : ""
-                          }${selectedSeat === seatId ? " selected" : ""} row-${r}`}
+                          }${selectedSeats.includes(seatId) ? " selected" : ""} row-${r}`}
                           onClick={() => handleSeatSelect(seatId)}
                           disabled={isOccupied}
                         >
@@ -421,9 +427,9 @@ function Ticket() {
             {t("ticketSector")}: {selectedSector}
           </p>
         )}
-        {selectedSeat && (
+        {selectedSeats.length > 0 && (
           <p className="selected-info">
-            {t("seatSelected")}: {selectedSeat}
+            {t("seatSelected")}: {selectedSeats.slice().sort((a, b) => a - b).join(", ")} ({selectedSeats.length} db)
           </p>
         )}
 

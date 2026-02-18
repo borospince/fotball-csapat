@@ -1,4 +1,5 @@
-import { useContext } from "react";
+﻿import { useContext } from "react";
+import { MdDeleteOutline } from "react-icons/md";
 import { CartContext } from "./kosar/CartContext";
 import "./Cart.css";
 import { useT } from "../i18n/LanguageContext.jsx";
@@ -39,7 +40,7 @@ const Cart = () => {
         window.location.href = data.url;
         localStorage.setItem("url", data.url);
       } else {
-      console.error("No URL returned from server.");
+        console.error("No URL returned from server.");
       }
     } catch (error) {
       console.error("Network error:", error);
@@ -52,9 +53,7 @@ const Cart = () => {
         <header className="cart-header">
           <h1>{t("cartTitle")}</h1>
           <p className="cart-subtitle">
-            {totalCount
-              ? `${totalCount} ${t("cartItems")}`
-              : t("cartEmpty")}
+            {totalCount ? `${totalCount} ${t("cartItems")}` : t("cartEmpty")}
           </p>
         </header>
 
@@ -80,8 +79,9 @@ const Cart = () => {
                         className="remove-btn"
                         onClick={() => removeFromCart(elem._id, elem.size)}
                         title={t("cartRemove")}
+                        aria-label={t("cartRemove")}
                       >
-                        âś•
+                        <MdDeleteOutline />
                       </button>
                     </div>
 
@@ -92,29 +92,18 @@ const Cart = () => {
                       </div>
 
                       <div className="quantity-controls">
-                        <button
-                          onClick={() => decreaseCartItem(elem._id, elem.size)}
-                        aria-label={t("cartDecrease")}
-                        >
-                          â’
+                        <button onClick={() => decreaseCartItem(elem._id, elem.size)} aria-label={t("cartDecrease")}>
+                          -
                         </button>
                         <span>{elem.quantity}</span>
-                        <button
-                          onClick={() => increaseCartItem(elem._id, elem.size)}
-                          aria-label={t("cartIncrease")}
-                        >
+                        <button onClick={() => increaseCartItem(elem._id, elem.size)} aria-label={t("cartIncrease")}>
                           +
                         </button>
                       </div>
 
                       <div className="cart-line-total">
                         <span>{t("cartLineTotal")}:</span>
-                        <b>
-                          {formatFt(
-                            (elem.ar || 0) * (elem.quantity || 0)
-                          )}{" "}
-                          Ft
-                        </b>
+                        <b>{formatFt((elem.ar || 0) * (elem.quantity || 0))} Ft</b>
                       </div>
                     </div>
                   </div>

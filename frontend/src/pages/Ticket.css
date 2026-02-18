@@ -1,13 +1,14 @@
 .ticket-page {
-  min-height: 100vh;
-  padding: 36px 16px 80px;
+  min-height: 100dvh;
+  padding: 96px 16px 56px;
   background: radial-gradient(circle at top, rgba(34, 197, 94, 0.18), transparent 55%),
     linear-gradient(180deg, var(--bg-0), var(--bg-1));
+  overflow-x: hidden;
 }
 
 .ticket-container {
   max-width: 1100px;
-  margin: 50px auto;
+  margin: 0 auto;
   display: grid;
   gap: 16px;
 }
@@ -23,7 +24,7 @@
 .ticket-layout {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 18px;
+  gap: 20px;
 }
 
 .ticket-stage {
@@ -65,6 +66,7 @@
   border-radius: 16px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+  overflow-x: auto;
 }
 
 .seat-picker h4 {
@@ -134,8 +136,9 @@
 }
 
 .seat-grid-labeled {
-  grid-template-columns: 28px repeat(8, 1fr);
+  grid-template-columns: 24px repeat(8, minmax(24px, 1fr));
   max-width: 420px;
+  min-width: 312px;
 }
 
 .seat-label {
@@ -159,6 +162,7 @@
   gap: 14px;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   margin-top: 12px;
   font-size: 13px;
   color: var(--muted);
@@ -189,9 +193,12 @@
   background: #e53935;
 }
 
-svg {
+.ticket-stage svg {
   display: block;
   margin: 0 auto 20px;
+  width: 100%;
+  height: auto;
+  max-width: 560px;
 }
 
 .customer-form {
@@ -261,28 +268,52 @@ svg {
 }
 
 @media (max-width: 720px) {
+  .ticket-page {
+    padding: 108px 12px 42px;
+  }
+
   .ticket-container {
-    margin: 24px auto;
+    gap: 14px;
   }
 
   .ticket-stage {
     padding: 18px 16px 20px;
   }
+
+  .ticket-container h1 {
+    font-size: clamp(24px, 7vw, 30px);
+  }
 }
 
 @media (max-width: 520px) {
-  .seat-grid {
-    max-width: 100%;
-    grid-template-columns: repeat(5, minmax(28px, 1fr));
+  .ticket-page {
+    padding: 116px 10px 32px;
+  }
+
+  .ticket-stage {
+    padding: 14px 10px 16px;
+  }
+
+  .match-summary,
+  .seat-picker,
+  .customer-form {
+    padding: 12px;
   }
 
   .seat-btn {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     font-size: 11px;
+    border-radius: 8px;
+  }
+
+  .seat-grid {
+    gap: 6px;
   }
 
   .seat-grid-labeled {
-    grid-template-columns: 24px repeat(5, 1fr);
+    grid-template-columns: 20px repeat(8, minmax(24px, 1fr));
+    min-width: 252px;
+    max-width: 100%;
   }
 }

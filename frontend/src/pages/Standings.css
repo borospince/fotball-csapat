@@ -14,6 +14,18 @@
   color: var(--text);
 }
 
+.standings-live {
+  margin: -10px auto 22px;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  color: #c7f9d9;
+  background: rgba(34, 197, 94, 0.16);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
 .standings-filters {
   max-width: 900px;
   margin: 0 auto 28px;
@@ -96,6 +108,10 @@
 @media (max-width: 720px) {
   .standings-page {
     padding: 32px 16px 70px;
+  }
+
+  .standings-live {
+    margin-bottom: 16px;
   }
 
   .standings-table-wrap {

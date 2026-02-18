@@ -19,20 +19,49 @@ const Success = () => {
     const createTicket = async () => {
       try {
         const payload = JSON.parse(draft);
-        const res = await fetch("http://localhost:3500/api/tickets", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
+        const seats = Array.isArray(payload?.seats) ? payload.seats : [];
 
-        if (!res.ok) {
-          const err = await res.json();
-          if (res.status === 409) {
-            alert(t("seatServerTaken"));
+        if (seats.length > 0) {
+          for (const seat of seats) {
+            const ticketPayload = {
+              ...payload,
+              seat,
+              quantity: 1,
+              category: `${payload.sector}-${seat}`,
+            };
+            delete ticketPayload.seats;
+            const res = await fetch("http://localhost:3500/api/tickets", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(ticketPayload),
+            });
+
+            if (!res.ok) {
+              const err = await res.json();
+              if (res.status === 409) {
+                alert(t("seatServerTaken"));
+              }
+              console.error(err.message || "Ticket save error");
+            }
           }
-          console.error(err.message || "Ticket save error");
+        } else {
+          const res = await fetch("http://localhost:3500/api/tickets", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            if (res.status === 409) {
+              alert(t("seatServerTaken"));
+            }
+            console.error(err.message || "Ticket save error");
+          }
         }
       } catch (error) {
         console.error(error);

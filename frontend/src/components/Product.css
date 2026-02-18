@@ -1,26 +1,28 @@
 .pd-page {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: radial-gradient(circle at top, rgba(34, 197, 94, 0.18), transparent 55%),
     linear-gradient(180deg, var(--bg-0), var(--bg-1));
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 32px 20px 70px;
+  padding: 96px 20px 56px;
+  overflow-x: hidden;
 }
 
 .pd-wrap {
-  width: min(1200px, 95%);
+  width: min(1200px, 100%);
   background: var(--card);
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 40px;
-  padding: 32px;
+  gap: clamp(20px, 3vw, 40px);
+  padding: clamp(16px, 2.5vw, 32px);
   border-radius: 20px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
 
 .pd-image-wrap {
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,6 +40,7 @@
 }
 
 .pd-info {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -145,17 +148,17 @@
 .pd-quantity select {
   width: 180px;
   max-width: 100%;
-  padding: 12px 14px;
+  padding: 12px 42px 12px 14px;
   font-size: 15px;
   font-weight: 700;
   border: 1px solid rgba(34, 197, 94, 0.5);
   border-radius: 10px;
-  background: rgba(6, 12, 9, 0.75);
-  color: var(--text);
+  background: rgba(8, 20, 14, 0.95);
+  color: #eafef2;
   cursor: pointer;
   outline: none;
   transition: 0.25s;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -168,7 +171,7 @@
 }
 
 .pd-quantity select:hover {
-  background-color: rgba(34, 197, 94, 0.06);
+  background-color: rgba(12, 30, 21, 0.98);
   transform: translateY(-1px);
 }
 
@@ -177,43 +180,56 @@
   box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
 }
 
+.pd-quantity select option {
+  background: #10271b;
+  color: #eafef2;
+}
+
 @media (max-width: 900px) {
+  .pd-page {
+    padding: 112px 14px 44px;
+  }
+
   .pd-wrap {
     grid-template-columns: 1fr;
     gap: 18px;
-    padding: 20px;
+    padding: 16px;
   }
 
   .pd-image {
-    max-height: 360px;
+    max-height: 320px;
   }
 
   .pd-quantity select {
     width: 100%;
   }
+
+  .pd-buy {
+    margin-top: 14px;
+  }
 }
 
 @media (max-width: 520px) {
   .pd-page {
-    padding: 20px 12px 50px;
+    padding: 122px 10px 34px;
   }
 
   .pd-wrap {
     width: 100%;
     border-radius: 16px;
-    padding: 14px;
-  }
-
-  .pd-image-wrap {
     padding: 12px;
   }
 
+  .pd-image-wrap {
+    padding: 10px;
+  }
+
   .pd-image {
-    max-height: 260px;
+    max-height: 220px;
   }
 
   .pd-sizes-list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
 
@@ -222,3 +238,4 @@
     font-size: 14px;
   }
 }
+
