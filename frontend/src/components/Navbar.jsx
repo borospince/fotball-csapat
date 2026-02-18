@@ -149,7 +149,7 @@ const Navbar = () => {
         </div>
       </div>
       {isLoggedIn === 0 ? (
-        <Link to="/login" onClick={closeMenu}>
+        <Link to="/login" id="belep-gomb" onClick={closeMenu}>
           <CgProfile size={30} />
         </Link>
       ) : (

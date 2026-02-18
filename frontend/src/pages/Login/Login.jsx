@@ -53,12 +53,12 @@ const Login = () => {
             required
           />
 
-          <button type="submit">{t("loginBtn")}</button>
+          <button type="submit" id="belepes-gomb">{t("loginBtn")}</button>
         </form>
 
         <div className="registergomb">
           <p>{t("loginNoAccount")}</p>
-          <button type="button" onClick={() => (window.location.href = "/register")}>
+          <button type="button" id="regiszter-gomb" onClick={() => (window.location.href = "/register")}>
             {t("loginRegister")}
           </button>
         </div>

@@ -78,7 +78,7 @@ const Register = () => {
             required
           />
 
-          <button type="submit">{t("registerBtn")}</button>
+          <button type="submit" id="registeration-gomb">{t("registerBtn")}</button>
         </form>
       </div>
     </section>
