@@ -1,15 +1,19 @@
 const express = require('express');
 
 const {
-    getAllItemsFrontend,
+  getAllItemsFrontend,
+  decreaseStockFrontend,
+  increaseStockFrontend,
 } = require('../controllers/ItemControllersFrontend');
 
 const router = express.Router();
 
 router.get('/', getAllItemsFrontend);
-//router.get('/:id',getOneUserBackend);
-//router.get('/',postUserBackend);
-//router.get('/modosit/:id',updateOneUserBackend);
-//router.get('/torol/:id',deleteOneUserBackend);
+
+// ✅ készlet csökkentés (kosárba rakáskor)
+router.patch('/:id/decrease-stock', decreaseStockFrontend);
+
+// ✅ készlet növelés (kosárból törlésnél / visszaadás)
+router.patch('/:id/increase-stock', increaseStockFrontend);
 
 module.exports = router;

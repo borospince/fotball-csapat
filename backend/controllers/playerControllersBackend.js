@@ -11,17 +11,17 @@ exports.getAllPlayersBackend = async (req, res) => {
     }
 };
 
-// exports.getOneUserBackend = async (req,res) => {
-//     try{
-//         const { id } = req.params;
-//         const userBackend = await User.findById({_id: id });
-//         res.statusCode = 200;
-//         return res.render('user.ejs', {userBackend});
-//     } catch (error){
-//         res.statusCode = 404;
-//         return res.render('404.ejs');
-//     }
-// };
+exports.getOneUserBackend = async (req,res) => {
+    try{
+        const { id } = req.params;
+        const userBackend = await Footballer.findById({_id: id });
+        res.statusCode = 200;
+        return res.render('user.ejs', {userBackend});
+    } catch (error){
+        res.statusCode = 404;
+        return res.render('404.ejs');
+    }
+};
 
 // exports.postUserBackend = async (req,res) => {
 //     try {

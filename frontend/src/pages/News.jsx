@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import "./News.css";
+import { useLanguage, useT } from "../i18n/LanguageContext.jsx";
+import { formatDate } from "../i18n/formatters.js";
 
 const News = () => {
+  const t = useT();
+  const { lang } = useLanguage();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,10 +17,10 @@ const News = () => {
       );
       const data = await res.json();
       console.log(data);
-      
+
       setNews(data.articles);
     } catch (error) {
-      console.error("Hiba a hírek lekérésénél", error);
+      console.error("News fetch error", error);
     } finally {
       setLoading(false);
     }
@@ -32,9 +36,9 @@ const News = () => {
 
   return (
     <div className="news-kontener">
-      <h1>⚽ Friss futball hírek</h1>
+      <h1>{t("newsTitle")}</h1>
 
-      {loading && <p className="loading">Hírek betöltése...</p>}
+      {loading && <p className="loading">{t("newsLoading")}</p>}
 
       <div className="news-grid">
         {news.map((item, index) => (
@@ -47,11 +51,11 @@ const News = () => {
             <p>{item.description}</p>
 
             <a href={item.url} target="_blank" rel="noreferrer">
-              Teljes cikk →
+              {t("newsFull") ?? "Teljes cikk →"}
             </a>
 
             <span className="date">
-              {new Date(item.publishedAt).toLocaleDateString("hu-HU")}
+              {formatDate(item.publishedAt, lang)}
             </span>
           </div>
         ))}

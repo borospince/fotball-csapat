@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <link
+            rel="stylesheet"
+            href="/css/users.css"
+        />
+        <title>Meccsek</title>
+    </head>
+    <body>
+        <%- include('nav.ejs') %>
+        <div id="users-kontener">
+            <p><a href="/api/new-match">Új meccs felvétele</a></p>
+            <h1>Meccsek</h1>
+            <% matches.forEach(elem => { %>
+                <div class="player-kontener">
+                <p>Saját csapat: <%= elem.sajatCsapat %></p>
+                <p>Ellenfél: <%= elem.ellenfel %></p>
+                <p>Helyszín: <%= elem.helyszin %></p>
+                <p>Dátum: <%= elem.datum ? new Date(elem.datum).toLocaleString('hu-HU') : '' %></p>
+                <p>Hazai/idegen: <%= elem.hazaiIdegen %></p>
+                <p>Liga: <%= elem.liga %></p>
+                <p>Korosztály: <%= elem.korosztaly %></p>
+                <p>Eredmény: <%= elem.eredmeny || '-' %></p>
+                <p>Jegy elérhető: <%= elem.jegyElerheto ? 'igen' : 'nem' %></p>
+                <% if (elem.jegyLink) { %>
+                    <p>Jegy link: <%= elem.jegyLink %></p>
+                <% } %>
+                <button onclick="meccsTorles('<%= elem._id%>')">Törlés</button>
+                <a class="modosit" href="/api/matches-backend/<%= elem._id %>">Lekérés</a>
+            </div>
+            <% }) %>
+        </div>
+        <script src="/js/match-backend.js"></script>
+    </body>
+</html>
