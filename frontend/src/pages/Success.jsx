@@ -95,7 +95,7 @@ const Success = () => {
     <div className="success-wrap">
       <div className="success-card">
         <div className="success-icon" aria-hidden="true">
-          ✓
+          {"\u2713"}
         </div>
 
         <h1 className="success-title">{t("successTitle")}</h1>
