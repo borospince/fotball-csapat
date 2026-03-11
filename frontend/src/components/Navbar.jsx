@@ -47,6 +47,27 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    const setNavbarHeight = () => {
+      const height = nav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--navbar-height", `${Math.ceil(height)}px`);
+    };
+
+    setNavbarHeight();
+
+    const observer = new ResizeObserver(setNavbarHeight);
+    observer.observe(nav);
+    window.addEventListener("resize", setNavbarHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", setNavbarHeight);
+    };
+  }, []);
+
   const kilep = () => {
     localStorage.removeItem("user");
     window.location.href = "/";

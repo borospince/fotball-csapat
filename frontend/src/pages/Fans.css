@@ -1,8 +1,9 @@
 /* Fan mail - themed */
 .fan-mail-container {
     max-width: 900px;
-    margin: 50px auto;
-    padding: 30px;
+    width: min(900px, 92vw);
+    margin: clamp(18px, 4vw, 50px) auto;
+    padding: clamp(16px, 2.4vw, 30px);
     background: var(--card);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -13,6 +14,7 @@
 .fan-mail-container h2 {
     text-align: center;
     color: var(--text);
+    font-size: clamp(24px, 4.2vw, 32px);
     margin-bottom: 20px;
 }
 
@@ -21,6 +23,7 @@
     color: var(--text);
     border-bottom: 2px solid var(--border);
     padding-bottom: 6px;
+    font-size: clamp(20px, 3.4vw, 26px);
 }
 
 .fan-mail-form {
@@ -94,6 +97,7 @@
     margin: 8px 0;
     font-size: 15px;
     color: var(--text);
+    overflow-wrap: anywhere;
 }
 
 .fan-mail-item small {
@@ -103,13 +107,24 @@
 
 @media (max-width: 720px) {
     .fan-mail-container {
-        margin: 28px auto;
-        padding: 20px;
+        width: 94vw;
+        margin: 16px auto 24px;
+        padding: 16px;
+    }
+
+    .fan-mail-form input,
+    .fan-mail-form textarea {
+        font-size: 16px;
     }
 
     .fan-mail-form button {
         align-self: stretch;
         text-align: center;
+    }
+
+    .fan-mail-item {
+        padding: 14px;
+        border-left-width: 4px;
     }
 }
 

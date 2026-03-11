@@ -1,4 +1,5 @@
 :root {
+  --navbar-height: 64px;
   --bg-0: #0f1d16;
   --bg-1: #15251c;
   --bg-2: #1b2f23;
@@ -34,6 +35,10 @@ a {
   padding: 0;
   text-align: center;
   background: var(--bg-0);
+}
+
+.app-content {
+  padding-top: calc(var(--navbar-height) + 8px);
 }
 
 button,
